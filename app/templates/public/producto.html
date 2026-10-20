@@ -1,0 +1,401 @@
+{% extends "public/base_public.html" %}
+
+{% block title %}{{ p.name }} — Central Chavalina{% endblock %}
+
+{% block content %}
+
+<!-- ==========================================
+     HERO DEL PRODUCTO
+=========================================== -->
+<div
+    class="relative pt-16 overflow-hidden"
+    style="background-color: {{ p.color }}; min-height: 420px;"
+>
+    <img
+        src="{{ p.img }}"
+        alt="{{ p.name }}"
+        class="absolute inset-0 w-full h-full object-cover"
+    >
+
+    <div
+        class="absolute inset-0"
+        style="background: linear-gradient(
+            to right,
+            {{ p.color }}cc 35%,
+            {{ p.color }}44 70%,
+            {{ p.color }}22 100%
+        );"
+    ></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-5 lg:px-10 py-24">
+
+        <a
+            href="{{ url_for('public.home') }}"
+            class="text-xs text-white/50 hover:text-white transition-colors mb-3 block"
+        >
+            ← Productos
+        </a>
+
+        <span
+            class="text-xs font-semibold tracking-[0.2em] uppercase text-white/60 mb-3 block"
+        >
+            {{ p.subtitle }}
+        </span>
+
+        <h1
+            class="font-display text-5xl md:text-7xl text-white font-semibold leading-tight mb-3"
+        >
+            {{ p.name }}
+        </h1>
+
+        <span
+            class="inline-block text-sm font-semibold px-4 py-1.5 rounded-full"
+            style="background-color: #c9930a; color: #3e1f06;"
+        >
+            Temporada: {{ p.season }}
+        </span>
+
+    </div>
+</div>
+
+
+<!-- ==========================================
+     DESCRIPCIÓN Y CARACTERÍSTICAS
+=========================================== -->
+<section class="py-20 bg-white">
+
+    <div
+        class="max-w-7xl mx-auto px-5 lg:px-10 grid lg:grid-cols-2 gap-16 items-start"
+    >
+
+        <!-- Descripción -->
+        <div>
+
+            <span
+                class="text-xs font-semibold tracking-[0.2em] uppercase text-[#3a6b2a] mb-3 block"
+            >
+                Descripción
+            </span>
+
+            <h2
+                class="font-display text-3xl font-semibold text-[#234018] mb-5"
+            >
+                Sobre el producto.
+            </h2>
+
+            <p
+                class="text-[15px] leading-relaxed text-[#3e1f06]/80 mb-4 text-justify"
+            >
+                {{ p.description }}
+            </p>
+
+            <p
+                class="text-[15px] leading-relaxed text-[#3e1f06]/80 mb-8 text-justify"
+            >
+                {{ p.detail }}
+            </p>
+
+
+            <!-- Presentación -->
+            <div
+                class="rounded-xl p-5 border border-[#e8d5b0]"
+                style="background-color: #fdf8f0;"
+            >
+                <div
+                    class="text-xs font-bold uppercase tracking-widest text-[#9a5e2a] mb-2"
+                >
+                    Presentación
+                </div>
+
+                <div class="text-sm font-semibold text-[#234018]">
+                    {{ p.presentation }}
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- Características -->
+        <div>
+
+            <span
+                class="text-xs font-semibold tracking-[0.2em] uppercase text-[#3a6b2a] mb-3 block"
+            >
+                Ficha técnica
+            </span>
+
+            <h2
+                class="font-display text-3xl font-semibold text-[#234018] mb-5"
+            >
+                Características.
+            </h2>
+
+            <ul class="space-y-3 mb-8">
+
+                {% for spec in p.specs.split('|') %}
+
+                <li class="flex items-start gap-2.5">
+
+                    <span
+                        class="w-1.5 h-1.5 rounded-full shrink-0 mt-2"
+                        style="background-color: #c9930a;"
+                    ></span>
+
+                    <span
+                        class="text-[15px] leading-relaxed text-[#3e1f06]/80"
+                    >
+                        {{ spec }}
+                    </span>
+
+                </li>
+
+                {% endfor %}
+
+            </ul>
+
+
+            <!-- Volumen -->
+            <div
+                class="rounded-xl p-5 border border-[#e8d5b0]"
+                style="background-color: #fdf8f0;"
+            >
+
+                <div
+                    class="text-xs font-bold uppercase tracking-widest text-[#9a5e2a] mb-2"
+                >
+                    Volumen disponible
+                </div>
+
+                <p
+                    class="text-sm leading-relaxed text-[#234018] text-justify"
+                >
+                    {{ p.volume }}
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==========================================
+     CALENDARIO AGRÍCOLA
+=========================================== -->
+<section
+    class="py-20"
+    style="background-color: #f5ead4;"
+>
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-10">
+
+        <div class="text-center mb-10">
+
+            <span
+                class="text-xs font-semibold tracking-[0.2em] uppercase text-[#3a6b2a] mb-2 block"
+            >
+                Planifica tu compra
+            </span>
+
+            <h2
+                class="font-display text-4xl font-semibold text-[#234018]"
+            >
+                Calendario agrícola.
+            </h2>
+
+        </div>
+
+
+        <div class="max-w-3xl mx-auto">
+
+            <!-- Meses -->
+            <div class="grid grid-cols-6 md:grid-cols-12 gap-2 mb-5">
+
+                {% for m in months %}
+
+                    {% set state = p.calendar[loop.index0] %}
+
+                    <div
+                        class="rounded-xl text-center py-4
+                        {{ 'bg-[#6b3f1f] text-white'
+                        if state == 'cosecha'
+                        else ('bg-[#234018] text-white'
+                        if state == 'siembra'
+                        else 'bg-white text-[#9a5e2a] border border-[#e8d5b0]') }}"
+                    >
+
+                        <div class="text-[10px] font-bold">
+                            {{ m }}
+                        </div>
+
+                        <div class="text-sm font-bold mt-1">
+                            {{ 'C' if state == 'cosecha' else ('S' if state == 'siembra' else '·') }}
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <!-- Leyenda -->
+            <div class="flex flex-wrap gap-3 justify-center">
+
+                <div class="flex items-center gap-2 text-sm">
+
+                    <span
+                        class="w-7 h-5 rounded text-[9px] flex items-center justify-center font-bold bg-[#6b3f1f] text-white"
+                    >
+                        C
+                    </span>
+
+                    <span class="text-[#6b3f1f]">
+                        Cosecha
+                    </span>
+
+                </div>
+
+
+                <div class="flex items-center gap-2 text-sm">
+
+                    <span
+                        class="w-7 h-5 rounded text-[9px] flex items-center justify-center font-bold bg-[#234018] text-white"
+                    >
+                        S
+                    </span>
+
+                    <span class="text-[#6b3f1f]">
+                        Siembra
+                    </span>
+
+                </div>
+
+
+                <div class="flex items-center gap-2 text-sm">
+
+                    <span
+                        class="w-7 h-5 rounded text-[9px] flex items-center justify-center font-bold bg-[#e8d5b0] text-[#9a5e2a]"
+                    >
+                        ·
+                    </span>
+
+                    <span class="text-[#6b3f1f]">
+                        Sin actividad
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==========================================
+     BOTONES DE ACCIÓN
+=========================================== -->
+<section class="py-16 bg-white">
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-10">
+
+        <div class="grid md:grid-cols-2 gap-5 max-w-2xl mx-auto">
+
+            <!-- WhatsApp -->
+            <a
+                href="https://wa.me/51912237268?text=Hola%2C%20solicito%20la%20ficha%20t%C3%A9cnica%20en%20PDF%20de%20{{ p.name | urlencode }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center justify-center gap-2 font-semibold text-sm py-4 rounded-full hover:opacity-90 transition-all"
+                style="background-color: #25D366; color: #fff;"
+            >
+                📄 Pedir ficha técnica PDF (WhatsApp)
+            </a>
+
+
+            <!-- Cotización -->
+            <a
+                href="{{ url_for('public.cotizacion') }}"
+                class="flex items-center justify-center gap-2 font-semibold text-sm py-4 rounded-full hover:opacity-90 transition-all"
+                style="background-color: #234018; color: #fff;"
+            >
+                Solicitar cotización →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==========================================
+     OTROS PRODUCTOS
+=========================================== -->
+<section
+    class="py-16 border-t border-[#e8d5b0]"
+    style="background-color: #fdf8f0;"
+>
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-10">
+
+        <h2
+            class="font-display text-2xl font-semibold text-[#234018] mb-6 text-center"
+        >
+            Otros productos
+        </h2>
+
+
+        <div class="grid grid-cols-3 gap-4">
+
+            {% for k in others %}
+
+                {% set op = products[k] %}
+
+                <a
+                    href="{{ url_for('public.producto', key=k) }}"
+                    class="relative rounded-xl overflow-hidden group"
+                    style="aspect-ratio: 1;"
+                >
+
+                    <img
+                        src="{{ op.img }}"
+                        alt="{{ op.name }}"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    >
+
+                    <div
+                        class="absolute inset-0"
+                        style="background: linear-gradient(to top, {{ op.color }}cc, transparent);"
+                    ></div>
+
+                    <div class="absolute bottom-3 left-3 right-3">
+
+                        <div class="text-white/60 text-[10px]">
+                            {{ op.season }}
+                        </div>
+
+                        <div
+                            class="font-display text-white font-semibold text-sm"
+                        >
+                            {{ op.name }}
+                        </div>
+
+                    </div>
+
+                </a>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

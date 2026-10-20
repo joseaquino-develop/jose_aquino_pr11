@@ -1,0 +1,182 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %}
+Contactos | Chavalina
+{% endblock %}
+
+{% block content %}
+
+<div class="mb-8">
+
+    <h1 class="text-3xl font-bold text-[#1d3515]">
+        Contactos
+    </h1>
+
+    <p class="text-gray-500 mt-1">
+        Mensajes recibidos desde el formulario de contacto.
+    </p>
+
+</div>
+
+
+<div class="bg-white border border-gray-200 rounded-2xl">
+
+    <div class="p-6 border-b border-gray-100">
+
+        <h2 class="font-bold text-[#1d3515]">
+            Todos los mensajes
+        </h2>
+
+        <p class="text-sm text-gray-500 mt-1">
+            Total: {{ contactos|length }}
+        </p>
+
+    </div>
+
+
+    <div class="p-6">
+
+        {% if contactos %}
+
+        <div class="overflow-x-auto">
+
+            <table class="w-full">
+
+                <thead>
+
+                    <tr class="border-b border-gray-200 text-left">
+
+                        <th class="pb-3 text-xs uppercase text-gray-400">
+                            Nombre
+                        </th>
+
+                        <th class="pb-3 text-xs uppercase text-gray-400">
+                            Email
+                        </th>
+
+                        <th class="pb-3 text-xs uppercase text-gray-400">
+                            Asunto
+                        </th>
+
+                        <th class="pb-3 text-xs uppercase text-gray-400">
+                            Mensaje
+                        </th>
+
+                        <th class="pb-3 text-xs uppercase text-gray-400">
+                            Fecha
+                        </th>
+
+                        <th class="pb-3 text-xs uppercase text-gray-400">
+                            Acciones
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for contacto in contactos %}
+
+                    <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
+
+                        <td class="py-4 font-semibold text-gray-700">
+                            {{ contacto.nombre }}
+                        </td>
+
+                        <td class="py-4 text-sm text-gray-600">
+                            {{ contacto.email }}
+                        </td>
+
+                        <td class="py-4 text-sm text-gray-600">
+                            {{ contacto.asunto or "-" }}
+                        </td>
+
+                        <td class="py-4 text-sm text-gray-600 max-w-xs">
+
+                            <p class="truncate">
+                                {{ contacto.mensaje }}
+                            </p>
+
+                        </td>
+
+                        <td class="py-4 text-sm text-gray-500">
+
+                            {% if contacto.creado_en %}
+                                {{ contacto.creado_en.strftime('%d/%m/%Y') }}
+                            {% else %}
+                                -
+                            {% endif %}
+
+                        </td>
+
+                        <td class="py-4">
+
+                            <div class="flex items-center gap-2">
+
+                                <!-- VER -->
+                                <a
+                                    href="{{ url_for('dashboard.detalle_contacto', id=contacto.id) }}"
+                                    class="inline-flex items-center justify-center
+                                           px-4 py-2 rounded-lg
+                                           bg-[#1d3515] text-white
+                                           text-xs font-semibold
+                                           hover:bg-[#294b1e] transition"
+                                >
+                                    Ver
+                                </a>
+
+
+                                <!-- ELIMINAR -->
+                                <form
+                                    action="{{ url_for('dashboard.eliminar_contacto', id=contacto.id) }}"
+                                    method="POST"
+                                    onsubmit="return confirm('¿Estás seguro de eliminar este mensaje?');"
+                                >
+
+                                    <button
+                                        type="submit"
+                                        class="inline-flex items-center justify-center
+                                               px-4 py-2 rounded-lg
+                                               bg-red-50 text-red-600
+                                               border border-red-200
+                                               text-xs font-semibold
+                                               hover:bg-red-600 hover:text-white
+                                               transition"
+                                    >
+                                        Eliminar
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <div class="py-12 text-center">
+
+            <p class="font-semibold text-gray-700">
+                No hay mensajes registrados.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

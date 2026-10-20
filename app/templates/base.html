@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}Central Chavalina{% endblock %}
+    </title>
+
+    <!-- Tailwind CSS Local Compilado -->
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/output.css') }}"
+    >
+
+    <!-- Tailwind por CDN (necesario para las clases del chatbot) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body class="bg-white text-gray-800 min-h-screen flex flex-col">
+
+    <!-- ==========================================
+         NAVBAR
+    =========================================== -->
+    <header
+        id="site-header"
+        class="fixed top-0 left-0 right-0 z-50
+               transition-all duration-300
+               bg-transparent backdrop-blur"
+    >
+
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8
+                   flex items-center justify-between"
+        >
+
+            <!-- LOGO -->
+            <a
+                href="{{ url_for('public.home') }}"
+                class="flex items-center space-x-3"
+            >
+
+                <img
+                    src="{{ url_for('static', filename='img/logo.png') }}"
+                    alt="Central Chavalina"
+                    class="h-10 w-auto"
+                >
+
+                <div class="hidden sm:block">
+
+                    <span class="text-sm font-bold block text-green-900">
+                        Central Chavalina
+                    </span>
+
+                    <span class="text-[10px] tracking-wider block text-amber-800">
+                        SAN JOSÉ DE LOS MOLINOS · ICA
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <!-- NAVEGACIÓN -->
+            <nav
+                class="hidden md:flex items-center
+                       space-x-8 font-medium text-green-900"
+            >
+
+                <a
+                    href="{{ url_for('public.home') }}"
+                    class="hover:text-amber-600 transition-colors"
+                >
+                    Inicio
+                </a>
+
+                <a
+                    href="{{ url_for('public.quienes_somos') }}"
+                    class="hover:text-amber-600 transition-colors"
+                >
+                    Nosotros
+                </a>
+
+                <a
+                    href="{{ url_for('public.producto', key='hass') }}"
+                    class="hover:text-amber-600 transition-colors"
+                >
+                    Productos
+                </a>
+
+                <a
+                    href="{{ url_for('public.aliados') }}"
+                    class="hover:text-amber-600 transition-colors"
+                >
+                    Aliados
+                </a>
+
+                <a
+                    href="{{ url_for('public.noticias') }}"
+                    class="hover:text-amber-600 transition-colors"
+                >
+                    Noticias
+                </a>
+
+                <a
+                    href="{{ url_for('public.contacto') }}"
+                    class="hover:text-amber-600 transition-colors"
+                >
+                    Contacto
+                </a>
+
+            </nav>
+
+
+            <!-- BOTÓN COTIZACIÓN -->
+            <div class="flex items-center">
+
+                <a
+                    href="{{ url_for('public.cotizacion') }}"
+                    class="bg-amber-500 hover:bg-amber-600
+                           text-white px-4 py-2 rounded-full
+                           font-semibold text-sm
+                           transition-colors shadow-sm"
+                >
+                    Solicitar Cotización
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         CONTENIDO PRINCIPAL
+    =========================================== -->
+    <main class="flex-1">
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+
+    <!-- ==========================================
+         FOOTER
+    =========================================== -->
+    <footer class="bg-green-900 text-white py-8 text-center text-xs">
+
+        <p>
+            Central Chavalina &copy; 2026 - Todos los derechos reservados.
+        </p>
+
+    </footer>
+
+
+    <!-- =====================================================================
+         CHATBOT FLOTANTE · Asistente Chavalina
+         ===================================================================== -->
+
+    <!-- ===== Botón flotante (trigger) ===== -->
+    <button id="chv-toggle" type="button"
+            aria-label="Abrir chat con el Asistente Chavalina"
+            aria-expanded="false" aria-controls="chv-window"
+            class="fixed bottom-4 left-4 z-50 flex h-14 w-14 items-center justify-center rounded-full
+                   bg-green-700 text-white shadow-lg shadow-green-900/30
+                   transition duration-300 hover:scale-110 hover:bg-green-800 hover:shadow-xl
+                   focus:outline-none focus-visible:ring-4 focus-visible:ring-green-300">
+      <!-- Ícono de chat (visible cuando está cerrado) -->
+      <svg id="chv-icon-chat" xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 transition duration-300"
+           fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M8 10h8M8 14h5m-9 6l1.6-3.2A8.5 8.5 0 1 1 8.2 19.3L4 20z"/>
+      </svg>
+      <!-- Ícono de cerrar (visible cuando está abierto) -->
+      <svg id="chv-icon-close" xmlns="http://www.w3.org/2000/svg"
+           class="absolute h-7 w-7 scale-0 opacity-0 transition duration-300"
+           fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+
+    <!-- ===== Ventana de chat ===== -->
+    <section id="chv-window" role="dialog" aria-label="Asistente Chavalina"
+             class="invisible fixed bottom-20 left-4 z-50 flex h-[30rem] max-h-[75vh] w-[calc(100vw-2rem)]
+                    max-w-sm origin-bottom-left translate-y-4 scale-95 flex-col overflow-hidden
+                    rounded-2xl border border-gray-200 bg-white opacity-0 shadow-2xl
+                    transition duration-300 ease-out">
+
+      <!-- Encabezado corporativo -->
+      <div class="flex items-center gap-3 bg-green-900 px-4 py-3 text-white">
+        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-green-700 text-lg">🌱</div>
+        <div class="min-w-0 flex-1">
+          <h2 class="truncate text-sm font-semibold leading-tight">Asistente Chavalina</h2>
+          <p class="flex items-center gap-1.5 text-xs text-green-200">
+            <span class="inline-block h-2 w-2 rounded-full bg-green-400"></span> En línea
+          </p>
+        </div>
+        <button id="chv-close" type="button" aria-label="Cerrar chat"
+                class="rounded-full p-1.5 text-green-100 transition hover:bg-green-800 hover:text-white
+                       focus:outline-none focus-visible:ring-2 focus-visible:ring-green-300">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+               stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Área de mensajes -->
+      <div id="chv-messages" class="flex-1 space-y-3 overflow-y-auto bg-gray-50 px-4 py-4 text-sm"
+           aria-live="polite"></div>
+
+      <!-- Barra de entrada -->
+      <form id="chv-form" class="flex items-center gap-2 border-t border-gray-200 bg-white p-3" autocomplete="off">
+        <input id="chv-input" type="text" maxlength="500" placeholder="Escribe tu mensaje..."
+               aria-label="Escribe tu mensaje"
+               class="flex-1 rounded-full border border-gray-300 bg-gray-100 px-4 py-2 text-sm text-gray-800
+                      placeholder-gray-500 transition focus:border-green-600 focus:bg-white focus:outline-none
+                      focus:ring-2 focus:ring-green-200"/>
+        <button type="submit" aria-label="Enviar mensaje"
+                class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-green-700 text-white
+                       transition hover:bg-green-800 focus:outline-none focus-visible:ring-2
+                       focus-visible:ring-green-300 active:scale-95">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+               stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6l6 6-6 6"/>
+          </svg>
+        </button>
+      </form>
+    </section>
+
+    <!-- ===== Lógica del chatbot (JavaScript puro) ===== -->
+<script>
+(function () {
+    'use strict';
+
+    // --- Referencias al DOM ---
+    const TYPING_MS = 1500; // duración mínima del "escribiendo"
+    const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+    const toggleBtn = document.getElementById('chv-toggle');
+    const closeBtn  = document.getElementById('chv-close');
+    const windowEl  = document.getElementById('chv-window');
+    const messages  = document.getElementById('chv-messages');
+    const form      = document.getElementById('chv-form');
+    const input     = document.getElementById('chv-input');
+    const iconChat  = document.getElementById('chv-icon-chat');
+    const iconClose = document.getElementById('chv-icon-close');
+
+    let isOpen = false;
+    let greeted = false;
+
+    // Clases que definen la animación de cierre (sin el invisible)
+    const HIDDEN_ANIM = ['opacity-0', 'scale-95', 'translate-y-4'];
+
+    function setOpen(open) {
+        isOpen = open; 
+
+        if (open) {
+            // Abrir: ocultar icono de chat, mostrar la 'X'
+            iconChat.classList.add('scale-0', 'opacity-0');
+            iconClose.classList.remove('scale-0', 'opacity-0');
+            toggleBtn.setAttribute('aria-expanded', 'true');
+
+            // Quitar invisible inmediatamente y arrancar animación de entrada
+            windowEl.classList.remove('invisible', ...HIDDEN_ANIM); 
+            
+            if (!greeted) { 
+                greeted = true; 
+                showWelcome(); 
+            }
+            setTimeout(() => input.focus(), 300);
+            
+        } else {
+            // Cerrar: ocultar la 'X', mostrar icono de chat
+            iconChat.classList.remove('scale-0', 'opacity-0');
+            iconClose.classList.add('scale-0', 'opacity-0');
+            toggleBtn.setAttribute('aria-expanded', 'false');
+
+            // Arrancar animación de salida (se vuelve transparente y baja)
+            windowEl.classList.add(...HIDDEN_ANIM); 
+            
+            // Esperar 350ms (lo que dura la transición CSS) antes de aplicar 'invisible'
+            setTimeout(() => {
+                if (!isOpen) { // Verifica que no lo hayas vuelto a abrir rápido
+                    windowEl.classList.add('invisible');
+                }
+            }, 350);
+        }
+    }
+
+    // --- Crear burbujas de mensaje (usa textContent: evita inyección HTML) ---
+    function addMessage(text, sender) {
+        const isUser = sender === 'user';
+        const row = document.createElement('div');
+        row.className = 'chv-msg-in flex ' + (isUser ? 'justify-end' : 'justify-start');
+
+        const bubble = document.createElement('div');
+        bubble.className = 'max-w-[80%] whitespace-pre-line px-3.5 py-2 shadow-sm ' + (isUser
+            ? 'rounded-2xl rounded-br-sm bg-green-700 text-white'
+            : 'rounded-2xl rounded-bl-sm border border-gray-200 bg-white text-gray-800');
+        bubble.textContent = text;
+
+        row.appendChild(bubble);
+        messages.appendChild(row);
+        scrollToBottom();
+    }
+
+    function scrollToBottom() { messages.scrollTop = messages.scrollHeight; }
+
+    // --- Indicador "escribiendo..." ---
+    function showTyping() {
+        hideTyping(); // evita indicadores duplicados
+        const row = document.createElement('div');
+        row.id = 'chv-typing';
+        row.className = 'chv-msg-in flex justify-start';
+        row.innerHTML = 
+            '<div class="chv-typing-bubble" aria-label="El asistente está escribiendo">' +
+            '<span class="chv-dot"></span><span class="chv-dot"></span><span class="chv-dot"></span>' +
+            '</div>';
+        messages.appendChild(row);
+        scrollToBottom();
+    }
+
+    function hideTyping() {
+        const t = document.getElementById('chv-typing');
+        if (t) t.remove();
+    }
+
+    // --- Mensaje de bienvenida + respuestas rápidas ---
+    function showWelcome() {
+        addMessage('¡Hola! 👋 Soy el Asistente Chavalina. ¿Sobre qué te gustaría consultar?', 'bot');
+
+        const quick = document.createElement('div');
+        quick.className = 'chv-msg-in flex flex-wrap gap-2';
+        ['Horarios', 'Productos', 'Ubicación', 'Contacto'].forEach(label => {
+            const b = document.createElement('button');
+            b.type = 'button';
+            b.textContent = label;
+            b.className = 'rounded-full border border-green-600 bg-white px-3 py-1 text-xs font-medium ' +
+                          'text-green-800 transition hover:bg-green-700 hover:text-white';
+            b.addEventListener('click', () => { quick.remove(); sendMessage(label); });
+            quick.appendChild(b);
+        });
+        messages.appendChild(quick);
+        scrollToBottom();
+    }
+
+    // ===================================================================
+    // RESPUESTA DEL BOT
+    // ===================================================================
+    async function getBotReply(text) {
+        // Se añade verificación de errores por si la ruta de Flask no existe aún
+        const res = await fetch('/api/chatbot', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: text })
+        });
+        
+        if (!res.ok) {
+            throw new Error('Error al conectar con el servidor');
+        }
+        
+        const data = await res.json();
+        return data.reply;
+    }
+
+    // Muestra los puntos mínimo TYPING_MS. Si el backend tarda más, espera a la respuesta
+    async function replyWithTyping(text) {
+        showTyping();
+        try {
+            const [reply] = await Promise.all([getBotReply(text), wait(TYPING_MS)]);
+            return reply;
+        } finally {
+            hideTyping(); // se quita aunque haya error
+        }
+    }
+
+    async function sendMessage(text) {
+        text = text.trim();
+        if (!text) return;
+
+        addMessage(text, 'user');
+        input.value = '';
+
+        try {
+            const reply = await replyWithTyping(text);
+            addMessage(reply, 'bot');
+        } catch (err) {
+            addMessage('Lo siento, ocurrió un error de conexión con el servidor. Inténtalo nuevamente.', 'bot');
+        }
+    }
+
+    // --- Eventos ---
+    toggleBtn.addEventListener('click', () => setOpen(!isOpen));
+    closeBtn.addEventListener('click', () => setOpen(false));
+    form.addEventListener('submit', e => { e.preventDefault(); sendMessage(input.value); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && isOpen) setOpen(false); });
+})();
+</script>
+<!-- ===== FIN CHATBOT FLOTANTE ===== -->

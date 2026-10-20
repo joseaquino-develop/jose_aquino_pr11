@@ -1,0 +1,251 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %}
+Editar temporada | {{ producto.name }} | Chavalina
+{% endblock %}
+
+{% block content %}
+
+<!-- ==========================================
+     ENCABEZADO
+=========================================== -->
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+
+    <div>
+        <p class="text-sm font-semibold text-[#87b848] uppercase tracking-wide">
+            Gestión de temporada
+        </p>
+
+        <h1 class="text-3xl font-bold text-[#1d3515] mt-1">
+            {{ producto.name }}
+        </h1>
+
+        <p class="text-gray-500 mt-1">
+            Selecciona los meses de cosecha y siembra del producto.
+        </p>
+    </div>
+
+    <a
+        href="{{ url_for('dashboard.productos') }}"
+        class="inline-flex items-center justify-center
+               px-5 py-3 bg-white
+               border border-gray-200 rounded-xl
+               text-sm font-semibold text-gray-600
+               hover:bg-gray-50 transition"
+    >
+        ← Volver a productos
+    </a>
+
+</div>
+
+
+<!-- ==========================================
+     CONTENIDO PRINCIPAL
+=========================================== -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+    <!-- PRODUCTO -->
+    <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden">
+
+        <img
+            src="{{ producto.img }}"
+            alt="{{ producto.name }}"
+            class="w-full h-64 object-cover"
+        >
+
+        <div class="p-6">
+
+            <p class="text-xs font-semibold uppercase text-gray-400">
+                Producto
+            </p>
+
+            <h2 class="text-xl font-bold text-[#1d3515] mt-1">
+                {{ producto.name }}
+            </h2>
+
+            <p class="text-sm text-gray-500 mt-1">
+                {{ producto.subtitle }}
+            </p>
+
+            <div class="mt-5 pt-5 border-t border-gray-100">
+
+                <p class="text-xs font-semibold uppercase text-gray-400">
+                    Temporada actual
+                </p>
+
+                <p class="text-lg font-bold text-[#87b848] mt-1">
+                    {{ producto.season }}
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         EDITAR TEMPORADA
+    =========================================== -->
+    <div class="lg:col-span-2 bg-white border border-gray-200 rounded-2xl p-6">
+
+        <div class="mb-6">
+
+            <h2 class="text-xl font-bold text-[#1d3515]">
+                Calendario agrícola
+            </h2>
+
+            <p class="text-sm text-gray-500 mt-1">
+                Marca el estado correspondiente para cada mes.
+            </p>
+
+        </div>
+
+
+        <form
+            method="POST"
+            action="{{ url_for('dashboard.detalle_producto', key=producto.key) }}"
+        >
+
+            {% set meses = [
+                'Ene', 'Feb', 'Mar', 'Abr',
+                'May', 'Jun', 'Jul', 'Ago',
+                'Sep', 'Oct', 'Nov', 'Dic'
+            ] %}
+
+
+            <!-- MESES -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+
+                {% for mes in meses %}
+
+                    {% set estado = producto.calendar[loop.index0] %}
+
+                    <div class="border border-gray-200 rounded-xl p-4">
+
+                        <!-- NOMBRE DEL MES -->
+                        <p class="font-bold text-[#1d3515] text-center mb-4">
+                            {{ mes }}
+                        </p>
+
+
+                        <!-- COSECHA -->
+                        <label
+                            class="flex items-center gap-2 cursor-pointer
+                                   bg-[#fdf8f0] rounded-lg p-2 mb-2"
+                        >
+
+                            <input
+                                type="radio"
+                                name="mes_{{ loop.index0 }}"
+                                value="cosecha"
+                                class="accent-[#6b3f1f]"
+                                {% if estado == 'cosecha' %}checked{% endif %}
+                            >
+
+                            <span class="text-sm font-medium text-[#6b3f1f]">
+                                Cosecha
+                            </span>
+
+                        </label>
+
+
+                        <!-- SIEMBRA -->
+                        <label
+                            class="flex items-center gap-2 cursor-pointer
+                                   bg-[#f4f8f1] rounded-lg p-2 mb-2"
+                        >
+
+                            <input
+                                type="radio"
+                                name="mes_{{ loop.index0 }}"
+                                value="siembra"
+                                class="accent-[#234018]"
+                                {% if estado == 'siembra' %}checked{% endif %}
+                            >
+
+                            <span class="text-sm font-medium text-[#234018]">
+                                Siembra
+                            </span>
+
+                        </label>
+
+
+                        <!-- SIN ACTIVIDAD -->
+                        <label
+                            class="flex items-center gap-2 cursor-pointer
+                                   bg-gray-50 rounded-lg p-2"
+                        >
+
+                            <input
+                                type="radio"
+                                name="mes_{{ loop.index0 }}"
+                                value="none"
+                                class="accent-gray-400"
+                                {% if estado == 'none' %}checked{% endif %}
+                            >
+
+                            <span class="text-sm text-gray-500">
+                                Sin actividad
+                            </span>
+
+                        </label>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <!-- LEYENDA -->
+            <div class="flex flex-wrap gap-5 mt-7 p-4 bg-gray-50 rounded-xl">
+
+                <div class="flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-[#6b3f1f]"></span>
+                    <span class="text-sm text-gray-600">
+                        Cosecha
+                    </span>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-[#234018]"></span>
+                    <span class="text-sm text-gray-600">
+                        Siembra
+                    </span>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-gray-300"></span>
+                    <span class="text-sm text-gray-600">
+                        Sin actividad
+                    </span>
+                </div>
+
+            </div>
+
+
+            <!-- BOTÓN -->
+            <div class="flex justify-end mt-7">
+
+                <button
+                    type="submit"
+                    class="inline-flex items-center justify-center
+                           px-7 py-3 rounded-xl
+                           bg-[#1d3515] text-white
+                           text-sm font-semibold
+                           hover:bg-[#294b1e]
+                           transition"
+                >
+                    Guardar cambios
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

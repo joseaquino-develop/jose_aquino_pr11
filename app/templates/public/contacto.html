@@ -1,0 +1,495 @@
+{% extends "public/base_public.html" %}
+
+{% block title %}Contacto — Central Chavalina{% endblock %}
+
+{% block content %}
+
+<!-- ==========================================
+     HERO
+=========================================== -->
+
+<div class="relative pt-16 overflow-hidden"
+     style="background-color:#3a6b2a;min-height:260px">
+
+    <img
+        src="https://images.unsplash.com/photo-1509099381441-ea3c0cf98b94?w=1600&h=400&fit=crop&auto=format"
+        alt="Central Chavalina"
+        class="absolute inset-0 w-full h-full object-cover opacity-40"
+    >
+
+    <div
+        class="absolute inset-0"
+        style="background: linear-gradient(
+            to right,
+            rgba(30,70,20,0.80) 45%,
+            rgba(30,70,20,0.18) 100%
+        )">
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-5 lg:px-10 py-20">
+
+        <span class="text-xs font-semibold tracking-[0.2em] uppercase text-[#c8ddb8] mb-3 block">
+            Contacto
+        </span>
+
+        <h1 class="font-display text-5xl md:text-6xl text-white font-semibold leading-tight">
+            Hablemos.
+        </h1>
+
+        <p class="mt-3 text-white/60 max-w-md text-sm leading-relaxed text-justify">
+            Estamos disponibles para resolver tus consultas, conocer tus
+            necesidades y brindarte información sobre nuestros productos.
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- ==========================================
+     CONTACTO
+=========================================== -->
+
+<section class="py-20 bg-white">
+
+    <div class="max-w-6xl mx-auto px-5 lg:px-10 grid lg:grid-cols-2 gap-16">
+
+
+        <!-- ==========================================
+             INFORMACIÓN
+        =========================================== -->
+
+        <div>
+
+            <span class="text-xs font-semibold tracking-[0.2em] uppercase text-[#3a6b2a] mb-3 block">
+                Canales de atención
+            </span>
+
+            <h2 class="font-display text-4xl font-semibold text-[#234018] leading-tight mb-5">
+                Estamos para ayudarte.
+            </h2>
+
+            <p class="text-sm text-[#1e1e1e]/65 leading-relaxed mb-8 text-justify">
+                Puedes comunicarte con nosotros para consultas generales,
+                información sobre nuestros productos, alianzas comerciales
+                o cualquier otra información relacionada con Central Chavalina.
+            </p>
+
+
+            <a
+                href="{{ url_for('public.cotizacion') }}"
+                class="inline-flex items-center gap-2 font-semibold px-6 py-3 rounded-full text-sm mb-10 hover:opacity-90 transition-all"
+                style="background-color:#234018;color:#fff"
+            >
+                Solicitar una cotización
+            </a>
+
+
+            <!-- CANALES DE CONTACTO -->
+
+            {% set canales = [
+                {
+                    'icon': '📱',
+                    'label': 'WhatsApp',
+                    'value': '+51 912237268',
+                    'sub': 'Atención directa y consultas comerciales'
+                },
+                {
+                    'icon': '📧',
+                    'label': 'Correo electrónico',
+                    'value': 'contacto@centralchavalina.com',
+                    'sub': 'Consultas generales y comerciales'
+                },
+                {
+                    'icon': '📍',
+                    'label': 'Ubicación',
+                    'value': 'San José de los Molinos, Ica',
+                    'sub': 'Ica, Perú',
+                    'url': 'https://www.google.com/maps/place/Cooperativa+Chavalina/@-13.9592265,-75.7002727,20z/data=!4m9!1m2!2m1!1s+Lt.+21,+Mz.+D,+Caser%C3%ADo+Chavalina,+distrito+de+San+Jos%C3%A9+de+los+Molinos,+Ica.!3m5!1s0x9111030280eee1f3:0xc4bd2591a96cdae6!8m2!3d-13.9592265!4d-75.6998831!16s%2Fg%2F11hz31gkxx?entry=ttu&g_ep=EgoyMDI2MDkzMC4wIKXMDSoASAFQAw%3D%3D'
+                },
+                {
+                    'icon': '🕐',
+                    'label': 'Horario de atención',
+                    'value': 'Lunes a viernes',
+                    'sub': '8:00 a. m. – 6:00 p. m.'
+                }
+            ] %}
+
+
+            <div class="space-y-3">
+
+                {% for canal in canales %}
+
+                <div
+                    class="flex gap-4 p-4 rounded-2xl border border-[#e8d5b0] hover:shadow-sm transition-all"
+                    style="background-color:#fdf8f0"
+                >
+
+                    <div
+                        class="w-10 h-10 rounded-xl flex items-center justify-center text-xl shrink-0"
+                        style="background-color:#e8d5b0"
+                    >
+                        {{ canal.icon }}
+                    </div>
+
+
+                    <div>
+
+                        <div class="text-[10px] text-[#9a5e2a] font-semibold uppercase tracking-wider mb-0.5">
+                            {{ canal.label }}
+                        </div>
+
+                        <div class="text-sm font-semibold text-[#234018]">
+                            {{ canal.value }}
+                        </div>
+
+                        <div class="text-[11px] text-[#9a8878] mt-0.5">
+                            {{ canal.sub }}
+                        </div>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+
+                <!-- MAPA DE GOOGLE MAPS CON ENLACE -->
+
+                <div class="mt-4 overflow-hidden rounded-2xl border border-[#e8d5b0] shadow-sm">
+
+                    <iframe
+                        src="https://maps.google.com/maps?q=Cooperativa+Chavalina&t=&z=18&ie=UTF8&iwloc=&output=embed"
+                        width="100%"
+                        height="220"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+
+                    <a
+                        href="https://www.google.com/maps/place/Cooperativa+Chavalina/@-13.9592265,-75.7002727,20z/data=!4m9!1m2!2m1!1s+Lt.+21,+Mz.+D,+Caser%C3%ADo+Chavalina,+distrito+de+San+Jos%C3%A9+de+los+Molinos,+Ica.!3m5!1s0x9111030280eee1f3:0xc4bd2591a96cdae6!8m2!3d-13.9592265!4d-75.6998831!16s%2Fg%2F11hz31gkxx?entry=ttu&g_ep=EgoyMDI2MDkzMC4wIKXMDSoASAFQAw%3D%3D"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="block text-center py-2 text-xs font-bold text-gray-700 bg-[#e8d5b0] hover:bg-[#dfc89d] transition-colors"
+                    >
+                        Ver ubicación en Google Maps
+                    </a>
+
+                </div>
+
+
+                <!-- REDES SOCIALES -->
+
+                <div class="mt-8">
+
+                    <div class="text-xs font-bold uppercase tracking-wider text-[#9a5e2a] mb-1">
+                        Síguenos
+                    </div>
+
+                    <p class="text-[11px] text-[#9a8878] mb-3">
+                        Conoce más sobre nuestro trabajo y nuestros productos.
+                    </p>
+
+
+                    <div class="flex gap-2.5">
+
+                        <!-- FACEBOOK -->
+
+                        <a
+                            href="#"
+                            aria-label="Facebook"
+                            class="w-10 h-10 rounded-full flex items-center justify-center border border-[#e8d5b0] text-[#234018] hover:bg-[#234018] hover:text-white hover:border-[#234018] transition-all"
+                        >
+                            <svg
+                                viewBox="0 0 24 24"
+                                class="w-4 h-4"
+                                fill="currentColor"
+                            >
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                            </svg>
+                        </a>
+
+
+                        <!-- YOUTUBE -->
+
+                        <a
+                            href="#"
+                            aria-label="YouTube"
+                            class="w-10 h-10 rounded-full flex items-center justify-center border border-[#e8d5b0] text-[#234018] hover:bg-[#234018] hover:text-white hover:border-[#234018] transition-all"
+                        >
+                            <svg
+                                viewBox="0 0 24 24"
+                                class="w-4 h-4"
+                                fill="currentColor"
+                            >
+                                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-1.96C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58a2.78 2.78 0 0 0 1.94 1.96C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/>
+                            </svg>
+                        </a>
+
+
+                        <!-- WHATSAPP -->
+
+                        <a
+                            href="https://wa.me/51912237268"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="WhatsApp"
+                            class="w-10 h-10 rounded-full flex items-center justify-center border border-[#e8d5b0] text-[#234018] hover:bg-[#234018] hover:text-white hover:border-[#234018] transition-all"
+                        >
+                            <svg
+                                viewBox="0 0 24 24"
+                                class="w-4 h-4"
+                                fill="currentColor"
+                            >
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+                            </svg>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==========================================
+             FORMULARIO
+        =========================================== -->
+
+        <div
+            class="rounded-2xl p-8 border border-[#e8d5b0] shadow-sm"
+            style="background-color:#fdf8f0"
+        >
+
+            {% if enviado %}
+
+
+            <!-- MENSAJE ENVIADO -->
+
+            <div class="flex flex-col items-center justify-center h-full text-center py-12">
+
+                <div
+                    class="w-16 h-16 rounded-full flex items-center justify-center text-2xl mb-5"
+                    style="background-color:#c8ddb8"
+                >
+                    ✉️
+                </div>
+
+                <h3 class="font-display text-2xl font-semibold text-[#234018] mb-2">
+                    Mensaje enviado
+                </h3>
+
+                <p class="text-sm text-[#1e1e1e]/60 mb-6">
+                    Gracias por contactarnos. Hemos recibido tu mensaje y
+                    responderemos lo antes posible.
+                </p>
+
+                <a
+                    href="{{ url_for('public.contacto') }}"
+                    class="text-sm font-semibold text-[#3a6b2a] underline"
+                >
+                    Enviar otro mensaje
+                </a>
+
+            </div>
+
+
+            {% else %}
+
+
+          <!-- FORMULARIO -->
+<form id="contactForm" method="POST" action="{{ url_for('public.contacto') }}" class="space-y-5" novalidate>
+
+    <div>
+        <h3 class="font-display text-xl font-semibold text-[#234018]">
+            Envíanos un mensaje
+        </h3>
+        <p class="text-xs text-[#9a5e2a] mt-1">
+            Completa el formulario y nos pondremos en contacto contigo.
+        </p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-4">
+
+        <!-- NOMBRE -->
+        <div>
+            <label
+                for="nombre"
+                class="block text-[11px] font-semibold tracking-wider uppercase text-[#1e1e1e]/60 mb-1.5"
+            >
+                Nombre *
+            </label>
+            <input
+                type="text"
+                id="nombre"
+                name="nombre"
+                required
+                maxlength="100"
+                placeholder="Carlos Pérez"
+                class="w-full rounded-xl border border-[#e8d5b0] bg-white px-4 py-3 text-sm
+                       text-[#1e1e1e] placeholder-[#1e1e1e]/40
+                       focus:outline-none focus:border-[#3a6b2a] focus:ring-2 focus:ring-[#3a6b2a]/20"
+            >
+        </div>
+
+        <!-- CORREO -->
+        <div>
+            <label
+                for="correo"
+                class="block text-[11px] font-semibold tracking-wider uppercase text-[#1e1e1e]/60 mb-1.5"
+            >
+                Correo electrónico *
+            </label>
+            <input
+                type="email"
+                id="correo"
+                name="correo"
+                required
+                maxlength="150"
+                placeholder="carlos@gmail.com"
+                class="w-full rounded-xl border border-[#e8d5b0] bg-white px-4 py-3 text-sm
+                       text-[#1e1e1e] placeholder-[#1e1e1e]/40
+                       focus:outline-none focus:border-[#3a6b2a] focus:ring-2 focus:ring-[#3a6b2a]/20"
+            >
+        </div>
+
+    </div>
+
+    <!-- ASUNTO -->
+    <div>
+        <label
+            for="asunto"
+            class="block text-[11px] font-semibold tracking-wider uppercase text-[#1e1e1e]/60 mb-1.5"
+        >
+            Asunto
+        </label>
+        <input
+            type="text"
+            id="asunto"
+            name="asunto"
+            maxlength="150"
+            placeholder="Ej: Consulta sobre alianza institucional"
+            class="w-full rounded-xl border border-[#e8d5b0] bg-white px-4 py-3 text-sm
+                   text-[#1e1e1e] placeholder-[#1e1e1e]/40
+                   focus:outline-none focus:border-[#3a6b2a] focus:ring-2 focus:ring-[#3a6b2a]/20"
+        >
+    </div>
+
+    <!-- MENSAJE -->
+    <div>
+        <label
+            for="mensaje"
+            class="block text-[11px] font-semibold tracking-wider uppercase text-[#1e1e1e]/60 mb-1.5"
+        >
+            Mensaje *
+        </label>
+        <textarea
+            id="mensaje"
+            name="mensaje"
+            rows="5"
+            required
+            maxlength="2000"
+            placeholder="Escribe aquí tu mensaje..."
+            class="w-full rounded-xl border border-[#e8d5b0] bg-white px-4 py-3 text-sm
+                   text-[#1e1e1e] placeholder-[#1e1e1e]/40 resize-none
+                   focus:outline-none focus:border-[#3a6b2a] focus:ring-2 focus:ring-[#3a6b2a]/20"
+        ></textarea>
+    </div>
+
+    <!-- BOTÓN -->
+    <button
+        type="submit"
+        class="w-full rounded-full bg-[#3a6b2a] hover:bg-[#234018] text-white
+               text-sm font-semibold py-3.5 transition-colors active:scale-[0.99]"
+    >
+        Enviar mensaje
+    </button>
+
+    <p class="text-center text-xs text-[#1e1e1e]/50">
+        Te responderemos lo antes posible.
+    </p>
+
+    <div class="mt-8 border-t border-[#e8d5b0] pt-6 space-y-6">
+    <div>
+      <h3 class="font-display text-2xl font-bold text-[#234018]">Preguntas Frecuentes</h3>
+      <p class="text-sm text-[#1e1e1e]/60 mt-1">Resolvemos tus dudas más comunes sobre nuestros productos y envíos.</p>
+    </div>
+
+    <div class="space-y-4">
+      
+     <!-- Pregunta 1 -->
+      <details class="group bg-white border border-[#e8d5b0] rounded-2xl overflow-hidden transition-all hover:shadow-sm">
+        <summary class="flex items-center justify-between font-semibold text-[#234018] p-5 cursor-pointer hover:bg-[#3a6b2a] hover:text-white transition-colors duration-200">
+          <span>¿Qué productos comercializa Central Chavalina?</span>
+          <span class="ml-2 transition-transform duration-300 group-open:rotate-180 text-[#3a6b2a] group-hover:text-white">▼</span>
+        </summary>
+        
+        <div class="px-5 pb-5 pt-1">
+          <div class="relative flex items-center justify-between gap-3 p-4 rounded-xl border border-[#a3d99b] bg-gradient-to-r from-[#f1f8ed] to-[#fffdf8]">
+            <p class="text-sm text-[#1e1e1e] font-medium leading-relaxed z-10">
+              Nos especializamos en Palta Hass, Palta Fuerte, Pecana, Pallar y Maíz Amarillo Duro, cultivados con los más altos estándares de calidad.
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <!-- Pregunta 2 -->
+      <details class="group bg-white border border-[#e8d5b0] rounded-2xl overflow-hidden transition-all hover:shadow-sm">
+        <summary class="flex items-center justify-between font-semibold text-[#234018] p-5 cursor-pointer hover:bg-[#3a6b2a] hover:text-white transition-colors duration-200 [&_summary::-webkit-details-marker]:hidden">
+          <span>¿Cómo puedo solicitar una cotización de exportación?</span>
+          <span class="ml-2 transition-transform duration-300 group-open:rotate-180 text-[#3a6b2a] group-hover:text-white">▼</span>
+        </summary>
+
+        <div class="px-5 pb-5 pt-1">
+          <div class="relative flex items-center justify-between gap-3 p-4 rounded-xl border border-[#a3d99b] bg-gradient-to-r from-[#f1f8ed] to-[#fffdf8]">
+            <p class="text-sm text-[#1e1e1e] font-medium leading-relaxed z-10">
+              Puedes rellenar el formulario de arriba o comunicarte a nuestro WhatsApp comercial. Te responderemos en menos de 24 horas.
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <!-- Pregunta 3 -->
+      <details class="group bg-white border border-[#e8d5b0] rounded-2xl overflow-hidden transition-all hover:shadow-sm">
+        <summary class="flex items-center justify-between font-semibold text-[#234018] p-5 cursor-pointer hover:bg-[#3a6b2a] hover:text-white transition-colors duration-200 [&_summary::-webkit-details-marker]:hidden">
+          <span>¿Cuentan con certificaciones internacionales?</span>
+          <span class="ml-2 transition-transform duration-300 group-open:rotate-180 text-[#3a6b2a] group-hover:text-white">▼</span>
+        </summary>
+
+        <div class="px-5 pb-5 pt-1">
+          <div class="relative flex items-center justify-between gap-3 p-4 rounded-xl border border-[#a3d99b] bg-gradient-to-r from-[#f1f8ed] to-[#fffdf8]">
+            <p class="text-sm text-[#1e1e1e] font-medium leading-relaxed z-10">
+              Sí, trabajamos con certificaciones de Buenas Prácticas Agrícolas y garantizamos trazabilidad y comercio justo para todos nuestros socios.
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <!-- Pregunta 4 -->
+      <details class="group bg-white border border-[#e8d5b0] rounded-2xl overflow-hidden transition-all hover:shadow-sm">
+        <summary class="flex items-center justify-between font-semibold text-[#234018] p-5 cursor-pointer hover:bg-[#3a6b2a] hover:text-white transition-colors duration-200 [&_summary::-webkit-details-marker]:hidden">
+          <span>¿En qué temporadas están disponibles las paltas?</span>
+          <span class="ml-2 transition-transform duration-300 group-open:rotate-180 text-[#3a6b2a] group-hover:text-white">▼</span>
+        </summary>
+
+        <div class="px-5 pb-5 pt-1">
+          <div class="relative flex items-center justify-between gap-3 p-4 rounded-xl border border-[#a3d99b] bg-gradient-to-r from-[#f1f8ed] to-[#fffdf8]">
+            <p class="text-sm text-[#1e1e1e] font-medium leading-relaxed z-10">
+              La campaña de Palta Hass y Fuerte se concentra de marzo a agosto. Te recomendamos contactarnos con anticipación para programar pedidos.
+            </p>
+          </div>
+        </div>
+      </details>
+
+    </div>
+  </div>
+
+</form>
+</div>
+</section>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,443 @@
+{% extends "public/base_public.html" %}
+
+{% block title %}Responsabilidad Social — Central Chavalina{% endblock %}
+
+{% block content %}
+
+<!-- ==========================================
+     HERO
+=========================================== -->
+
+<div
+  class="relative pt-16 overflow-hidden"
+  style="background-color:#234018;min-height:340px"
+>
+
+  <img
+    src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=1600&h=600&fit=crop&auto=format"
+    alt=""
+    class="absolute inset-0 w-full h-full object-cover opacity-60"
+  >
+
+  <div
+    class="absolute inset-0"
+    style="background: linear-gradient(to right, rgba(20,40,12,0.76) 40%, rgba(20,40,12,0.20) 100%)"
+  ></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-5 lg:px-10 py-24">
+
+    <a
+      href="{{ url_for('public.quienes_somos') }}"
+      class="text-xs text-white/50 hover:text-white transition-colors mb-3 block"
+    >
+      ← Nosotros
+    </a>
+
+    <span class="text-xs font-semibold tracking-[0.2em] uppercase text-[#74c69d] mb-3 block">
+      Impacto comunitario
+    </span>
+
+    <h1 class="font-display text-5xl md:text-6xl text-white font-semibold leading-tight max-w-xl">
+      30 familias.<br>
+      Una sola voz.
+    </h1>
+
+    <p class="mt-4 text-white/60 max-w-lg text-sm leading-relaxed text-justify">
+      El corazón de Cooperativa Central Chavalina no es un producto ni un precio.
+      Es el bienestar de las 30 familias productoras de San José de los Molinos, Ica.
+    </p>
+
+  </div>
+
+</div>
+
+
+<!-- ==========================================
+     MISIÓN SOCIAL
+=========================================== -->
+
+<section class="py-20 bg-white">
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-10 grid lg:grid-cols-2 gap-16 items-center">
+
+    <div>
+
+      <span class="text-xs font-semibold tracking-[0.2em] uppercase text-[#3a6b2a] mb-3 block">
+        Nuestra misión social
+      </span>
+
+      <h2 class="font-display text-4xl font-semibold text-[#234018] leading-tight mb-5">
+        Producir juntos para<br>
+        negociar mejor.
+      </h2>
+
+      <p class="text-sm text-[#1e1e1e]/65 leading-relaxed mb-4 text-justify max-w-xl">
+        Nuestra misión es impulsar el desarrollo socioeconómico y sostenible de
+        los pequeños productores asociados y sus familias del sector de San José
+        de los Molinos de Ica. Lo hacemos mediante asistencia técnica integral,
+        mejora de la calidad de los cultivos y una comercialización justa.
+      </p>
+
+      <p class="text-sm text-[#1e1e1e]/65 leading-relaxed mb-4 text-justify max-w-xl">
+        En la cooperativa, cada socio es propietario y parte activa de la cadena
+        de valor. No somos intermediarios: somos los mismos productores organizados
+        para acceder directamente a los mercados que valoran la calidad y el origen.
+      </p>
+
+      <p class="text-sm text-[#1e1e1e]/65 leading-relaxed text-justify max-w-xl">
+        Aspiramos a ser una cooperativa líder en la región Ica, reconocida por
+        la calidad, la sostenibilidad y el fortalecimiento continuo de las
+        familias que hacen posible cada cosecha.
+      </p>
+
+    </div>
+
+
+    <div
+      class="relative rounded-2xl overflow-hidden"
+      style="aspect-ratio:4/3"
+    >
+
+      <img
+        src="https://images.unsplash.com/photo-1530507629858-e4977d30e9e0?w=700&h=500&fit=crop&auto=format"
+        alt="Agricultores en campo"
+        class="w-full h-full object-cover"
+      >
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ==========================================
+     FRASE / ATRIBUTO DE MARCA
+=========================================== -->
+
+<section
+  class="py-14 border-y border-[#e8d5b0]"
+  style="background-color:#f5ead4"
+>
+
+  <div class="max-w-4xl mx-auto px-5 text-center">
+
+    <p class="font-display text-2xl md:text-3xl font-semibold italic text-[#234018] leading-snug">
+      "Calidad con origen y compromiso con el productor."
+    </p>
+
+    <p class="text-xs text-[#9a5e2a] mt-3 tracking-wide uppercase font-semibold">
+      Atributo de marca · Cooperativa Central Chavalina
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- ==========================================
+     VALORES
+=========================================== -->
+
+<section class="py-20 bg-white">
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-10">
+
+    <div class="text-center mb-12">
+
+      <span class="text-xs font-semibold tracking-[0.2em] uppercase text-[#3a6b2a] mb-2 block">
+        Los principios que nos guían
+      </span>
+
+      <h2 class="font-display text-4xl font-semibold text-[#234018]">
+        Nuestros valores.
+      </h2>
+
+    </div>
+
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+
+
+      <!-- ASOCIATIVIDAD -->
+
+      <div
+        id="asociatividad"
+        class="rounded-2xl p-6 border border-[#e8d5b0] hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+        style="background-color:#fdf8f0"
+      >
+
+        <span class="text-3xl block mb-4">🤝</span>
+
+        <h3 class="font-display text-lg font-semibold text-[#234018] mb-2">
+          Asociatividad
+        </h3>
+
+        <p class="text-xs text-[#1e1e1e]/60 leading-relaxed text-justify">
+          Trabajamos unidos para ser más fuertes como organización y como familias.
+          La cooperativa existe porque 30 productores decidieron que juntos logran más.
+        </p>
+
+      </div>
+
+
+      <!-- CALIDAD -->
+
+      <div
+        id="calidad"
+        class="rounded-2xl p-6 border border-[#e8d5b0] hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+        style="background-color:#fdf8f0"
+      >
+
+        <span class="text-3xl block mb-4">⭐</span>
+
+        <h3 class="font-display text-lg font-semibold text-[#234018] mb-2">
+          Calidad
+        </h3>
+
+        <p class="text-xs text-[#1e1e1e]/60 leading-relaxed text-justify">
+          Cada producto que sale de nuestros campos cumple estándares que
+          garantizan su destino. La calidad no es un atributo, es nuestra responsabilidad.
+        </p>
+
+      </div>
+
+
+      <!-- SOSTENIBILIDAD -->
+
+      <div
+        id="sostenibilidad"
+        class="rounded-2xl p-6 border border-[#e8d5b0] hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+        style="background-color:#fdf8f0"
+      >
+
+        <span class="text-3xl block mb-4">🌱</span>
+
+        <h3 class="font-display text-lg font-semibold text-[#234018] mb-2">
+          Sostenibilidad
+        </h3>
+
+        <p class="text-xs text-[#1e1e1e]/60 leading-relaxed text-justify">
+          Producimos cuidando el suelo, el agua y el entorno para las generaciones
+          que vienen. La sostenibilidad garantiza el futuro del campo iqueño.
+        </p>
+
+      </div>
+
+
+      <!-- COMPROMISO -->
+
+      <div
+        id="compromiso"
+        class="rounded-2xl p-6 border border-[#e8d5b0] hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+        style="background-color:#fdf8f0"
+      >
+
+        <span class="text-3xl block mb-4">💪</span>
+
+        <h3 class="font-display text-lg font-semibold text-[#234018] mb-2">
+          Compromiso
+        </h3>
+
+        <p class="text-xs text-[#1e1e1e]/60 leading-relaxed text-justify">
+          Cumplimos con nuestros socios, clientes y aliados. Ese compromiso se
+          honra con puntualidad, transparencia y consistencia en cada cosecha.
+        </p>
+
+      </div>
+
+
+      <!-- TRANSPARENCIA -->
+
+      <div
+        id="transparencia"
+        class="rounded-2xl p-6 border border-[#e8d5b0] hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+        style="background-color:#fdf8f0"
+      >
+
+        <span class="text-3xl block mb-4">📋</span>
+
+        <h3 class="font-display text-lg font-semibold text-[#234018] mb-2">
+          Transparencia
+        </h3>
+
+        <p class="text-xs text-[#1e1e1e]/60 leading-relaxed text-justify">
+          Gestionamos con honestidad y rendimos cuentas a cada uno de los 30 socios.
+          La transparencia fortalece la confianza interna y la credibilidad externa.
+        </p>
+
+      </div>
+
+
+      <!-- COMERCIO JUSTO -->
+
+      <div
+        id="comercio justo"
+        class="rounded-2xl p-6 border border-[#e8d5b0] hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+        style="background-color:#fdf8f0"
+      >
+
+        <span class="text-3xl block mb-4">⚖️</span>
+
+        <h3 class="font-display text-lg font-semibold text-[#234018] mb-2">
+          Comercio justo
+        </h3>
+
+        <p class="text-xs text-[#1e1e1e]/60 leading-relaxed text-justify">
+          Buscamos que el precio que recibe el productor reconozca su trabajo real.
+          Sin intermediarios que capturen el valor, redistribuimos directamente
+          a las familias.
+        </p>
+
+      </div>
+
+
+      <!-- TRABAJO EN EQUIPO -->
+
+      <div
+        id="trabajo en equipo"
+        class="rounded-2xl p-6 border border-[#e8d5b0] hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+        style="background-color:#fdf8f0"
+      >
+
+        <span class="text-3xl block mb-4">👥</span>
+
+        <h3 class="font-display text-lg font-semibold text-[#234018] mb-2">
+          Trabajo en equipo
+        </h3>
+
+        <p class="text-xs text-[#1e1e1e]/60 leading-relaxed text-justify">
+          Dentro de la cooperativa no hay competencia entre socios: hay colaboración.
+          Compartimos conocimientos, recursos y maquinaria para mejores resultados.
+        </p>
+
+      </div>
+
+
+      <!-- DESARROLLO FAMILIAR -->
+
+      <div
+        id="desarrollo familiar"
+        class="rounded-2xl p-6 border border-[#e8d5b0] hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+        style="background-color:#fdf8f0"
+      >
+
+        <span class="text-3xl block mb-4">👨‍👩‍👧</span>
+
+        <h3 class="font-display text-lg font-semibold text-[#234018] mb-2">
+          Desarrollo familiar
+        </h3>
+
+        <p class="text-xs text-[#1e1e1e]/60 leading-relaxed text-justify">
+          El fin último de la cooperativa es mejorar la calidad de vida de las
+          familias productoras: más ingresos, más acceso a servicios y más oportunidades.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ==========================================
+     ESTADÍSTICAS
+=========================================== -->
+
+<section style="background-color:#234018">
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-10">
+
+    <div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10">
+
+
+      <div class="text-center py-10 px-4">
+
+        <div class="font-display text-4xl md:text-5xl font-semibold text-white mb-2">
+          30
+        </div>
+
+        <div class="text-xs uppercase tracking-widest text-white/40">
+          Familias beneficiadas
+        </div>
+
+      </div>
+
+
+      <div class="text-center py-10 px-4">
+
+        <div class="font-display text-4xl md:text-5xl font-semibold text-white mb-2">
+          8
+        </div>
+
+        <div class="text-xs uppercase tracking-widest text-white/40">
+          Valores fundamentales
+        </div>
+
+      </div>
+
+
+      <div class="text-center py-10 px-4">
+
+        <div class="font-display text-4xl md:text-5xl font-semibold text-white mb-2">
+          100%
+        </div>
+
+        <div class="text-xs uppercase tracking-widest text-white/40">
+          Comercio justo
+        </div>
+
+      </div>
+
+
+      <div class="text-center py-10 px-4">
+
+        <div class="font-display text-4xl md:text-5xl font-semibold text-white mb-2">
+          2025
+        </div>
+
+        <div class="text-xs uppercase tracking-widest text-white/40">
+          Primer año activo
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ==========================================
+     CTA
+=========================================== -->
+
+<section class="py-16 bg-white border-t border-[#e8d5b0]">
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-10 text-center">
+
+    <h2 class="font-display text-3xl font-semibold text-[#234018] mb-3">
+      ¿Quieres apoyar este camino?
+    </h2>
+
+    <p class="text-sm text-[#1e1e1e]/55 max-w-md mx-auto mb-6">
+      Comprando directamente a Cooperativa Central Chavalina, apoyas a 30
+      familias productoras de Ica que trabajan con calidad, esfuerzo y compromiso.
+    </p>
+
+    <a
+      href="{{ url_for('public.contacto') }}"
+      class="inline-flex items-center gap-2 font-semibold px-8 py-3.5 rounded-full text-sm hover:opacity-90 active:scale-95 transition-all"
+      style="background-color:#c9930a;color:#3e1f06"
+    >
+      Contactar ahora
+    </a>
+
+  </div>
+
+</section>
+
+{% endblock %}

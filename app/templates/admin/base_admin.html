@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {% block title %}Panel de Control{% endblock %}
+    </title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/styles.css') }}"
+    >
+</head>
+
+<body class="bg-[#f4f5f0]">
+
+    <div class="flex min-h-screen">
+
+        <!-- MENÚ LATERAL -->
+        <aside
+            class="hidden md:flex md:w-64 lg:w-72
+                   bg-[#1d3515] text-white
+                   flex-col"
+        >
+
+            <!-- LOGO -->
+            <div class="p-6 border-b border-white/10">
+
+                <div class="flex items-center gap-3">
+
+                    <div
+                        class="w-12 h-12 bg-white rounded-xl
+                               flex items-center justify-center p-1"
+                    >
+                        <img
+                            src="{{ url_for('static', filename='img/logo-chavalina.png') }}"
+                            alt="Central Chavalina"
+                            class="w-full h-full object-contain"
+                        >
+                    </div>
+
+                    <div>
+
+                        <h1 class="font-bold">
+                            Chavalina
+                        </h1>
+
+                        <p class="text-xs text-white/60">
+                            Panel de Control
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- OPCIONES -->
+            <nav class="flex-1 p-4 space-y-2">
+
+                <!-- DASHBOARD -->
+                <a
+                    href="{{ url_for('dashboard.index') }}"
+                    class="flex items-center gap-3
+                           px-4 py-3 rounded-xl
+                           hover:bg-white/10 transition"
+                >
+                    <span>⌂</span>
+                    <span>Dashboard</span>
+                </a>
+
+
+                <!-- COTIZACIONES -->
+                <a
+                    href="{{ url_for('dashboard.cotizaciones') }}"
+                    class="flex items-center gap-3
+                           px-4 py-3 rounded-xl
+                           hover:bg-white/10 transition"
+                >
+                    <span>▤</span>
+                    <span>Cotizaciones</span>
+                </a>
+
+
+                <!-- CONTACTOS -->
+                <a
+                    href="{{ url_for('dashboard.contactos') }}"
+                    class="flex items-center gap-3
+                           px-4 py-3 rounded-xl
+                           hover:bg-white/10 transition"
+                >
+                    <span>✉</span>
+                    <span>Contactos</span>
+                </a>
+
+
+                <!-- PRODUCTOS -->
+                <a
+                    href="{{ url_for('dashboard.productos') }}"
+                    class="flex items-center gap-3
+                           px-4 py-3 rounded-xl
+                           hover:bg-white/10 transition"
+                >
+                    <span>●</span>
+                    <span>Productos</span>
+                </a>
+
+
+                <!-- IMÁGENES -->
+                <a
+                    href="{{ url_for('dashboard.imagenes') }}"
+                    class="flex items-center gap-3
+                           px-4 py-3 rounded-xl
+                           hover:bg-white/10 transition"
+                >
+                    <span>▧</span>
+                    <span>Imágenes</span>
+                </a>
+               <!-- ALIADOS -->
+                <a
+               href="{{ url_for('dashboard.aliados') }}"
+               class="flex items-center gap-3
+               px-4 py-3 rounded-xl
+               hover:bg-white/10 transition"
+               >
+               <span>🤝</span>
+               <span>Aliados</span>
+               </a>
+               </nav>
+
+
+            <!-- OPCIONES INFERIORES -->
+            <div class="p-4 border-t border-white/10 space-y-2">
+
+                <!-- VER PÁGINA WEB -->
+                <a
+                    href="{{ url_for('public.home') }}"
+                    class="flex items-center gap-3
+                           px-4 py-3 rounded-xl
+                           hover:bg-white/10 transition"
+                >
+                    <span>↗</span>
+                    <span>Ver página web</span>
+                </a>
+
+
+                <!-- CERRAR SESIÓN -->
+                <a
+                    href="{{ url_for('dashboard.logout') }}"
+                    class="flex items-center gap-3
+                           px-4 py-3 rounded-xl
+                           text-red-200
+                           hover:bg-red-500/20
+                           hover:text-white
+                           transition"
+                >
+                    <span>⇥</span>
+                    <span>Cerrar sesión</span>
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <!-- CONTENIDO -->
+        <div class="flex-1 min-w-0">
+
+            <!-- BARRA SUPERIOR -->
+            <header
+                class="h-20 bg-white border-b border-gray-200
+                       flex items-center justify-between
+                       px-6 lg:px-8"
+            >
+
+                <div>
+
+                    <h2 class="font-bold text-[#1d3515]">
+                        Panel Administrativo
+                    </h2>
+
+                    <p class="text-xs text-gray-500">
+                        Cooperativa Central Chavalina
+                    </p>
+
+                </div>
+
+
+                <!-- ADMINISTRADOR -->
+                <div class="flex items-center gap-3">
+
+                    <div class="text-right hidden sm:block">
+
+                        <p class="text-sm font-semibold text-gray-700">
+                            Administrador
+                        </p>
+
+                        <p class="text-xs text-gray-400">
+                            Chavalina
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="w-10 h-10 rounded-full
+                               bg-[#1d3515] text-white
+                               flex items-center justify-center
+                               font-bold"
+                    >
+                        A
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- CONTENIDO DE LA PÁGINA -->
+            <main class="p-6 lg:p-8">
+
+                {% block content %}
+                {% endblock %}
+
+            </main>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

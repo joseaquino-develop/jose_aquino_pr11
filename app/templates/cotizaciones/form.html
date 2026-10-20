@@ -1,0 +1,303 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {{ 'Editar cotización' if cotizacion else 'Nueva cotización' }}
+{% endblock %}
+
+{% block content %}
+
+<h1 class="text-2xl font-semibold mb-6">
+  {{ 'Editar cotización' if cotizacion else 'Nueva cotización' }}
+</h1>
+
+<form method="POST" class="bg-white rounded-xl shadow p-6 space-y-4 max-w-2xl">
+
+  <!-- DATOS DE LA EMPRESA -->
+
+  <div class="grid sm:grid-cols-2 gap-4">
+
+    <div>
+      <label class="block text-sm font-medium mb-1">
+        Empresa
+      </label>
+
+      <input
+        type="text"
+        name="empresa"
+        required
+        value="{{ cotizacion.empresa if cotizacion else '' }}"
+        class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
+      >
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium mb-1">
+        Contacto
+      </label>
+
+      <input
+        type="text"
+        name="contacto"
+        required
+        value="{{ cotizacion.contacto if cotizacion else '' }}"
+        class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
+      >
+    </div>
+
+  </div>
+
+
+  <div class="grid sm:grid-cols-2 gap-4">
+
+    <div>
+      <label class="block text-sm font-medium mb-1">
+        Cargo
+      </label>
+
+      <input
+        type="text"
+        name="cargo"
+        value="{{ cotizacion.cargo if cotizacion else '' }}"
+        class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
+      >
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium mb-1">
+        País
+      </label>
+
+      <input
+        type="text"
+        name="pais"
+        required
+        value="{{ cotizacion.pais if cotizacion else '' }}"
+        class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
+      >
+    </div>
+
+  </div>
+
+
+  <div class="grid sm:grid-cols-2 gap-4">
+
+    <div>
+      <label class="block text-sm font-medium mb-1">
+        Email
+      </label>
+
+      <input
+        type="email"
+        name="email"
+        required
+        value="{{ cotizacion.email if cotizacion else '' }}"
+        class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
+      >
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium mb-1">
+        Teléfono
+      </label>
+
+      <input
+        type="text"
+        name="telefono"
+        value="{{ cotizacion.telefono if cotizacion else '' }}"
+        class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
+      >
+    </div>
+
+  </div>
+
+
+  <div>
+
+    <label class="block text-sm font-medium mb-1">
+      Sitio web
+    </label>
+
+    <input
+      type="text"
+      name="web"
+      value="{{ cotizacion.web if cotizacion else '' }}"
+      class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
+    >
+
+  </div>
+
+
+  <hr class="border-gray-200">
+
+
+  <!-- DATOS DEL PRODUCTO -->
+
+  <div class="grid sm:grid-cols-3 gap-4">
+
+    <div>
+
+      <label class="block text-sm font-medium mb-1">
+        Producto
+      </label>
+
+      <input
+        type="text"
+        name="producto"
+        required
+        value="{{ cotizacion.producto if cotizacion else '' }}"
+        class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
+      >
+
+    </div>
+
+
+    <div>
+
+      <label class="block text-sm font-medium mb-1">
+        Cantidad
+      </label>
+
+      <input
+        type="text"
+        name="cantidad"
+        required
+        value="{{ cotizacion.cantidad if cotizacion else '' }}"
+        class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
+      >
+
+    </div>
+
+
+    <div>
+
+      <label class="block text-sm font-medium mb-1">
+        Unidad
+      </label>
+
+      <input
+        type="text"
+        name="unidad"
+        value="{{ cotizacion.unidad if cotizacion else '' }}"
+        class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
+      >
+
+    </div>
+
+  </div>
+
+
+  <div class="grid sm:grid-cols-2 gap-4">
+
+    <div>
+
+      <label class="block text-sm font-medium mb-1">
+        Frecuencia de compra
+      </label>
+
+      <input
+        type="text"
+        name="frecuencia"
+        value="{{ cotizacion.frecuencia if cotizacion else '' }}"
+        class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
+      >
+
+    </div>
+
+
+    <div>
+
+      <label class="block text-sm font-medium mb-1">
+        País / puerto de destino
+      </label>
+
+      <input
+        type="text"
+        name="destino"
+        value="{{ cotizacion.destino if cotizacion else '' }}"
+        class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
+      >
+
+    </div>
+
+  </div>
+
+
+  <hr class="border-gray-200">
+
+
+  <!-- REQUISITOS -->
+
+  <div class="grid sm:grid-cols-2 gap-4">
+
+    <div>
+
+      <label class="block text-sm font-medium mb-1">
+        Incoterm
+      </label>
+
+      <input
+        type="text"
+        name="incoterm"
+        value="{{ cotizacion.incoterm if cotizacion else '' }}"
+        class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
+      >
+
+    </div>
+
+
+    <div>
+
+      <label class="block text-sm font-medium mb-1">
+        Certificaciones requeridas
+      </label>
+
+      <input
+        type="text"
+        name="certificaciones"
+        value="{{ cotizacion.certificaciones if cotizacion else '' }}"
+        class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
+      >
+
+    </div>
+
+  </div>
+
+
+  <div>
+
+    <label class="block text-sm font-medium mb-1">
+      Observaciones
+    </label>
+
+    <textarea
+      name="notas"
+      rows="4"
+      class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
+    >{{ cotizacion.notas if cotizacion else '' }}</textarea>
+
+  </div>
+
+
+  <!-- BOTONES -->
+
+  <div class="flex gap-3 pt-2">
+
+    <button
+      type="submit"
+      class="bg-green-700 text-white px-4 py-2 rounded-lg hover:bg-green-800 text-sm"
+    >
+      Guardar
+    </button>
+
+    <a
+      href="{{ url_for('cotizaciones.index') }}"
+      class="px-4 py-2 rounded-lg border hover:bg-gray-50 text-sm"
+    >
+      Cancelar
+    </a>
+
+  </div>
+
+</form>
+
+{% endblock %}

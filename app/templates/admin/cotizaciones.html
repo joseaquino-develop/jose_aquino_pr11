@@ -1,0 +1,200 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %}
+Cotizaciones | Chavalina
+{% endblock %}
+
+{% block content %}
+
+<div class="mb-8">
+
+    <h1 class="text-3xl font-bold text-[#1d3515]">
+        Cotizaciones
+    </h1>
+
+    <p class="text-gray-500 mt-1">
+        Solicitudes de cotización recibidas desde la página web.
+    </p>
+
+</div>
+
+
+<div class="bg-white border border-gray-200 rounded-2xl">
+
+    <div class="p-6 border-b border-gray-100">
+
+        <h2 class="font-bold text-[#1d3515]">
+            Todas las cotizaciones
+        </h2>
+
+        <p class="text-sm text-gray-500 mt-1">
+            Total: {{ cotizaciones|length }}
+        </p>
+
+    </div>
+
+
+    <div class="p-6">
+
+        {% if cotizaciones %}
+
+        <div class="overflow-x-auto">
+
+            <table class="w-full">
+
+                <thead>
+
+                    <tr class="border-b border-gray-200 text-left">
+
+                        <th class="pb-3 text-xs uppercase text-gray-400">
+                            Empresa
+                        </th>
+
+                        <th class="pb-3 text-xs uppercase text-gray-400">
+                            Contacto
+                        </th>
+
+                        <th class="pb-3 text-xs uppercase text-gray-400">
+                            Producto
+                        </th>
+
+                        <th class="pb-3 text-xs uppercase text-gray-400">
+                            Cantidad
+                        </th>
+
+                        <th class="pb-3 text-xs uppercase text-gray-400">
+                            País
+                        </th>
+
+                        <th class="pb-3 text-xs uppercase text-gray-400">
+                            Fecha
+                        </th>
+
+                        <th class="pb-3 text-xs uppercase text-gray-400">
+                            Acciones
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for cotizacion in cotizaciones %}
+
+                    <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
+
+                        <td class="py-4 font-semibold text-gray-700">
+                            {{ cotizacion.empresa }}
+                        </td>
+
+                        <td class="py-4">
+
+                            <p class="text-sm text-gray-700">
+                                {{ cotizacion.contacto }}
+                            </p>
+
+                            <p class="text-xs text-gray-400">
+                                {{ cotizacion.email }}
+                            </p>
+
+                        </td>
+
+                        <td class="py-4 text-sm text-gray-600">
+                            {{ cotizacion.producto }}
+                        </td>
+
+                        <td class="py-4 text-sm text-gray-600">
+
+                            {{ cotizacion.cantidad }}
+
+                            {% if cotizacion.unidad %}
+                                {{ cotizacion.unidad }}
+                            {% endif %}
+
+                        </td>
+
+                        <td class="py-4 text-sm text-gray-600">
+                            {{ cotizacion.pais }}
+                        </td>
+
+                        <td class="py-4 text-sm text-gray-500">
+
+                            {% if cotizacion.creado_en %}
+                                {{ cotizacion.creado_en.strftime('%d/%m/%Y') }}
+                            {% else %}
+                                -
+                            {% endif %}
+
+                        </td>
+
+                        <td class="py-4">
+
+                            <div class="flex items-center gap-2">
+
+                                <!-- BOTÓN VER -->
+                                <a
+                                    href="{{ url_for('dashboard.detalle_cotizacion', id=cotizacion.id) }}"
+                                    class="inline-flex items-center justify-center
+                                           px-4 py-2 rounded-lg
+                                           bg-[#1d3515] text-white
+                                           text-xs font-semibold
+                                           hover:bg-[#294b1e] transition"
+                                >
+                                    Ver
+                                </a>
+
+
+                                <!-- BOTÓN ELIMINAR -->
+                                <form
+                                    action="{{ url_for('dashboard.eliminar_cotizacion', id=cotizacion.id) }}"
+                                    method="POST"
+                                    onsubmit="return confirm('¿Estás seguro de eliminar esta cotización?');"
+                                >
+
+                                    <button
+                                        type="submit"
+                                        class="inline-flex items-center justify-center
+                                               px-4 py-2 rounded-lg
+                                               bg-red-50 text-red-600
+                                               border border-red-200
+                                               text-xs font-semibold
+                                               hover:bg-red-600 hover:text-white
+                                               transition"
+                                    >
+                                        Eliminar
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <div class="py-12 text-center">
+
+            <p class="font-semibold text-gray-700">
+                No hay cotizaciones registradas.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

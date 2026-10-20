@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block title %}Cotizaciones{% endblock %}
+
+{% block content %}
+
+<div class="flex items-center justify-between mb-6">
+
+  <h1 class="text-2xl font-semibold">
+    Solicitudes de cotización
+  </h1>
+
+  <a
+    href="{{ url_for('cotizaciones.nueva') }}"
+    class="bg-green-700 text-white px-4 py-2 rounded-lg hover:bg-green-800 text-sm"
+  >
+    + Nueva cotización
+  </a>
+
+</div>
+
+
+<div class="bg-white rounded-xl shadow overflow-x-auto">
+
+  <table class="w-full text-left text-sm">
+
+    <thead class="bg-gray-100 uppercase text-gray-500 text-xs">
+
+      <tr>
+        <th class="px-4 py-3">Empresa</th>
+        <th class="px-4 py-3">Contacto</th>
+        <th class="px-4 py-3">País</th>
+        <th class="px-4 py-3">Producto</th>
+        <th class="px-4 py-3">Volumen</th>
+        <th class="px-4 py-3">Fecha</th>
+        <th class="px-4 py-3 text-right">Acciones</th>
+      </tr>
+
+    </thead>
+
+
+    <tbody class="divide-y">
+
+      {% for c in cotizaciones %}
+
+      <tr>
+
+        <td class="px-4 py-3 font-medium">
+          {{ c.empresa }}
+        </td>
+
+        <td class="px-4 py-3">
+          {{ c.contacto }}
+
+          <br>
+
+          <span class="text-xs text-gray-400">
+            {{ c.email }}
+          </span>
+        </td>
+
+        <td class="px-4 py-3">
+          {{ c.pais }}
+        </td>
+
+        <td class="px-4 py-3">
+          {{ c.producto }}
+        </td>
+
+        <td class="px-4 py-3">
+          {{ c.cantidad }} {{ c.unidad or '' }}
+        </td>
+
+        <td class="px-4 py-3 text-xs text-gray-400">
+          {{ c.creado_en.strftime('%d/%m/%Y') if c.creado_en else '-' }}
+        </td>
+
+        <td class="px-4 py-3 text-right space-x-3 whitespace-nowrap">
+
+          <a
+            href="{{ url_for('cotizaciones.editar', cotizacion_id=c.id) }}"
+            class="text-blue-600 hover:underline"
+          >
+            Editar
+          </a>
+
+          <form
+            action="{{ url_for('cotizaciones.eliminar', cotizacion_id=c.id) }}"
+            method="POST"
+            class="inline"
+            onsubmit="return confirm('¿Eliminar esta cotización?');"
+          >
+            <button
+              type="submit"
+              class="text-red-600 hover:underline"
+            >
+              Eliminar
+            </button>
+          </form>
+
+        </td>
+
+      </tr>
+
+
+      {% else %}
+
+      <tr>
+
+        <td
+          colspan="7"
+          class="px-4 py-6 text-center text-gray-400"
+        >
+          Todavía no hay solicitudes de cotización registradas.
+        </td>
+
+      </tr>
+
+      {% endfor %}
+
+    </tbody>
+
+  </table>
+
+</div>
+
+{% endblock %}

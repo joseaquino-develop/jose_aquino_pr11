@@ -1,0 +1,248 @@
+/* ==========================================================
+   FOOTER CORPORATIVO · Cooperativa Central Chavalina
+   ========================================================== */
+
+.site-footer {
+  /* Variables: cambia aquí los colores de todo el footer */
+  --sf-bg: #1a2e11;
+  --sf-text: rgba(255, 255, 255, .68);
+  --sf-title: #ffffff;
+  --sf-muted: rgba(255, 255, 255, .4);
+  --sf-line: rgba(255, 255, 255, .1);
+  --sf-accent: #c9930a;
+  --sf-accent-dark: #3e1f06;
+
+  background: var(--sf-bg);
+  color: var(--sf-text);
+  padding-top: 4.5rem;
+}
+
+.site-footer ul { list-style: none; margin: 0; padding: 0; }
+.site-footer a { text-decoration: none; }
+
+.site-footer__inner {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* ---------- Cuadrícula de 4 columnas ---------- */
+.site-footer__grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1.4fr;
+  gap: 3rem;
+  padding-bottom: 3.5rem;
+}
+
+/* ---------- Columna 1: marca ---------- */
+.site-footer__logo {
+  display: flex;
+  align-items: center;
+  gap: .85rem;
+  margin-bottom: 1.25rem;
+}
+
+.site-footer__logo-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  padding: 6px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .95);
+  flex-shrink: 0;
+}
+
+.site-footer__logo-box img { width: 100%; height: 100%; object-fit: contain; }
+
+.site-footer__brand-name {
+  display: block;
+  font-family: 'Fraunces', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--sf-title);
+}
+
+.site-footer__brand-sub {
+  display: block;
+  margin-top: .2rem;
+  font-size: .625rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--sf-muted);
+}
+
+.site-footer__about {
+  max-width: 24rem;
+  margin: 0 0 1.5rem;
+  font-size: .875rem;
+  line-height: 1.7;
+}
+
+/* ---------- Redes sociales (circulares) ---------- */
+.site-footer__social { display: flex; gap: .7rem; }
+
+.site-footer__social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--sf-line);
+  border-radius: 50%;
+  color: var(--sf-text);
+  transition: transform .3s ease, background .3s ease, color .3s ease, border-color .3s ease;
+}
+
+.site-footer__social-link svg { width: 17px; height: 17px; }
+
+.site-footer__social-link:hover,
+.site-footer__social-link:focus-visible {
+  transform: translateY(-4px);                 /* elevación */
+  background: var(--sf-accent);
+  border-color: var(--sf-accent);
+  color: var(--sf-accent-dark);
+}
+
+/* ---------- Títulos de columna ---------- */
+.site-footer__title {
+  position: relative;
+  margin: 0 0 1.5rem;
+  padding-bottom: .8rem;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--sf-title);
+}
+
+.site-footer__title::after {                   /* pequeña línea dorada */
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 28px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--sf-accent);
+}
+
+/* ---------- Enlaces de navegación ---------- */
+.site-footer__list li + li { margin-top: .15rem; }
+
+.site-footer__link {
+  display: inline-block;
+  padding: .3rem 0;
+  font-size: .875rem;
+  color: var(--sf-text);
+  transition: color .25s ease, transform .25s ease;
+}
+
+.site-footer__link:hover,
+.site-footer__link:focus-visible {
+  color: #ffffff;                              /* tono más claro */
+  transform: translateX(6px);                  /* se desplaza a la derecha */
+}
+
+/* ---------- Newsletter ---------- */
+.site-footer__form {
+  display: flex;
+  gap: .5rem;
+  margin-bottom: .6rem;
+}
+
+.site-footer__form input {
+  flex: 1;
+  min-width: 0;
+  padding: .75rem 1rem;
+  border: 1px solid var(--sf-line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .06);
+  color: #ffffff;
+  font-size: .85rem;
+  outline: none;
+  transition: border-color .25s ease, background .25s ease;
+}
+
+.site-footer__form input::placeholder { color: var(--sf-muted); }
+
+.site-footer__form input:focus {
+  border-color: var(--sf-accent);
+  background: rgba(255, 255, 255, .1);
+}
+
+.site-footer__form button {
+  padding: .75rem 1.2rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--sf-accent);
+  color: var(--sf-accent-dark);
+  font-size: .8rem;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform .25s ease, filter .25s ease;
+}
+
+.site-footer__form button:hover { transform: translateY(-2px); filter: brightness(1.1); }
+
+.site-footer__msg { min-height: 1.2rem; margin: 0; font-size: .8rem; color: #74c69d; }
+.site-footer__msg.is-error { color: #f1a7a0; }
+.site-footer__note { margin: .4rem 0 0; font-size: .72rem; color: var(--sf-muted); }
+
+/* Texto solo para lectores de pantalla */
+.site-footer__sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Barra inferior ---------- */
+.site-footer__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--sf-line);        /* línea separadora */
+}
+
+.site-footer__copy { font-size: .75rem; color: var(--sf-muted); }
+
+.site-footer__legal { display: flex; gap: 1.5rem; }
+
+.site-footer__legal a {
+  font-size: .75rem;
+  color: var(--sf-muted);
+  transition: color .25s ease;
+}
+
+.site-footer__legal a:hover { color: #ffffff; }
+
+/* ---------- Responsive ---------- */
+@media (min-width: 1024px) {
+  .site-footer__inner { padding: 0 2.5rem; }
+}
+
+@media (max-width: 1023px) {                   /* tablet: 2 columnas */
+  .site-footer__grid { grid-template-columns: repeat(2, 1fr); gap: 2.5rem; }
+  .site-footer__brand { grid-column: 1 / -1; }
+}
+
+@media (max-width: 639px) {                    /* móvil: 1 columna */
+  .site-footer { padding-top: 3rem; }
+  .site-footer__grid { grid-template-columns: 1fr; gap: 2.25rem; padding-bottom: 2.5rem; }
+  .site-footer__bottom { flex-direction: column; align-items: flex-start; }
+  .site-footer__legal { gap: 1.25rem; }
+}
+
+/* ---------- Accesibilidad: menos movimiento ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .site-footer * { transition: none !important; transform: none !important; }
+}

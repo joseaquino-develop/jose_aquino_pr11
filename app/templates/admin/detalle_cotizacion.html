@@ -1,0 +1,270 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %}
+Detalle de Cotización | Chavalina
+{% endblock %}
+
+{% block content %}
+
+<!-- ENCABEZADO -->
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+
+    <div>
+        <p class="text-sm font-semibold text-[#87b848] mb-1">
+            COTIZACIÓN N.° {{ cotizacion.id }}
+        </p>
+
+        <h1 class="text-3xl font-bold text-[#1d3515]">
+            Detalle de cotización
+        </h1>
+
+        <p class="text-gray-500 mt-1">
+            Información completa de la solicitud recibida.
+        </p>
+    </div>
+
+    <a
+        href="{{ url_for('dashboard.cotizaciones') }}"
+        class="inline-flex items-center justify-center px-5 py-3
+               bg-white border border-gray-200 rounded-xl
+               text-sm font-semibold text-gray-600
+               hover:bg-gray-50 transition"
+    >
+        ← Volver a cotizaciones
+    </a>
+
+</div>
+
+
+<!-- INFORMACIÓN PRINCIPAL -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+    <!-- DATOS DE LA EMPRESA -->
+    <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden">
+
+        <div class="px-6 py-5 border-b border-gray-100">
+            <h2 class="text-lg font-bold text-[#1d3515]">
+                Datos de la empresa
+            </h2>
+
+            <p class="text-sm text-gray-400 mt-1">
+                Información del cliente que realizó la solicitud.
+            </p>
+        </div>
+
+        <div class="p-6 space-y-5">
+
+            <div>
+                <p class="text-xs font-semibold uppercase text-gray-400">
+                    Empresa
+                </p>
+
+                <p class="text-gray-700 font-semibold mt-1">
+                    {{ cotizacion.empresa }}
+                </p>
+            </div>
+
+            <div>
+                <p class="text-xs font-semibold uppercase text-gray-400">
+                    Persona de contacto
+                </p>
+
+                <p class="text-gray-700 mt-1">
+                    {{ cotizacion.contacto }}
+                </p>
+            </div>
+
+            <div>
+                <p class="text-xs font-semibold uppercase text-gray-400">
+                    Cargo
+                </p>
+
+                <p class="text-gray-700 mt-1">
+                    {{ cotizacion.cargo or "-" }}
+                </p>
+            </div>
+
+            <div>
+                <p class="text-xs font-semibold uppercase text-gray-400">
+                    País
+                </p>
+
+                <p class="text-gray-700 mt-1">
+                    {{ cotizacion.pais }}
+                </p>
+            </div>
+
+            <div>
+                <p class="text-xs font-semibold uppercase text-gray-400">
+                    Correo electrónico
+                </p>
+
+                <p class="text-gray-700 mt-1">
+                    {{ cotizacion.email }}
+                </p>
+            </div>
+
+            <div>
+                <p class="text-xs font-semibold uppercase text-gray-400">
+                    Teléfono
+                </p>
+
+                <p class="text-gray-700 mt-1">
+                    {{ cotizacion.telefono }}
+                </p>
+            </div>
+
+            <div>
+                <p class="text-xs font-semibold uppercase text-gray-400">
+                    Sitio web
+                </p>
+
+                <p class="text-gray-700 mt-1">
+                    {{ cotizacion.web or "-" }}
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- DATOS DEL PRODUCTO -->
+    <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden">
+
+        <div class="px-6 py-5 border-b border-gray-100">
+            <h2 class="text-lg font-bold text-[#1d3515]">
+                Producto solicitado
+            </h2>
+
+            <p class="text-sm text-gray-400 mt-1">
+                Información comercial de la cotización.
+            </p>
+        </div>
+
+        <div class="p-6 space-y-5">
+
+            <div>
+                <p class="text-xs font-semibold uppercase text-gray-400">
+                    Producto
+                </p>
+
+                <p class="text-gray-700 font-semibold mt-1">
+                    {{ cotizacion.producto }}
+                </p>
+            </div>
+
+            <div>
+                <p class="text-xs font-semibold uppercase text-gray-400">
+                    Cantidad
+                </p>
+
+                <p class="text-gray-700 mt-1">
+                    {{ cotizacion.cantidad }}
+
+                    {% if cotizacion.unidad %}
+                        {{ cotizacion.unidad }}
+                    {% endif %}
+                </p>
+            </div>
+
+            <div>
+                <p class="text-xs font-semibold uppercase text-gray-400">
+                    Frecuencia
+                </p>
+
+                <p class="text-gray-700 mt-1">
+                    {{ cotizacion.frecuencia or "-" }}
+                </p>
+            </div>
+
+            <div>
+                <p class="text-xs font-semibold uppercase text-gray-400">
+                    Destino
+                </p>
+
+                <p class="text-gray-700 mt-1">
+                    {{ cotizacion.destino or "-" }}
+                </p>
+            </div>
+
+            <div>
+                <p class="text-xs font-semibold uppercase text-gray-400">
+                    Incoterm
+                </p>
+
+                <p class="text-gray-700 mt-1">
+                    {{ cotizacion.incoterm or "-" }}
+                </p>
+            </div>
+
+            <div>
+                <p class="text-xs font-semibold uppercase text-gray-400">
+                    Certificaciones requeridas
+                </p>
+
+                <p class="text-gray-700 mt-1">
+                    {{ cotizacion.certificaciones or "-" }}
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- INFORMACIÓN ADICIONAL -->
+<div class="bg-white border border-gray-200 rounded-2xl overflow-hidden mt-6">
+
+    <div class="px-6 py-5 border-b border-gray-100">
+
+        <h2 class="text-lg font-bold text-[#1d3515]">
+            Información adicional
+        </h2>
+
+    </div>
+
+    <div class="p-6">
+
+        <div>
+
+            <p class="text-xs font-semibold uppercase text-gray-400">
+                Notas
+            </p>
+
+            <p class="text-gray-700 mt-2 leading-relaxed">
+                {{ cotizacion.notas or "Sin notas adicionales." }}
+            </p>
+
+        </div>
+
+
+        <div class="border-t border-gray-100 mt-6 pt-6">
+
+            <p class="text-xs font-semibold uppercase text-gray-400">
+                Fecha de solicitud
+            </p>
+
+            <p class="text-gray-700 mt-1">
+
+                {% if cotizacion.creado_en %}
+
+                    {{ cotizacion.creado_en.strftime('%d/%m/%Y %H:%M') }}
+
+                {% else %}
+
+                    -
+
+                {% endif %}
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

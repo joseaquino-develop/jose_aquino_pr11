@@ -1,0 +1,100 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %}
+Productos | Chavalina
+{% endblock %}
+
+{% block content %}
+
+<div class="mb-8">
+
+    <h1 class="text-3xl font-bold text-[#1d3515]">
+        Productos
+    </h1>
+
+    <p class="text-gray-500 mt-1">
+        Productos disponibles en la página web de Chavalina.
+    </p>
+
+</div>
+
+
+<div class="bg-white border border-gray-200 rounded-2xl">
+
+    <div class="p-6 border-b border-gray-100">
+
+        <h2 class="font-bold text-[#1d3515]">
+            Todos los productos
+        </h2>
+
+        <p class="text-sm text-gray-500 mt-1">
+            Total: {{ products|length }}
+        </p>
+
+    </div>
+
+
+    <div class="p-6">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+
+            {% for key, producto in products.items() %}
+
+            <div class="border border-gray-200 rounded-2xl overflow-hidden bg-white">
+
+                <!-- IMAGEN -->
+                <div class="h-44 overflow-hidden">
+
+                    <img
+                        src="{{ producto.img }}"
+                        alt="{{ producto.name }}"
+                        class="w-full h-full object-cover"
+                    >
+
+                </div>
+
+
+                <!-- INFORMACIÓN -->
+                <div class="p-5">
+
+                    <p class="text-xs font-semibold text-[#87b848] uppercase">
+                        {{ producto.season }}
+                    </p>
+
+                    <h2 class="text-xl font-bold text-[#1d3515] mt-1">
+                        {{ producto.name }}
+                    </h2>
+
+                    <p class="text-sm text-gray-500 mt-1">
+                        {{ producto.subtitle }}
+                    </p>
+
+
+                    <div class="mt-5">
+
+                        <a
+                            href="{{ url_for('dashboard.detalle_producto', key=key) }}"
+                            class="inline-flex items-center justify-center
+                                   w-full px-4 py-2 rounded-lg
+                                   bg-[#1d3515] text-white
+                                   text-sm font-semibold
+                                   hover:bg-[#294b1e] transition"
+                        >
+                            Ver producto
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

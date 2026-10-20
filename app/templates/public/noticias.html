@@ -1,0 +1,337 @@
+{% extends "public/base_public.html" %}
+
+{% block title %}Noticias — Central Chavalina{% endblock %}
+
+{% block content %}
+
+<!-- ==========================================
+     HERO
+=========================================== -->
+<div
+    class="relative pt-16 overflow-hidden"
+    style="background-color:#234018; min-height:280px;"
+>
+    <img
+        src="https://images.unsplash.com/photo-1585242902894-e8a65ecbe1ef?w=1600&h=700&fit=crop&auto=format"
+        alt=""
+        aria-hidden="true"
+        fetchpriority="high"
+        class="absolute inset-0 h-full w-full object-cover object-center"
+    >
+
+    <div class="absolute inset-0 bg-[#14271b]/75" aria-hidden="true"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-5 lg:px-10 py-20">
+
+        <span
+            class="text-xs font-semibold tracking-[0.2em] uppercase text-[#74c69d] mb-3 block"
+        >
+            Actualidad
+        </span>
+
+        <h1
+            class="font-display text-5xl md:text-6xl text-white font-semibold"
+        >
+            Noticias.
+        </h1>
+
+        <p
+            class="mt-4 text-white/80 leading-relaxed max-w-md text-justify"
+        >
+            Los avances de nuestra cooperativa: cosechas, alianzas,
+            certificaciones y los pasos que damos para llevar los productos
+            de Ica al mundo.
+        </p>
+
+    </div>
+</div>
+
+
+<!-- ==========================================
+     DATOS DE LAS NOTICIAS
+=========================================== -->
+{% set news = [
+    {
+        "date": "Agosto 2026",
+        "tag": "Exportación",
+        "title": "Cooperativa Central Chavalina completa su primera exportación formal de palta Hass",
+        "excerpt": "Un hito para nuestros 30 socios productores: la palta Hass cosechada en San José de los Molinos llega a mercados internacionales con estándares de calidad de exportación. El trabajo asociativo y la asistencia técnica hicieron posible dar este paso hacia la comercialización directa que la cooperativa se propuso desde su fundación.",
+        "img": "https://images.unsplash.com/photo-1585242902894-e8a65ecbe1ef?w=800&h=500&fit=crop&auto=format",
+        "color": "#234018"
+    },
+    {
+        "date": "Julio 2026",
+        "tag": "Certificación",
+        "title": "SENASA certifica los campos de todos los socios de Chavalina en Ica",
+        "excerpt": "El respaldo sanitario de SENASA habilita a la cooperativa para comercializar formalmente y sienta las bases para avanzar hacia la certificación GlobalG.A.P.",
+        "img": "https://images.unsplash.com/photo-1702105705586-c951ddade811?w=800&h=500&fit=crop&auto=format",
+        "color": "#6b3f1f"
+    },
+    {
+        "date": "Junio 2026",
+        "tag": "Financiamiento",
+        "title": "Agroideas aprueba financiamiento de maquinaria para los 30 socios productores",
+        "excerpt": "El cofinanciamiento del programa AGROIDEAS permitirá adquirir maquinaria y equipos que mejorarán la eficiencia y la calidad de la producción de la organización.",
+        "img": "https://images.unsplash.com/photo-1761839257961-4dce65b72d99?w=800&h=500&fit=crop&auto=format",
+        "color": "#3a6b2a"
+    },
+    {
+        "date": "Mayo 2026",
+        "tag": "Digital",
+        "title": "Chavalina lanza su página web y estrategia de posicionamiento digital en mercados internacionales",
+        "excerpt": "Con presencia digital, la cooperativa busca conectar directamente con agroexportadoras, importadores, mercados mayoristas y el sector HORECA.",
+        "img": "https://images.unsplash.com/photo-1648862151875-49617797a230?w=800&h=500&fit=crop&auto=format",
+        "color": "#9a5e2a"
+    },
+    {
+        "date": "Marzo 2026",
+        "tag": "Asistencia técnica",
+        "title": "Ingenieros agrónomos inician programa de asistencia técnica integral en campos de Chavalina",
+        "excerpt": "El acompañamiento profesional en las campañas de cosecha fortalece el manejo agronómico y asegura el calibre y la calidad de la palta, pecana y pallar.",
+        "img": "https://images.unsplash.com/photo-1626906722163-bd4c03cb3b9b?w=800&h=500&fit=crop&auto=format",
+        "color": "#234018"
+    },
+    {
+        "date": "2025",
+        "tag": "Institucional",
+        "title": "Constitución oficial de la Cooperativa Agraria de Usuarios Central Chavalina en San José de los Molinos",
+        "excerpt": "Treinta pequeños productores de Ica se unen para impulsar el desarrollo socioeconómico de sus familias mediante la asociatividad, la calidad y la comercialización justa.",
+        "img": "https://images.unsplash.com/photo-1769660957771-9e4fd5f43971?w=800&h=500&fit=crop&auto=format",
+        "color": "#3a6b2a"
+    }
+] %}
+
+
+<!-- ==========================================
+    NOTICIA DESTACADA
+=========================================== -->
+<section class="py-16 bg-white">
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-10">
+
+        <div
+            class="rounded-2xl overflow-hidden grid lg:grid-cols-2 border border-[#e8d5b0] shadow-sm"
+        >
+
+            <!-- Imagen -->
+            <div
+                class="news-image-reveal relative min-h-[300px] lg:min-h-0"
+                style="background-color:#e8d5b0;"
+            >
+                <img
+                    src="{{ news[0].img }}"
+                    alt="{{ news[0].title }}"
+                    class="news-image-reveal__image w-full h-full object-cover"
+                >
+            </div>
+
+
+            <!-- Información -->
+            <div
+                class="p-8 lg:p-12 flex flex-col justify-center"
+                style="background-color:#fdf8f0;"
+            >
+
+                <div class="flex items-center gap-3 mb-4">
+
+                    <span
+                        class="text-xs font-semibold px-3 py-1 rounded-full text-white"
+                        style="background-color:{{ news[0].color }};"
+                    >
+                        {{ news[0].tag }}
+                    </span>
+
+                    <span class="text-xs text-[#9a5e2a]">
+                        {{ news[0].date }}
+                    </span>
+
+                </div>
+
+
+                <h2
+                    class="font-display text-3xl font-semibold text-[#234018] leading-snug mb-5"
+                >
+                    {{ news[0].title }}
+                </h2>
+
+
+                <p
+                    class="text-[15px] leading-relaxed text-[#3e1f06]/80 text-justify"
+                >
+                    {{ news[0].excerpt }}
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==========================================
+     LISTA DE NOTICIAS
+=========================================== -->
+<section
+    class="py-10 pb-24"
+    style="background-color:#f5ead4;"
+>
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-10">
+
+        <div class="mb-7 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+                <span class="mb-2 block text-xs font-semibold uppercase tracking-[0.18em] text-[#9a5e2a]">Archivo</span>
+                <h2 class="font-display text-3xl font-semibold text-[#234018]">Todas las noticias</h2>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <p id="news-carousel-status" class="text-xs font-medium text-[#6b3f1f]" aria-live="polite"></p>
+                <button
+                    id="news-carousel-prev"
+                    type="button"
+                    class="news-carousel__control"
+                    aria-label="Ver noticias anteriores"
+                    disabled
+                >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="m15 18-6-6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+                <button
+                    id="news-carousel-next"
+                    type="button"
+                    class="news-carousel__control"
+                    aria-label="Ver más noticias"
+                >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="m9 18 6-6-6-6" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div id="news-carousel" class="news-carousel__track" tabindex="0" aria-label="Carrusel de noticias">
+
+            {% for item in news[1:] %}
+
+            <article
+                class="news-carousel__card rounded-2xl overflow-hidden border border-[#e8d5b0] bg-white hover:shadow-lg transition-shadow"
+            >
+
+                <!-- Imagen -->
+                <div
+                    class="news-image-reveal aspect-video overflow-hidden"
+                    style="background-color:#e8d5b0;"
+                >
+
+                    <img
+                        src="{{ item.img }}"
+                        alt="{{ item.title }}"
+                        class="news-image-reveal__image w-full h-full object-cover"
+                    >
+
+                </div>
+
+
+                <!-- Contenido -->
+                <div class="p-5">
+
+                    <div class="flex items-center gap-2 mb-3">
+
+                        <span
+                            class="text-[10px] font-semibold px-2 py-0.5 rounded-full text-white"
+                            style="background-color:{{ item.color }};"
+                        >
+                            {{ item.tag }}
+                        </span>
+
+                        <span class="text-[10px] text-[#9a5e2a]">
+                            {{ item.date }}
+                        </span>
+
+                    </div>
+
+
+                    <h3
+                        class="font-display text-lg font-semibold text-[#234018] leading-snug mb-3"
+                    >
+                        {{ item.title }}
+                    </h3>
+
+
+                    <p
+                        class="text-sm leading-relaxed text-[#3e1f06]/70 text-justify"
+                    >
+                        {{ item.excerpt }}
+                    </p>
+
+                </div>
+
+            </article>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const carousel = document.getElementById("news-carousel");
+    const previousButton = document.getElementById("news-carousel-prev");
+    const nextButton = document.getElementById("news-carousel-next");
+    const status = document.getElementById("news-carousel-status");
+    if (!carousel || !previousButton || !nextButton || !status) return;
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const cards = Array.from(carousel.querySelectorAll(".news-carousel__card"));
+    if (!cards.length) return;
+
+    const getStep = () => {
+        const firstCard = cards[0];
+        const trackStyles = window.getComputedStyle(carousel);
+        return firstCard.getBoundingClientRect().width + parseFloat(trackStyles.columnGap || trackStyles.gap || "0");
+    };
+
+    const updateControls = () => {
+        const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+        const atStart = carousel.scrollLeft <= 2;
+        const atEnd = carousel.scrollLeft >= maxScroll - 2;
+        const step = getStep();
+        const firstVisible = Math.min(cards.length, Math.floor(carousel.scrollLeft / step) + 1);
+        const visibleCount = Math.max(1, Math.round(carousel.clientWidth / step));
+        const lastVisible = Math.min(cards.length, firstVisible + visibleCount - 1);
+
+        previousButton.disabled = atStart;
+        nextButton.disabled = atEnd;
+        status.textContent = `${firstVisible}–${lastVisible} de ${cards.length}`;
+    };
+
+    const scrollByCard = (direction) => {
+        carousel.scrollBy({
+            left: getStep() * direction,
+            behavior: reduceMotion ? "auto" : "smooth"
+        });
+    };
+
+    previousButton.addEventListener("click", () => scrollByCard(-1));
+    nextButton.addEventListener("click", () => scrollByCard(1));
+    carousel.addEventListener("scroll", updateControls, { passive: true });
+    window.addEventListener("resize", updateControls);
+    carousel.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+            event.preventDefault();
+            scrollByCard(event.key === "ArrowLeft" ? -1 : 1);
+        }
+    });
+    updateControls();
+});
+</script>
+{% endblock %}

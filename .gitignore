@@ -1,0 +1,25 @@
+# Entorno / secretos
+.env
+venv/
+env/
+.venv/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# Bases de datos locales
+*.sqlite3
+instance/
+
+# Editores / SO
+.vscode/
+.idea/
+.DS_Store
+
+# Node
+node_modules/
+package.json
+package-lock.json

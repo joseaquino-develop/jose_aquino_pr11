@@ -1,0 +1,432 @@
+{% extends "public/base_public.html" %}
+
+{% block title %}Certificaciones — Central Chavalina{% endblock %}
+
+{% block content %}
+
+<!-- ==========================================
+     HERO
+=========================================== -->
+
+<div
+  class="relative pt-16 overflow-hidden"
+  style="background-color:#6b3f1f;min-height:300px"
+>
+  <img
+    src="https://images.unsplash.com/photo-1671624749229-7d37826013b5?w=1600&h=500&fit=crop&auto=format"
+    alt=""
+    class="absolute inset-0 w-full h-full object-cover opacity-45"
+  >
+
+  <div
+    class="absolute inset-0"
+    style="background: linear-gradient(to right, rgba(80,40,15,0.78) 40%, rgba(80,40,15,0.18) 100%)"
+  ></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-5 lg:px-10 py-20">
+
+    <a
+      href="{{ url_for('public.quienes_somos') }}"
+      class="text-xs text-white/50 hover:text-white transition-colors mb-3 block"
+    >
+      ← Nosotros
+    </a>
+
+    <span class="text-xs font-semibold tracking-[0.2em] uppercase text-[#f2dfc0] mb-3 block">
+      Respaldo institucional
+    </span>
+
+    <h1 class="font-display text-5xl md:text-6xl text-white font-semibold leading-tight">
+      Certificaciones.
+    </h1>
+
+    <p class="mt-4 text-white/80 leading-relaxed max-w-lg text-justify">
+      El respaldo institucional avala la calidad y sanidad de nuestra producción.
+      Trabajamos de la mano de SENASA y AGROIDEAS, y avanzamos hacia estándares
+      internacionales que abren las puertas de la agroexportación.
+    </p>
+
+  </div>
+</div>
+
+
+<!-- ==========================================
+     LISTA DE CERTIFICACIONES CON LOGOS OFICIALES
+=========================================== -->
+
+<style>
+  .cert-card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  }
+  .cert-card-hover:hover {
+    transform: translateY(-8px) !important;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+  }
+</style>
+
+<section class="py-20 bg-white">
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+
+    <!-- Tarjeta 1: SENASA -->
+    <div
+      class="group cert-card-hover rounded-2xl border border-[#e8d5b0] bg-[#fdf8f0] shadow-md flex flex-col justify-between"
+      data-aos="fade-up"
+      data-aos-delay="0"
+    >
+      <div>
+        <div class="relative p-6 pb-4 bg-[#f5ead4]/50 border-b border-[#e8d5b0]/40">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-lg overflow-hidden bg-white p-1 shadow-sm shrink-0">
+                <img src="{{ url_for('static', filename='img/senasa.jpg') }}" alt="SENASA" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110">
+              </div>
+              <div>
+                <span class="inline-block text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[#c8ddb8] text-[#234018] mb-1">
+                  Activo
+                </span>
+                <div class="font-display text-xl font-semibold text-[#234018]">
+                  SENASA
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-xs text-[#9a5e2a] italic mt-2">
+            Servicio Nacional de Sanidad Agraria
+          </div>
+        </div>
+
+        <div class="p-6 pt-4">
+          <p class="text-sm leading-relaxed text-[#3e1f06]/80 text-justify">
+            SENASA respalda la sanidad de los campos de nuestros socios y otorga
+            las certificaciones fitosanitarias que permiten comercializar la
+            producción. Este apoyo es la base para acceder a mercados formales y,
+            progresivamente, a la exportación.
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Tarjeta 2: GlobalG.A.P. -->
+    <div
+      class="group cert-card-hover rounded-2xl border border-[#e8d5b0] bg-[#fdf8f0] shadow-md flex flex-col justify-between"
+      data-aos="fade-up"
+      data-aos-delay="150"
+    >
+      <div>
+        <div class="relative p-6 pb-4 bg-[#f5ead4]/50 border-b border-[#e8d5b0]/40">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-lg overflow-hidden bg-white p-1 shadow-sm shrink-0">
+                <img src="{{ url_for('static', filename='img/globalgap.png') }}" alt="GlobalG.A.P." class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110">
+              </div>
+              <div>
+                <span class="inline-block text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[#f2dfc0] text-[#6b3f1f] mb-1">
+                  En proceso
+                </span>
+                <div class="font-display text-xl font-semibold text-[#234018]">
+                  GlobalG.A.P.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-xs text-[#9a5e2a] italic mt-2">
+            Buenas Prácticas Agrícolas
+          </div>
+        </div>
+
+        <div class="p-6 pt-4">
+          <p class="text-sm leading-relaxed text-[#3e1f06]/80 text-justify">
+            Estamos avanzando hacia la certificación de Buenas Prácticas
+            Agrícolas, estándar exigido por las agroexportadoras e importadores
+            internacionales. Garantiza inocuidad, trazabilidad, uso responsable
+            de insumos y bienestar de los trabajadores del campo.
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Tarjeta 3: HACCP -->
+    <div
+      class="group cert-card-hover rounded-2xl border border-[#e8d5b0] bg-[#fdf8f0] shadow-md flex flex-col justify-between"
+      data-aos="fade-up"
+      data-aos-delay="300"
+    >
+      <div>
+        <div class="relative p-6 pb-4 bg-[#f5ead4]/50 border-b border-[#e8d5b0]/40">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-lg overflow-hidden bg-white p-1 shadow-sm shrink-0">
+                <img src="{{ url_for('static', filename='img/haccp.jpg') }}" alt="HACCP" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110">
+              </div>
+              <div>
+                <span class="inline-block text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[#f2dfc0] text-[#6b3f1f] mb-1">
+                  En implementación
+                </span>
+                <div class="font-display text-xl font-semibold text-[#234018]">
+                  HACCP
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-xs text-[#9a5e2a] italic mt-2">
+            Análisis de Peligros y Puntos Críticos
+          </div>
+        </div>
+
+        <div class="p-6 pt-4">
+          <p class="text-sm leading-relaxed text-[#3e1f06]/80 text-justify">
+            Iniciamos la implementación de sistemas de análisis de peligros y
+            puntos críticos de control para asegurar la inocuidad de los productos
+            a lo largo de la cadena de cosecha, manejo postcosecha y empaque.
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Tarjeta 4: Registro Agroideas -->
+    <div
+      class="group cert-card-hover rounded-2xl border border-[#e8d5b0] bg-[#fdf8f0] shadow-md flex flex-col justify-between"
+      data-aos="fade-up"
+      data-aos-delay="450"
+    >
+      <div>
+        <div class="relative p-6 pb-4 bg-[#f5ead4]/50 border-b border-[#e8d5b0]/40">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-lg overflow-hidden bg-white p-1 shadow-sm shrink-0">
+                <img src="{{ url_for('static', filename='img/agroideas.png') }}" alt="Agroideas" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110">
+              </div>
+              <div>
+                <span class="inline-block text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[#c8ddb8] text-[#234018] mb-1">
+                  Activo
+                </span>
+                <div class="font-display text-xl font-semibold text-[#234018]">
+                  Registro Agroideas
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-xs text-[#9a5e2a] italic mt-2">
+            Programa AGROIDEAS — MIDAGRI
+          </div>
+        </div>
+
+        <div class="p-6 pt-4">
+          <p class="text-sm leading-relaxed text-[#3e1f06]/80 text-justify">
+            Como organización beneficiaria de AGROIDEAS, accedemos a
+            cofinanciamiento para maquinaria y fortalecimiento de la gestión
+            asociativa, mejorando la competitividad de los 30 socios productores.
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Tarjeta 5: RUC Activo -->
+    <div
+      class="group cert-card-hover rounded-2xl border border-[#e8d5b0] bg-[#fdf8f0] shadow-md flex flex-col justify-between"
+      data-aos="fade-up"
+      data-aos-delay="600"
+    >
+      <div>
+        <div class="relative p-6 pb-4 bg-[#f5ead4]/50 border-b border-[#e8d5b0]/40">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-lg overflow-hidden bg-white p-1 shadow-sm shrink-0">
+                <img src="{{ url_for('static', filename='img/sunat.jpg') }}" alt="SUNAT" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110">
+              </div>
+              <div>
+                <span class="inline-block text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[#c8ddb8] text-[#234018] mb-1">
+                  Activo
+                </span>
+                <div class="font-display text-xl font-semibold text-[#234018]">
+                  RUC Activo
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-xs text-[#9a5e2a] italic mt-2">
+            Registro Único de Contribuyentes
+          </div>
+        </div>
+
+        <div class="p-6 pt-4">
+          <p class="text-sm leading-relaxed text-[#3e1f06]/80 text-justify">
+            La cooperativa está formalmente constituida y cuenta con RUC activo
+            ante SUNAT, lo que nos permite emitir comprobantes y contratar
+            directamente con empresas, mercados mayoristas y retail.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ==========================================
+     CAMINO HACIA LA CERTIFICACIÓN
+=========================================== -->
+
+<section
+  class="py-20"
+  style="background-color:#f5ead4"
+>
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-10">
+
+    <div class="text-center mb-12">
+
+      <h2 class="font-display text-4xl font-semibold text-[#234018]">
+        Camino hacia la certificación.
+      </h2>
+
+      <p class="mt-3 text-[#6b3f1f]/80 max-w-xl mx-auto leading-relaxed text-justify md:text-center">
+        Nuestra hoja de ruta parte de la sanidad de campo y la formalización,
+        y avanza hacia los estándares internacionales que exige la exportación.
+      </p>
+
+    </div>
+
+
+    <div class="grid md:grid-cols-4 gap-0 relative">
+
+      <div class="hidden md:block absolute top-8 left-[12.5%] right-[12.5%] h-0.5 bg-[#e8d5b0] z-0"></div>
+
+
+      <!-- PASO 1 -->
+
+      <div class="relative z-10 text-center p-5">
+
+        <div
+          class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 font-display text-xl font-semibold text-white"
+          style="background-color:#234018"
+        >
+          ✓
+        </div>
+
+        <h3 class="font-display text-lg font-semibold text-[#234018] mb-2">
+          SENASA
+        </h3>
+
+        <p class="text-sm leading-relaxed text-[#6b3f1f]/75 text-justify md:text-center">
+          Certificación sanitaria de los campos de los socios como punto de
+          partida para la comercialización formal.
+        </p>
+
+      </div>
+
+
+      <!-- PASO 2 -->
+
+      <div class="relative z-10 text-center p-5">
+
+        <div
+          class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 font-display text-xl font-semibold text-white"
+          style="background-color:#234018"
+        >
+          ✓
+        </div>
+
+        <h3 class="font-display text-lg font-semibold text-[#234018] mb-2">
+          Formalización
+        </h3>
+
+        <p class="text-sm leading-relaxed text-[#6b3f1f]/75 text-justify md:text-center">
+          Constitución de la cooperativa y RUC activo para contratar de forma
+          directa con compradores.
+        </p>
+
+      </div>
+
+
+      <!-- PASO 3 -->
+
+      <div class="relative z-10 text-center p-5">
+
+        <div
+          class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 font-display text-xl font-semibold border-2 border-[#e8d5b0] text-[#9a5e2a]"
+          style="background-color:#fdf8f0"
+        >
+          03
+        </div>
+
+        <h3 class="font-display text-lg font-semibold text-[#234018] mb-2">
+          GlobalG.A.P.
+        </h3>
+
+        <p class="text-sm leading-relaxed text-[#6b3f1f]/75 text-justify md:text-center">
+          Certificación de Buenas Prácticas Agrícolas requerida para la
+          agroexportación.
+        </p>
+
+      </div>
+
+
+      <!-- PASO 4 -->
+
+      <div class="relative z-10 text-center p-5">
+
+        <div
+          class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 font-display text-xl font-semibold border-2 border-[#e8d5b0] text-[#9a5e2a]"
+          style="background-color:#fdf8f0"
+        >
+          04
+        </div>
+
+        <h3 class="font-display text-lg font-semibold text-[#234018] mb-2">
+          HACCP
+        </h3>
+
+        <p class="text-sm leading-relaxed text-[#6b3f1f]/75 text-justify md:text-center">
+          Sistemas de inocuidad en manejo postcosecha y empaque para mercados
+          internacionales.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ==========================================
+     CTA
+=========================================== -->
+
+<section class="py-16 bg-white border-t border-[#e8d5b0]">
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-10 text-center">
+
+    <h2 class="font-display text-3xl font-semibold text-[#234018] mb-3">
+      ¿Necesitas documentación específica?
+    </h2>
+
+    <p class="text-[#6b3f1f]/80 max-w-xl mx-auto mb-6 leading-relaxed">
+      Ponemos a disposición de compradores y aliados los certificados y fichas
+      técnicas vigentes. Escríbenos y te enviamos la documentación que tu
+      empresa requiera.
+    </p>
+
+    <a
+      href="https://wa.me/51912237268"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center gap-2 font-semibold px-8 py-3.5 rounded-full text-sm hover:opacity-90 transition-all"
+      style="background-color:#25D366;color:#fff"
+    >
+      Solicitar documentación por WhatsApp
+    </a>
+
+  </div>
+
+</section>
+
+{% endblock %}

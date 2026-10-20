@@ -1,0 +1,236 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %}Aliados — Panel Administrativo{% endblock %}
+
+{% block content %}
+
+<div class="max-w-7xl mx-auto">
+
+    <!-- ENCABEZADO -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+
+        <div>
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#9a5e2a] mb-2">
+                Gestión de contenido
+            </p>
+
+            <h1 class="text-3xl font-bold text-[#1d3515]">
+                Aliados estratégicos
+            </h1>
+
+            <p class="text-sm text-gray-500 mt-2">
+                Administra los aliados que aparecen en la página web.
+            </p>
+        </div>
+
+        <a
+            href="{{ url_for('dashboard.nuevo_aliado') }}"
+            class="inline-flex items-center justify-center gap-2
+                   bg-[#1d3515] text-white
+                   px-5 py-3 rounded-xl
+                   font-semibold text-sm
+                   hover:bg-[#2d5121]
+                   transition"
+        >
+            <span class="text-lg">+</span>
+            Nuevo aliado
+        </a>
+
+    </div>
+
+
+    <!-- MENSAJES -->
+    {% with mensajes = get_flashed_messages(with_categories=true) %}
+
+        {% if mensajes %}
+
+            <div class="space-y-3 mb-6">
+
+                {% for categoria, mensaje in mensajes %}
+
+                    <div
+                        class="px-5 py-4 rounded-xl text-sm font-medium
+                        {% if categoria == 'success' %}
+                            bg-green-100 text-green-800 border border-green-200
+                        {% else %}
+                            bg-red-100 text-red-800 border border-red-200
+                        {% endif %}"
+                    >
+                        {{ mensaje }}
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% endif %}
+
+    {% endwith %}
+
+
+    <!-- SIN ALIADOS -->
+    {% if not aliados %}
+
+        <div class="bg-white border border-gray-200 rounded-2xl p-12 text-center">
+
+            <div class="text-5xl mb-4">
+                🤝
+            </div>
+
+            <h2 class="text-xl font-bold text-[#1d3515] mb-2">
+                No hay aliados registrados
+            </h2>
+
+            <p class="text-gray-500 text-sm mb-6">
+                Agrega el primer aliado para mostrarlo en la página web.
+            </p>
+
+            <a
+                href="{{ url_for('dashboard.nuevo_aliado') }}"
+                class="inline-flex items-center gap-2
+                       bg-[#1d3515] text-white
+                       px-5 py-3 rounded-xl
+                       font-semibold text-sm"
+            >
+                + Agregar aliado
+            </a>
+
+        </div>
+
+    {% else %}
+
+        <!-- LISTA -->
+        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+
+            {% for aliado in aliados %}
+
+                <div
+                    class="bg-white rounded-2xl overflow-hidden
+                           border border-gray-200
+                           shadow-sm hover:shadow-md transition"
+                >
+
+                    <!-- IMAGEN -->
+                    <div class="relative h-48 bg-gray-100">
+
+                        <img
+                            src="{{ aliado.imagen }}"
+                            alt="{{ aliado.nombre }}"
+                            class="w-full h-full object-cover"
+                        >
+
+                        <div
+                            class="absolute top-4 left-4
+                                   w-11 h-11
+                                   bg-white rounded-xl shadow
+                                   flex items-center justify-center
+                                   text-2xl"
+                        >
+                            {{ aliado.icono }}
+                        </div>
+
+                    </div>
+
+
+                    <!-- INFORMACIÓN -->
+                    <div class="p-6">
+
+                        <h2 class="text-xl font-bold text-[#1d3515]">
+                            {{ aliado.nombre }}
+                        </h2>
+
+                        <p class="text-xs text-[#9a5e2a] mt-1 mb-4">
+                            {{ aliado.subtitulo }}
+                        </p>
+
+                        <p
+                            class="text-sm text-gray-600 leading-relaxed mb-5"
+                            style="
+                                display: -webkit-box;
+                                -webkit-line-clamp: 3;
+                                -webkit-box-orient: vertical;
+                                overflow: hidden;
+                            "
+                        >
+                            {{ aliado.descripcion }}
+                        </p>
+
+
+                        <!-- BENEFICIOS -->
+                        <div class="mb-6">
+
+                            <p class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">
+                                Beneficios
+                            </p>
+
+                            <p class="text-sm text-gray-600">
+                                {{ aliado.beneficios|length }}
+                                beneficio(s) registrado(s)
+                            </p>
+
+                        </div>
+
+
+                        <!-- BOTONES -->
+                        <div class="flex gap-3">
+
+                            <a
+                                href="{{ url_for(
+                                    'dashboard.editar_aliado',
+                                    aliado_id=aliado.id
+                                ) }}"
+                                class="flex-1 text-center
+                                       bg-[#f4f5f0]
+                                       text-[#1d3515]
+                                       px-4 py-2.5
+                                       rounded-xl
+                                       font-semibold text-sm
+                                       hover:bg-[#e5e8df]
+                                       transition"
+                            >
+                                Editar
+                            </a>
+
+
+                            <form
+                                method="POST"
+                                action="{{ url_for(
+                                    'dashboard.eliminar_aliado',
+                                    aliado_id=aliado.id
+                                ) }}"
+                                class="flex-1"
+                                onsubmit="return confirm('¿Seguro que deseas eliminar este aliado?');"
+                            >
+
+                                <button
+                                    type="submit"
+                                    class="w-full
+                                           bg-red-50
+                                           text-red-600
+                                           px-4 py-2.5
+                                           rounded-xl
+                                           font-semibold text-sm
+                                           hover:bg-red-100
+                                           transition"
+                                >
+                                    Eliminar
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,545 @@
+{% extends "public/base_public.html" %}
+
+{% block title %}Aliados Estratégicos — Central Chavalina{% endblock %}
+
+{% block content %}
+
+
+<!-- ==========================================
+     HERO
+=========================================== -->
+
+<div
+    class="relative pt-16 overflow-hidden"
+    style="background-color:#234018;min-height:320px"
+>
+
+    <img
+        src="https://images.unsplash.com/photo-1509099381441-ea3c0cf98b94?w=1600&h=500&fit=crop&auto=format"
+        alt=""
+        class="absolute inset-0 w-full h-full object-cover opacity-55"
+    >
+
+    <div
+        class="absolute inset-0"
+        style="background: linear-gradient(
+            to right,
+            rgba(20,40,12,0.72) 40%,
+            rgba(20,40,12,0.15) 100%
+        )"
+    >
+    </div>
+
+
+    <div class="relative z-10 max-w-7xl mx-auto px-5 lg:px-10 py-24">
+
+        <span
+            class="text-xs font-semibold tracking-[0.2em]
+                   uppercase text-[#74c69d] mb-3 block"
+        >
+            Red de apoyo
+        </span>
+
+        <h1
+            class="font-display text-5xl md:text-6xl
+                   text-white font-semibold leading-tight"
+        >
+            Aliados Estratégicos.
+        </h1>
+
+        <p
+            class="mt-4 text-white/80 leading-relaxed
+                   max-w-lg text-justify"
+        >
+            Detrás de cada cosecha existe una red de instituciones
+            y profesionales que acompañan a nuestros 30 socios:
+            financiamiento, sanidad, asistencia técnica y canales
+            de comercialización que nos acercan a los mercados
+            nacionales e internacionales.
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==========================================
+     ALIADOS DETALLADOS
+=========================================== -->
+
+<section class="py-20 bg-white">
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-10 space-y-8">
+
+
+        {% for aliado in aliados %}
+
+
+        <!-- ==========================================
+             ALIADO
+        =========================================== -->
+
+        <div
+            class="rounded-2xl overflow-hidden
+                   border border-[#e8d5b0]
+                   grid lg:grid-cols-2
+                   {% if loop.index is even %}
+                       lg:grid-flow-dense
+                   {% endif %}"
+        >
+
+
+            <!-- IMAGEN -->
+            <div
+                class="relative min-h-[240px]
+                       {% if loop.index is even %}
+                           lg:col-start-2
+                       {% endif %}"
+                style="
+                    {% if loop.index % 4 == 1 %}
+                        background-color:#ddefd0;
+                    {% elif loop.index % 4 == 2 %}
+                        background-color:#f2dfc0;
+                    {% elif loop.index % 4 == 3 %}
+                        background-color:#c8ddb8;
+                    {% else %}
+                        background-color:#f5e8d0;
+                    {% endif %}
+                "
+            >
+
+                <img
+                    src="{{ aliado.imagen }}"
+                    alt="{{ aliado.nombre }}"
+                    class="absolute inset-0
+                           w-full h-full
+                           object-cover opacity-75"
+                >
+
+
+                <!-- CAPA SOBRE IMAGEN -->
+                <div
+                    class="absolute inset-0"
+                    style="
+                        {% if loop.index % 4 == 1 %}
+                            background:
+                            linear-gradient(
+                                to right,
+                                transparent,
+                                #3a6b2a88
+                            );
+                        {% elif loop.index % 4 == 2 %}
+                            background:
+                            linear-gradient(
+                                to right,
+                                transparent,
+                                #6b3f1f88
+                            );
+                        {% elif loop.index % 4 == 3 %}
+                            background:
+                            linear-gradient(
+                                to right,
+                                transparent,
+                                #23401888
+                            );
+                        {% else %}
+                            background:
+                            linear-gradient(
+                                to right,
+                                transparent,
+                                #9a5e2a88
+                            );
+                        {% endif %}
+                    "
+                >
+                </div>
+
+            </div>
+
+
+
+            <!-- ==========================================
+                 INFORMACIÓN DEL ALIADO
+            =========================================== -->
+
+            <div
+                class="flex flex-col justify-center p-8 lg:p-10"
+                style="background-color:#fdf8f0"
+            >
+
+
+                <!-- NOMBRE -->
+                <div class="flex items-center gap-3 mb-4">
+
+                    <span class="text-4xl">
+                        {{ aliado.icono }}
+                    </span>
+
+
+                    <div>
+
+                        <h2
+                            class="font-display text-2xl font-semibold"
+                            style="
+                                {% if loop.index % 4 == 1 %}
+                                    color:#3a6b2a;
+                                {% elif loop.index % 4 == 2 %}
+                                    color:#6b3f1f;
+                                {% elif loop.index % 4 == 3 %}
+                                    color:#234018;
+                                {% else %}
+                                    color:#9a5e2a;
+                                {% endif %}
+                            "
+                        >
+                            {{ aliado.nombre }}
+                        </h2>
+
+
+                        {% if aliado.subtitulo %}
+
+                        <div
+                            class="text-xs
+                                   text-[#9a5e2a]
+                                   italic"
+                        >
+                            {{ aliado.subtitulo }}
+                        </div>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- DESCRIPCIÓN -->
+                {% if aliado.descripcion %}
+
+                <p
+                    class="text-[15px]
+                           leading-relaxed
+                           text-[#3e1f06]/80
+                           mb-5
+                           text-justify"
+                >
+                    {{ aliado.descripcion }}
+                </p>
+
+                {% endif %}
+
+
+
+                <!-- BENEFICIOS -->
+                {% if aliado.beneficios %}
+
+                <div>
+
+                    <div
+                        class="text-xs
+                               font-bold
+                               uppercase
+                               tracking-widest
+                               text-[#9a5e2a]
+                               mb-3"
+                    >
+                        Beneficios para socios
+                    </div>
+
+
+                    <ul class="space-y-3">
+
+                        {% for beneficio in aliado.beneficios %}
+
+                        <li class="flex items-start gap-2.5">
+
+                            <span
+                                class="w-1.5 h-1.5
+                                       rounded-full
+                                       shrink-0 mt-2"
+                                style="background-color:#c9930a"
+                            >
+                            </span>
+
+                            <span
+                                class="text-sm
+                                       leading-relaxed
+                                       text-[#3e1f06]/80"
+                            >
+                                {{ beneficio }}
+                            </span>
+
+                        </li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        {% else %}
+
+
+        <!-- ==========================================
+             SI NO HAY ALIADOS
+        =========================================== -->
+
+        <div
+            class="rounded-2xl
+                   border border-[#e8d5b0]
+                   bg-[#fdf8f0]
+                   py-16 px-6
+                   text-center"
+        >
+
+            <div class="text-5xl mb-4">
+                🤝
+            </div>
+
+            <h2
+                class="font-display
+                       text-2xl
+                       font-semibold
+                       text-[#234018]
+                       mb-2"
+            >
+                Próximamente nuevos aliados
+            </h2>
+
+            <p
+                class="text-sm
+                       text-[#3e1f06]/70
+                       max-w-lg mx-auto"
+            >
+                Actualmente estamos fortaleciendo nuestra red
+                de aliados estratégicos.
+            </p>
+
+        </div>
+
+
+        {% endfor %}
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ==========================================
+     BENEFICIOS RESUMEN
+=========================================== -->
+
+<section
+    class="py-20"
+    style="background-color:#234018"
+>
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-10">
+
+        <div class="text-center mb-12">
+
+            <h2
+                class="font-display
+                       text-4xl
+                       font-semibold
+                       text-white"
+            >
+                Lo que nuestros socios reciben.
+            </h2>
+
+        </div>
+
+
+
+        <div class="grid md:grid-cols-3 gap-6">
+
+
+            <!-- TARJETA 1 -->
+            <div class="flex gap-4">
+
+                <span class="text-2xl">
+                    🌾
+                </span>
+
+                <div>
+
+                    <h4
+                        class="font-semibold
+                               text-white
+                               text-sm
+                               mb-2"
+                    >
+                        Asistencia técnica agrícola
+                    </h4>
+
+                    <p
+                        class="text-xs
+                               leading-relaxed
+                               text-white/70
+                               text-justify"
+                    >
+                        Ingenieros agrónomos acompañan a los socios
+                        en el manejo del cultivo y las campañas
+                        de cosecha.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- TARJETA 2 -->
+            <div class="flex gap-4">
+
+                <span class="text-2xl">
+                    🚜
+                </span>
+
+                <div>
+
+                    <h4
+                        class="font-semibold
+                               text-white
+                               text-sm
+                               mb-2"
+                    >
+                        Financiamiento de maquinaria
+                    </h4>
+
+                    <p
+                        class="text-xs
+                               leading-relaxed
+                               text-white/70
+                               text-justify"
+                    >
+                        A través de AGROIDEAS accedemos a
+                        cofinanciamiento para la maquinaria y
+                        equipos que necesita la organización.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- TARJETA 3 -->
+            <div class="flex gap-4">
+
+                <span class="text-2xl">
+                    📋
+                </span>
+
+                <div>
+
+                    <h4
+                        class="font-semibold
+                               text-white
+                               text-sm
+                               mb-2"
+                    >
+                        Certificaciones SENASA
+                    </h4>
+
+                    <p
+                        class="text-xs
+                               leading-relaxed
+                               text-white/70
+                               text-justify"
+                    >
+                        SENASA certifica la sanidad de los campos
+                        para comercializar formalmente y avanzar
+                        hacia la exportación.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==========================================
+     CTA
+=========================================== -->
+
+<section
+    class="py-16
+           bg-white
+           border-t
+           border-[#e8d5b0]"
+>
+
+    <div
+        class="max-w-7xl
+               mx-auto
+               px-5 lg:px-10
+               text-center"
+    >
+
+        <h2
+            class="font-display
+                   text-3xl
+                   font-semibold
+                   text-[#234018]
+                   mb-3"
+        >
+            ¿Eres una institución o empresa interesada en aliarte?
+        </h2>
+
+
+        <p
+            class="text-[#6b3f1f]/80
+                   max-w-xl
+                   mx-auto
+                   mb-6
+                   leading-relaxed"
+        >
+            Buscamos aliados comprometidos con el desarrollo
+            de los pequeños productores y con una comercialización
+            justa. Conversemos sobre cómo trabajar juntos.
+        </p>
+
+
+        <a
+            href="{{ url_for('public.contacto') }}"
+            class="inline-flex
+                   items-center
+                   gap-2
+                   font-semibold
+                   px-8 py-3.5
+                   rounded-full
+                   text-sm
+                   hover:opacity-90
+                   transition-all"
+            style="
+                background-color:#c9930a;
+                color:#3e1f06
+            "
+        >
+            Contactar ahora
+        </a>
+
+    </div>
+
+</section>
+
+
+{% endblock %}

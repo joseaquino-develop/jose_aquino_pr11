@@ -1,0 +1,137 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %}
+Administrar imágenes
+{% endblock %}
+
+
+{% block content %}
+
+<div class="max-w-7xl mx-auto">
+
+    <!-- ENCABEZADO -->
+    <div class="mb-8">
+
+        <p class="text-sm font-semibold uppercase tracking-widest text-green-700 mb-2">
+            Contenido
+        </p>
+
+        <h1 class="text-3xl font-bold text-gray-800">
+            Imágenes de Inicio
+        </h1>
+
+        <p class="text-gray-500 mt-2">
+            Cambia las imágenes principales que aparecen
+            en la página de inicio.
+        </p>
+
+    </div>
+
+
+    <!-- MENSAJES -->
+    {% with mensajes = get_flashed_messages(with_categories=true) %}
+
+        {% if mensajes %}
+
+            {% for categoria, mensaje in mensajes %}
+
+                <div
+                    class="mb-5 p-4 rounded-xl
+                    {% if categoria == 'success' %}
+                        bg-green-100 text-green-800
+                    {% else %}
+                        bg-red-100 text-red-800
+                    {% endif %}"
+                >
+                    {{ mensaje }}
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+    {% endwith %}
+
+
+    <!-- TARJETAS -->
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+
+        {% for key, ruta in imagenes.items() %}
+
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200">
+
+                <!-- IMAGEN ACTUAL -->
+                <div class="h-52 bg-gray-100">
+
+                    <img
+                        src="{{ ruta }}"
+                        alt="{{ nombres.get(key, key) }}"
+                        class="w-full h-full object-cover"
+                    >
+
+                </div>
+
+
+                <!-- INFORMACIÓN -->
+                <div class="p-5">
+
+                    <h2 class="text-lg font-bold text-gray-800 mb-1">
+                        {{ nombres.get(key, key) }}
+                    </h2>
+
+                    <p class="text-sm text-gray-500 mb-5">
+                        Selecciona una nueva imagen para reemplazar la actual.
+                    </p>
+
+
+                    <!-- FORMULARIO -->
+                    <form
+                        method="POST"
+                        action="{{ url_for('dashboard.cambiar_imagen', key=key) }}"
+                        enctype="multipart/form-data"
+                    >
+
+                        <input
+                            type="file"
+                            name="imagen"
+                            accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
+                            required
+                            class="block w-full text-sm text-gray-600
+                                   file:mr-4
+                                   file:py-2
+                                   file:px-4
+                                   file:rounded-lg
+                                   file:border-0
+                                   file:text-sm
+                                   file:font-semibold
+                                   file:bg-green-50
+                                   file:text-green-700
+                                   hover:file:bg-green-100
+                                   mb-4"
+                        >
+
+
+                        <button
+                            type="submit"
+                            class="w-full px-5 py-3 rounded-xl
+                                   bg-green-700 text-white
+                                   font-semibold
+                                   hover:bg-green-800
+                                   transition"
+                        >
+                            Guardar nueva imagen
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}
