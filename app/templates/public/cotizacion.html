@@ -17,7 +17,9 @@
 
         <div class="w-20 h-20 rounded-full flex items-center justify-center text-3xl mx-auto mb-6"
              style="background-color:#c8ddb8">
-            ✓
+            <svg aria-hidden="true" class="h-10 w-10 text-[#3a6b2a]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m5 12 4 4L19 6" />
+            </svg>
         </div>
 
         <h2 class="font-display text-3xl font-semibold text-[#234018] mb-3">
@@ -124,7 +126,10 @@
                         class="step-btn flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-xs font-semibold transition-all w-full text-white"
                         style="background-color:#234018"
                     >
-                        <span>🏢</span>
+                        <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M4 21V5a2 2 0 0 1 2-2h9l5 5v13H4Z"/>
+                            <path d="M14 3v6h6M8 13h8m-8 4h8"/>
+                        </svg>
                         <span class="hidden sm:inline">Empresa</span>
                         <span class="ml-auto font-bold text-[10px] opacity-60">1/3</span>
                     </button>
@@ -142,7 +147,10 @@
                         class="step-btn flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-xs font-semibold transition-all w-full border border-[#d4c5a9] text-[#9a8878]"
                         style="background-color:#ede3d2"
                     >
-                        <span>📦</span>
+                        <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="m3 7 9-4 9 4-9 4-9-4Z"/>
+                            <path d="M3 7v10l9 4 9-4V7m-9 4v10"/>
+                        </svg>
                         <span class="hidden sm:inline">Producto</span>
                         <span class="ml-auto font-bold text-[10px] opacity-60">2/3</span>
                     </button>
@@ -160,7 +168,10 @@
                         class="step-btn flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-xs font-semibold transition-all w-full border border-[#d4c5a9] text-[#9a8878]"
                         style="background-color:#ede3d2"
                     >
-                        <span>📋</span>
+                        <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M8 4h8l3 3v13H5V4h3Z"/>
+                            <path d="M9 4v4h6V4M8 12h8m-8 4h8"/>
+                        </svg>
                         <span class="hidden sm:inline">Condiciones</span>
                         <span class="ml-auto font-bold text-[10px] opacity-60">3/3</span>
                     </button>
@@ -172,7 +183,7 @@
 
             <form
                 method="POST"
-                action="/cotizacion"
+                action="{{ url_for('public.cotizacion') }}"
                 id="cotiz-form"
                 class="bg-white rounded-2xl border border-[#e8d5b0] p-8 shadow-sm"
             >
@@ -217,7 +228,7 @@
 
                                 <input
                                     type="text"
-                                    name="contacto"
+                                    name="contacto_nombre"
                                     required
                                     class="w-full border border-[#d4c5a9] bg-white rounded-xl px-4 py-3 text-sm outline-none focus:border-[#3a6b2a] focus:ring-2 focus:ring-[#3a6b2a]/15 transition-all placeholder:text-[#9a8878]"
                                     placeholder="Carlos Pérez"
@@ -236,7 +247,7 @@
 
                                 <input
                                     type="text"
-                                    name="cargo"
+                                    name="contacto_cargo"
                                     class="w-full border border-[#d4c5a9] bg-white rounded-xl px-4 py-3 text-sm outline-none focus:border-[#3a6b2a] focus:ring-2 focus:ring-[#3a6b2a]/15 transition-all placeholder:text-[#9a8878]"
                                     placeholder="Gerente de Compras"
                                 >
@@ -269,7 +280,7 @@
 
                                 <input
                                     type="email"
-                                    name="email"
+                                    name="correo"
                                     required
                                     class="w-full border border-[#d4c5a9] bg-white rounded-xl px-4 py-3 text-sm outline-none focus:border-[#3a6b2a] focus:ring-2 focus:ring-[#3a6b2a]/15 transition-all placeholder:text-[#9a8878]"
                                     placeholder="ventas@empresa.com"
@@ -301,7 +312,7 @@
 
                             <input
                                 type="url"
-                                name="web"
+                                name="pagina_web"
                                 class="w-full border border-[#d4c5a9] bg-white rounded-xl px-4 py-3 text-sm outline-none focus:border-[#3a6b2a] focus:ring-2 focus:ring-[#3a6b2a]/15 transition-all placeholder:text-[#9a8878]"
                                 placeholder="https://www.empresa.com"
                             >
@@ -719,7 +730,9 @@
                             class="w-4 h-4 rounded-full flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold"
                             style="background-color:#ddefd0;color:#234018"
                         >
-                            ✓
+                            <svg aria-hidden="true" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m5 12 4 4L19 6" />
+                            </svg>
                         </span>
 
                         {{ beneficio }}

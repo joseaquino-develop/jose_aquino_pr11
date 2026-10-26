@@ -24,12 +24,12 @@ def _certificaciones_desde_form(data):
 def crear_cotizacion(data):
     cotizacion = Cotizacion(
         empresa=data.get("empresa"),
-        contacto=data.get("contacto"),
-        cargo=data.get("cargo"),
+        contacto=data.get("contacto_nombre", data.get("contacto")),
+        cargo=data.get("contacto_cargo", data.get("cargo")),
         pais=data.get("pais"),
-        email=data.get("email"),
+        email=data.get("correo", data.get("email")),
         telefono=data.get("telefono"),
-        web=data.get("web"),
+        web=data.get("pagina_web", data.get("web")),
         producto=data.get("producto"),
         cantidad=data.get("cantidad"),
         unidad=data.get("unidad"),
@@ -47,12 +47,24 @@ def crear_cotizacion(data):
 def actualizar_cotizacion(cotizacion_id, data):
     cotizacion = obtener_cotizacion(cotizacion_id)
     cotizacion.empresa = data.get("empresa", cotizacion.empresa)
-    cotizacion.contacto = data.get("contacto", cotizacion.contacto)
-    cotizacion.cargo = data.get("cargo", cotizacion.cargo)
+    cotizacion.contacto = data.get(
+        "contacto_nombre",
+        data.get("contacto", cotizacion.contacto)
+    )
+    cotizacion.cargo = data.get(
+        "contacto_cargo",
+        data.get("cargo", cotizacion.cargo)
+    )
     cotizacion.pais = data.get("pais", cotizacion.pais)
-    cotizacion.email = data.get("email", cotizacion.email)
+    cotizacion.email = data.get(
+        "correo",
+        data.get("email", cotizacion.email)
+    )
     cotizacion.telefono = data.get("telefono", cotizacion.telefono)
-    cotizacion.web = data.get("web", cotizacion.web)
+    cotizacion.web = data.get(
+        "pagina_web",
+        data.get("web", cotizacion.web)
+    )
     cotizacion.producto = data.get("producto", cotizacion.producto)
     cotizacion.cantidad = data.get("cantidad", cotizacion.cantidad)
     cotizacion.unidad = data.get("unidad", cotizacion.unidad)

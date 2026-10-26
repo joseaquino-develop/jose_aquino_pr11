@@ -194,7 +194,12 @@
 
       <!-- Encabezado corporativo -->
       <div class="flex items-center gap-3 bg-green-900 px-4 py-3 text-white">
-        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-green-700 text-lg">🌱</div>
+        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-green-700 text-green-100">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 4c-7 0-13 2-13 8a5 5 0 0 0 5 5c6 0 8-6 8-13Z"/>
+            <path d="M4 21c2-5 6-8 12-12"/>
+          </svg>
+        </div>
         <div class="min-w-0 flex-1">
           <h2 class="truncate text-sm font-semibold leading-tight">Asistente Chavalina</h2>
           <p class="flex items-center gap-1.5 text-xs text-green-200">
@@ -258,7 +263,7 @@
     const HIDDEN_ANIM = ['opacity-0', 'scale-95', 'translate-y-4'];
 
     function setOpen(open) {
-        isOpen = open; 
+        isOpen = open;
 
         if (open) {
             // Abrir: ocultar icono de chat, mostrar la 'X'
@@ -267,14 +272,14 @@
             toggleBtn.setAttribute('aria-expanded', 'true');
 
             // Quitar invisible inmediatamente y arrancar animación de entrada
-            windowEl.classList.remove('invisible', ...HIDDEN_ANIM); 
-            
-            if (!greeted) { 
-                greeted = true; 
-                showWelcome(); 
+            windowEl.classList.remove('invisible', ...HIDDEN_ANIM);
+
+            if (!greeted) {
+                greeted = true;
+                showWelcome();
             }
             setTimeout(() => input.focus(), 300);
-            
+
         } else {
             // Cerrar: ocultar la 'X', mostrar icono de chat
             iconChat.classList.remove('scale-0', 'opacity-0');
@@ -282,8 +287,8 @@
             toggleBtn.setAttribute('aria-expanded', 'false');
 
             // Arrancar animación de salida (se vuelve transparente y baja)
-            windowEl.classList.add(...HIDDEN_ANIM); 
-            
+            windowEl.classList.add(...HIDDEN_ANIM);
+
             // Esperar 350ms (lo que dura la transición CSS) antes de aplicar 'invisible'
             setTimeout(() => {
                 if (!isOpen) { // Verifica que no lo hayas vuelto a abrir rápido
@@ -310,6 +315,26 @@
         scrollToBottom();
     }
 
+    function addAction(action) {
+        if (
+            !action ||
+            typeof action.label !== 'string' ||
+            typeof action.href !== 'string' ||
+            !action.href.startsWith('/') ||
+            action.href.startsWith('//')
+        ) return;
+
+        const row = document.createElement('div');
+        row.className = 'chv-msg-in flex justify-start';
+        const link = document.createElement('a');
+        link.href = action.href;
+        link.textContent = action.label;
+        link.className = 'rounded-full border border-green-700 px-3 py-1.5 text-xs font-semibold text-green-800 transition hover:bg-green-700 hover:text-white';
+        row.appendChild(link);
+        messages.appendChild(row);
+        scrollToBottom();
+    }
+
     function scrollToBottom() { messages.scrollTop = messages.scrollHeight; }
 
     // --- Indicador "escribiendo..." ---
@@ -318,7 +343,7 @@
         const row = document.createElement('div');
         row.id = 'chv-typing';
         row.className = 'chv-msg-in flex justify-start';
-        row.innerHTML = 
+        row.innerHTML =
             '<div class="chv-typing-bubble" aria-label="El asistente está escribiendo">' +
             '<span class="chv-dot"></span><span class="chv-dot"></span><span class="chv-dot"></span>' +
             '</div>';
@@ -333,7 +358,7 @@
 
     // --- Mensaje de bienvenida + respuestas rápidas ---
     function showWelcome() {
-        addMessage('¡Hola! 👋 Soy el Asistente Chavalina. ¿Sobre qué te gustaría consultar?', 'bot');
+        addMessage('Hola, soy el Asistente Chavalina. ¿Sobre qué te gustaría consultar?', 'bot');
 
         const quick = document.createElement('div');
         quick.className = 'chv-msg-in flex flex-wrap gap-2';
@@ -360,21 +385,24 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ message: text })
         });
-        
+
         if (!res.ok) {
             throw new Error('Error al conectar con el servidor');
         }
-        
+
         const data = await res.json();
-        return data.reply;
+        if (typeof data.reply !== 'string') {
+            throw new Error('La respuesta del servidor no es válida');
+        }
+        return data;
     }
 
     // Muestra los puntos mínimo TYPING_MS. Si el backend tarda más, espera a la respuesta
     async function replyWithTyping(text) {
         showTyping();
         try {
-            const [reply] = await Promise.all([getBotReply(text), wait(TYPING_MS)]);
-            return reply;
+            const [result] = await Promise.all([getBotReply(text), wait(TYPING_MS)]);
+            return result;
         } finally {
             hideTyping(); // se quita aunque haya error
         }
@@ -388,8 +416,9 @@
         input.value = '';
 
         try {
-            const reply = await replyWithTyping(text);
-            addMessage(reply, 'bot');
+            const result = await replyWithTyping(text);
+            addMessage(result.reply, 'bot');
+            addAction(result.action);
         } catch (err) {
             addMessage('Lo siento, ocurrió un error de conexión con el servidor. Inténtalo nuevamente.', 'bot');
         }

@@ -1,6 +1,9 @@
 from datetime import datetime
 from app.database import db
 from .cotizacion import Cotizacion
+from .contactos import Contacto
+from .noticia import Noticia
+from .user import User
 
 
 class Maestro(db.Model):

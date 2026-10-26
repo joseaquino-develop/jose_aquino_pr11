@@ -1,5 +1,6 @@
 from flask import Blueprint, flash, redirect, render_template, request, url_for
 
+from app.auth import admin_required
 from app.services import cotizacion_service
 
 
@@ -14,6 +15,7 @@ cotizaciones_bp = Blueprint(
 
 
 @cotizaciones_bp.route("/")
+@admin_required
 def index():
     cotizaciones = cotizacion_service.obtener_cotizaciones()
 
@@ -24,6 +26,7 @@ def index():
 
 
 @cotizaciones_bp.route("/nueva", methods=["GET", "POST"])
+@admin_required
 def nueva():
 
     if request.method == "POST":
@@ -49,6 +52,7 @@ def nueva():
     "/<int:cotizacion_id>/editar",
     methods=["GET", "POST"]
 )
+@admin_required
 def editar(cotizacion_id):
 
     cotizacion = cotizacion_service.obtener_cotizacion(
@@ -81,6 +85,7 @@ def editar(cotizacion_id):
     "/<int:cotizacion_id>/eliminar",
     methods=["POST"]
 )
+@admin_required
 def eliminar(cotizacion_id):
 
     cotizacion_service.eliminar_cotizacion(

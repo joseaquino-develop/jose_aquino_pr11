@@ -2,37 +2,6 @@
 // Tailwind se usa por CDN (ver templates/base.html), así que este archivo
 // es para pequeñas interacciones propias del sitio.
 document.addEventListener("DOMContentLoaded", () => {
-    const themeToggle = document.getElementById('theme-toggle');
-    if (!themeToggle) return;
-
-    const themeIcons = themeToggle.querySelectorAll('[data-theme-icon]');
-
-    const updateThemeToggle = () => {
-        const isDark = document.documentElement.dataset.theme === 'dark';
-        themeToggle.setAttribute('aria-pressed', String(isDark));
-        themeToggle.setAttribute('aria-label', isDark ? 'Activar modo claro' : 'Activar modo oscuro');
-        themeToggle.title = isDark ? 'Activar modo claro' : 'Activar modo oscuro';
-        themeIcons.forEach(icon => {
-            icon.classList.toggle('hidden', icon.dataset.themeIcon === (isDark ? 'moon' : 'sun'));
-        });
-    };
-
-    updateThemeToggle();
-    themeToggle.addEventListener('click', () => {
-        const isDark = document.documentElement.dataset.theme !== 'dark';
-        document.documentElement.dataset.theme = isDark ? 'dark' : 'light';
-
-        try {
-            localStorage.setItem('chavalina-theme', isDark ? 'dark' : 'light');
-        } catch (error) {
-            // El cambio visual funciona aunque el almacenamiento esté bloqueado.
-        }
-
-        updateThemeToggle();
-    });
-});
-
-document.addEventListener("DOMContentLoaded", () => {
     console.log("Mi Proyecto listo.");
 
     const header = document.getElementById('site-header');
@@ -862,7 +831,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (inp.hasAttribute('required') && !value) {
                     alert(`⚠️ El campo "${(name || 'requerido').toUpperCase()}" es obligatorio.`);
                     inp.focus();
-                    
+
                     // BLOQUEO DE ENVÍO
                     e.preventDefault();
                     e.stopPropagation();
@@ -914,91 +883,4 @@ document.addEventListener('DOMContentLoaded', () => {
             // Si pasa todas las validaciones, se envía a Flask correctamente
         });
     }
-});
-
-
-/* ============================================================
-   ANIMACIÓN DEL TEXTO DEL CARRUSEL PRINCIPAL
-   Central Chavalina
-   Anima el título, la descripción y los botones al cambiar
-   de diapositiva, sin reemplazar el funcionamiento del carrusel.
-============================================================ */
-
-document.addEventListener("DOMContentLoaded", () => {
-    const carrusel = document.getElementById("hero-carousel");
-
-    if (!carrusel) return;
-
-    const reducirMovimiento = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-    ).matches;
-
-    let diapositivaActivaAnterior = null;
-
-    function obtenerDiapositivaActiva() {
-        const diapositivas = carrusel.querySelectorAll(".hero-slide");
-
-        for (const diapositiva of diapositivas) {
-            if (
-                diapositiva.classList.contains("opacity-100") ||
-                diapositiva.classList.contains("z-[1]")
-            ) {
-                return diapositiva;
-            }
-        }
-
-        return null;
-    }
-
-    function animarTexto(diapositiva) {
-        const elementos = diapositiva.querySelectorAll(
-            ".hero-text-animado"
-        );
-
-        elementos.forEach((elemento) => {
-            if (reducirMovimiento) {
-                elemento.style.animation = "none";
-                elemento.style.opacity = "1";
-                elemento.style.transform = "none";
-                return;
-            }
-
-            // Reiniciar la animación sin duplicar eventos.
-            elemento.style.animation = "none";
-            elemento.style.opacity = "0";
-
-            // Forzar al navegador a reiniciar el efecto.
-            void elemento.offsetWidth;
-
-            // Recuperar la animación definida en el CSS.
-            elemento.style.animation = "";
-        });
-    }
-
-    function comprobarDiapositivaActiva() {
-        const diapositiva = obtenerDiapositivaActiva();
-
-        if (!diapositiva) return;
-
-        // Evitar repetir la animación si solo cambia otra clase.
-        if (diapositiva === diapositivaActivaAnterior) return;
-
-        diapositivaActivaAnterior = diapositiva;
-        animarTexto(diapositiva);
-    }
-
-    // Detectar cambios de diapositiva realizados por el carrusel.
-    const observador = new MutationObserver(() => {
-        comprobarDiapositivaActiva();
-    });
-
-    carrusel.querySelectorAll(".hero-slide").forEach((diapositiva) => {
-        observador.observe(diapositiva, {
-            attributes: true,
-            attributeFilter: ["class"]
-        });
-    });
-
-    // Animar también el texto de la primera diapositiva.
-    comprobarDiapositivaActiva();
 });

@@ -2,7 +2,8 @@ FROM python:3.13-slim
 
 # Buffers y .pyc: logs en vivo, sin obsoletos.
 ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+    PYTHONUNBUFFERED=1 \
+    FLASK_ENV=production
 WORKDIR /app
 
 COPY requirements.txt .

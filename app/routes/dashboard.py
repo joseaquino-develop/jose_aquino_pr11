@@ -1,7 +1,6 @@
 import os
 import time
-
-from functools import wraps
+import uuid
 
 from flask import (
     Blueprint,
@@ -16,6 +15,7 @@ from flask import (
 
 from werkzeug.utils import secure_filename
 
+from app.auth import admin_required
 from app.database import db
 from app.data.products import PRODUCTS
 from app.data.temporadas import TEMPORADAS
@@ -23,6 +23,7 @@ from app.data.imagenes import IMAGENES
 from app.data.aliados import ALIADOS
 from app.models.cotizacion import Cotizacion
 from app.models.contactos import Contacto
+from app.services import noticia_service
 
 
 # ==========================================================
@@ -217,86 +218,8 @@ def guardar_aliados():
 dashboard_bp = Blueprint(
     "dashboard",
     __name__,
-    url_prefix="/admin"
+    url_prefix="/dashboard"
 )
-
-
-# ==========================================================
-# PROTEGER RUTAS DEL ADMINISTRADOR
-# ==========================================================
-
-def login_requerido(func):
-
-    @wraps(func)
-    def funcion_protegida(*args, **kwargs):
-
-        if not session.get("admin_logueado"):
-
-            return redirect(
-                url_for("dashboard.login")
-            )
-
-        return func(*args, **kwargs)
-
-    return funcion_protegida
-
-
-# ==========================================================
-# LOGIN
-# ==========================================================
-
-@dashboard_bp.route(
-    "/login",
-    methods=["GET", "POST"]
-)
-def login():
-
-    if session.get("admin_logueado"):
-
-        return redirect(
-            url_for("dashboard.index")
-        )
-
-    error = None
-
-    if request.method == "POST":
-
-        usuario = request.form.get(
-            "usuario",
-            ""
-        ).strip()
-
-        password = request.form.get(
-            "password",
-            ""
-        )
-
-        admin_user = os.environ.get(
-            "ADMIN_USER"
-        )
-
-        admin_password = os.environ.get(
-            "ADMIN_PASSWORD"
-        )
-
-        if (
-            usuario == admin_user
-            and password == admin_password
-        ):
-
-            session["admin_logueado"] = True
-            session["admin_usuario"] = usuario
-
-            return redirect(
-                url_for("dashboard.index")
-            )
-
-        error = "Usuario o contraseña incorrectos."
-
-    return render_template(
-        "admin/login.html",
-        error=error
-    )
 
 
 # ==========================================================
@@ -304,20 +227,13 @@ def login():
 # ==========================================================
 
 @dashboard_bp.route("/logout")
+@admin_required
 def logout():
-
-    session.pop(
-        "admin_logueado",
-        None
-    )
-
-    session.pop(
-        "admin_usuario",
-        None
-    )
+    # Esta ruta GET se conserva para compatibilidad con enlaces antiguos.
+    session.clear()
 
     return redirect(
-        url_for("dashboard.login")
+        url_for("authentication.admin_login")
     )
 
 
@@ -325,8 +241,9 @@ def logout():
 # DASHBOARD PRINCIPAL
 # ==========================================================
 
+@dashboard_bp.route("")
 @dashboard_bp.route("/")
-@login_requerido
+@admin_required
 def index():
 
     total_productos = len(PRODUCTS)
@@ -368,7 +285,7 @@ def index():
 # ==========================================================
 
 @dashboard_bp.route("/cotizaciones")
-@login_requerido
+@admin_required
 def cotizaciones():
 
     cotizaciones = (
@@ -390,7 +307,7 @@ def cotizaciones():
 @dashboard_bp.route(
     "/cotizaciones/<int:id>"
 )
-@login_requerido
+@admin_required
 def detalle_cotizacion(id):
 
     cotizacion = (
@@ -411,7 +328,7 @@ def detalle_cotizacion(id):
     "/cotizaciones/<int:id>/eliminar",
     methods=["POST"]
 )
-@login_requerido
+@admin_required
 def eliminar_cotizacion(id):
 
     cotizacion = (
@@ -431,7 +348,7 @@ def eliminar_cotizacion(id):
 # ==========================================================
 
 @dashboard_bp.route("/contactos")
-@login_requerido
+@admin_required
 def contactos():
 
     contactos = (
@@ -453,7 +370,7 @@ def contactos():
 @dashboard_bp.route(
     "/contactos/<int:id>"
 )
-@login_requerido
+@admin_required
 def detalle_contacto(id):
 
     contacto = (
@@ -474,7 +391,7 @@ def detalle_contacto(id):
     "/contactos/<int:id>/eliminar",
     methods=["POST"]
 )
-@login_requerido
+@admin_required
 def eliminar_contacto(id):
 
     contacto = (
@@ -494,7 +411,7 @@ def eliminar_contacto(id):
 # ==========================================================
 
 @dashboard_bp.route("/productos")
-@login_requerido
+@admin_required
 def productos():
 
     for key, producto in PRODUCTS.items():
@@ -527,7 +444,7 @@ def productos():
     "/productos/<key>",
     methods=["GET", "POST"]
 )
-@login_requerido
+@admin_required
 def detalle_producto(key):
 
     producto = PRODUCTS.get(key)
@@ -607,7 +524,7 @@ def detalle_producto(key):
 # ==========================================================
 
 @dashboard_bp.route("/imagenes")
-@login_requerido
+@admin_required
 def imagenes():
 
     return render_template(
@@ -625,7 +542,7 @@ def imagenes():
     "/imagenes/<key>",
     methods=["POST"]
 )
-@login_requerido
+@admin_required
 def cambiar_imagen(key):
 
     # Comprobar que la imagen existe
@@ -733,11 +650,144 @@ def cambiar_imagen(key):
     )
 
 # ==========================================================
+# ADMINISTRAR NOTICIAS
+# ==========================================================
+
+@dashboard_bp.route("/noticias")
+@admin_required
+def noticias():
+    return render_template(
+        "admin/noticias.html",
+        noticias=noticia_service.obtener_noticias(),
+    )
+
+
+def _datos_noticia_desde_formulario():
+    return {
+        "categoria": request.form.get("categoria", "").strip(),
+        "fecha": request.form.get("fecha", "").strip(),
+        "titulo": request.form.get("titulo", "").strip(),
+        "resumen": request.form.get("resumen", "").strip(),
+    }
+
+
+def _guardar_imagen_noticia(archivo):
+    if not archivo or not archivo.filename:
+        return None
+
+    if not extension_permitida(archivo.filename):
+        raise ValueError("Solo se permiten imágenes JPG, JPEG, PNG o WEBP.")
+
+    extension = archivo.filename.rsplit(".", 1)[1].lower()
+    nombre_archivo = f"noticia_{uuid.uuid4().hex}.{extension}"
+    carpeta_imagenes = os.path.join(current_app.static_folder, "img", "noticias")
+    os.makedirs(carpeta_imagenes, exist_ok=True)
+    archivo.save(os.path.join(carpeta_imagenes, nombre_archivo))
+    return f"img/noticias/{nombre_archivo}"
+
+
+def _validar_datos_noticia(data):
+    return all(
+        data.get(campo)
+        for campo in ("categoria", "fecha", "titulo", "resumen")
+    )
+
+
+@dashboard_bp.route("/noticias/nueva", methods=["GET", "POST"])
+@admin_required
+def nueva_noticia():
+    if request.method == "POST":
+        data = _datos_noticia_desde_formulario()
+        if not _validar_datos_noticia(data):
+            flash("Completa todos los campos obligatorios.", "danger")
+            return render_template(
+                "admin/form_noticia.html",
+                noticia=None,
+                titulo="Nueva noticia",
+            ), 400
+
+        try:
+            data["imagen"] = _guardar_imagen_noticia(
+                request.files.get("imagen")
+            )
+        except ValueError as error:
+            flash(str(error), "danger")
+            return render_template(
+                "admin/form_noticia.html",
+                noticia=None,
+                titulo="Nueva noticia",
+            ), 400
+
+        noticia_service.crear_noticia(data)
+        flash("Noticia creada correctamente.", "success")
+        return redirect(url_for("dashboard.noticias"))
+
+    return render_template(
+        "admin/form_noticia.html",
+        noticia=None,
+        titulo="Nueva noticia",
+    )
+
+
+@dashboard_bp.route(
+    "/noticias/<int:noticia_id>/editar",
+    methods=["GET", "POST"],
+)
+@admin_required
+def editar_noticia(noticia_id):
+    noticia = noticia_service.obtener_noticia(noticia_id)
+
+    if request.method == "POST":
+        data = _datos_noticia_desde_formulario()
+        if not _validar_datos_noticia(data):
+            flash("Completa todos los campos obligatorios.", "danger")
+            return render_template(
+                "admin/form_noticia.html",
+                noticia=noticia,
+                titulo="Editar noticia",
+            ), 400
+
+        try:
+            data["imagen"] = _guardar_imagen_noticia(
+                request.files.get("imagen")
+            )
+        except ValueError as error:
+            flash(str(error), "danger")
+            return render_template(
+                "admin/form_noticia.html",
+                noticia=noticia,
+                titulo="Editar noticia",
+            ), 400
+
+        noticia_service.actualizar_noticia(noticia, data)
+        flash("Noticia actualizada correctamente.", "success")
+        return redirect(url_for("dashboard.noticias"))
+
+    return render_template(
+        "admin/form_noticia.html",
+        noticia=noticia,
+        titulo="Editar noticia",
+    )
+
+
+@dashboard_bp.route(
+    "/noticias/<int:noticia_id>/eliminar",
+    methods=["POST"],
+)
+@admin_required
+def eliminar_noticia(noticia_id):
+    noticia = noticia_service.obtener_noticia(noticia_id)
+    noticia_service.eliminar_noticia(noticia)
+    flash("Noticia eliminada correctamente.", "success")
+    return redirect(url_for("dashboard.noticias"))
+
+
+# ==========================================================
 # ADMINISTRAR ALIADOS
 # ==========================================================
 
 @dashboard_bp.route("/aliados")
-@login_requerido
+@admin_required
 def aliados():
 
     return render_template(
@@ -754,7 +804,7 @@ def aliados():
     "/aliados/nuevo",
     methods=["GET", "POST"]
 )
-@login_requerido
+@admin_required
 def nuevo_aliado():
 
     if request.method == "POST":
@@ -896,7 +946,7 @@ def nuevo_aliado():
     "/aliados/<aliado_id>/editar",
     methods=["GET", "POST"]
 )
-@login_requerido
+@admin_required
 def editar_aliado(aliado_id):
 
     aliado = next(
@@ -1032,7 +1082,7 @@ def editar_aliado(aliado_id):
     "/aliados/<aliado_id>/eliminar",
     methods=["POST"]
 )
-@login_requerido
+@admin_required
 def eliminar_aliado(aliado_id):
 
     aliado = next(

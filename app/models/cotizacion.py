@@ -9,32 +9,32 @@ class Cotizacion(db.Model):
     importadores, mercados mayoristas, etc.
     """
 
-    __tablename__ = "cotizaciones"
+    __tablename__ = "quotations"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 
     # Paso 1: datos de la empresa
-    empresa = db.Column(db.String(150), nullable=False)
-    contacto = db.Column(db.String(120), nullable=False)
-    cargo = db.Column(db.String(120), nullable=True)
-    pais = db.Column(db.String(80), nullable=False)
-    email = db.Column(db.String(120), nullable=False)
-    telefono = db.Column(db.String(50), nullable=False)  # Coincide con VARCHAR(50) de la BD
-    web = db.Column(db.String(150), nullable=True)
+    empresa = db.Column("company", db.String(255), nullable=False)
+    contacto = db.Column("contact_name", db.String(255), nullable=False)
+    cargo = db.Column("contact_position", db.String(100), nullable=True)
+    pais = db.Column("country", db.String(100), nullable=False)
+    email = db.Column(db.String(255), nullable=False)
+    telefono = db.Column("phone", db.String(50), nullable=True)
+    web = db.Column("website", db.String(255), nullable=True)
 
     # Paso 2: producto y volumen
-    producto = db.Column(db.String(100), nullable=False)
-    cantidad = db.Column(db.String(100), nullable=False)
-    unidad = db.Column(db.String(50), nullable=True)
-    frecuencia = db.Column(db.String(50), nullable=True)
-    destino = db.Column(db.String(150), nullable=True)
+    producto = db.Column("product", db.String(100), nullable=False)
+    cantidad = db.Column("quantity", db.String(50), nullable=False)
+    unidad = db.Column("unit", db.String(50), nullable=True)
+    frecuencia = db.Column("frequency", db.String(100), nullable=True)
+    destino = db.Column("destination", db.String(150), nullable=True)
 
     # Paso 3: requisitos técnicos
     incoterm = db.Column(db.String(50), nullable=True)
-    certificaciones = db.Column(db.Text, nullable=True)  # ej: "SENASA, GlobalG.A.P."
-    notas = db.Column(db.Text, nullable=True)
+    certificaciones = db.Column("certifications", db.String(255), nullable=True)
+    notas = db.Column("notes", db.Text, nullable=True)
 
-    creado_en = db.Column(db.DateTime, server_default=db.func.now())
+    creado_en = db.Column("request_date", db.DateTime, server_default=db.func.now())
 
     def __repr__(self):
         return f"<Cotizacion {self.id} {self.empresa}>"

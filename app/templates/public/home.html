@@ -1,4 +1,3 @@
-
 {% extends "public/base_public.html" %}
 
 {% block title %}
@@ -6,86 +5,6 @@ Central Chavalina — Palta Hass, Pecana y Pallar desde Ica
 {% endblock %}
 
 {% block content %}
-
-<!-- ==========================================
-     ANIMACIÓN CINEMATOGRÁFICA DEL CARRUSEL
-=========================================== -->
-
-<style>
-    @keyframes revelarTitulo {
-        0% {
-            opacity: 0;
-            transform: translate3d(0, 35px, 0);
-            filter: blur(8px);
-        }
-
-        65% {
-            filter: blur(1px);
-        }
-
-        100% {
-            opacity: 1;
-            transform: translate3d(0, 0, 0);
-            filter: blur(0);
-        }
-    }
-
-    @keyframes revelarDescripcion {
-        from {
-            opacity: 0;
-            transform: translate3d(0, 22px, 0);
-        }
-
-        to {
-            opacity: 1;
-            transform: translate3d(0, 0, 0);
-        }
-    }
-
-    @keyframes revelarBotones {
-        0% {
-            opacity: 0;
-            transform: translate3d(0, 15px, 0) scale(0.97);
-        }
-
-        100% {
-            opacity: 1;
-            transform: translate3d(0, 0, 0) scale(1);
-        }
-    }
-
-    #hero-carousel .hero-text-titulo {
-        opacity: 0;
-        animation: revelarTitulo 1s cubic-bezier(.16, 1, .3, 1) 0.1s both;
-    }
-
-    #hero-carousel .hero-text-descripcion {
-        opacity: 0;
-        animation: revelarDescripcion 0.8s ease-out 0.35s both;
-    }
-
-    #hero-carousel .hero-text-botones {
-        opacity: 0;
-        animation: revelarBotones 0.7s cubic-bezier(.16, 1, .3, 1) 0.55s both;
-    }
-
-    #hero-carousel .hero-text-animado {
-        will-change: transform, opacity;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        #hero-carousel .hero-text-titulo,
-        #hero-carousel .hero-text-descripcion,
-        #hero-carousel .hero-text-botones {
-            animation: none !important;
-            opacity: 1 !important;
-            transform: none !important;
-            filter: none !important;
-            will-change: auto;
-        }
-    }
-</style>
-
 
 <!-- ==========================================
      HERO / CARRUSEL
@@ -98,25 +17,25 @@ Central Chavalina — Palta Hass, Pecana y Pallar desde Ica
 >
 
     {% set slides = [
-        {
-            'img': imagenes['inicio_carrusel_1'],
-            'tag': 'Cooperativa Agraria · San José de los Molinos, Ica',
-            'title': 'Desde Ica, cultivamos calidad y llevamos nuestros productos al mundo.',
-            'sub': 'Cooperativa Agraria de Usuarios Central Chavalina — 30 familias productoras comprometidas con la calidad, la sostenibilidad y el comercio justo.'
-        },
-        {
-            'img': imagenes['inicio_carrusel_2'],
-            'tag': 'Producto principal · Palta Hass',
-            'title': 'Palta Hass de calidad que nace de nuestra tierra.',
-            'sub': 'Producida en Ica con asistencia técnica integral. Cajas de 4 kg, cosecha de febrero a mayo. Disponible para mercados nacionales e internacionales.'
-        },
-        {
-            'img': imagenes['inicio_carrusel_3'],
-            'tag': 'Est. 2025 · 30 socios productores',
-            'title': 'Calidad que nace de nuestra tierra y crece con nuestros productores.',
-            'sub': 'Nuestro modelo asociativo conecta directamente a productores de Ica con compradores, agroexportadoras y mercados que valoran el origen.'
-        }
-    ] %}
+    {
+        'img': url_for('static', filename='uploads/inicio_carrusel_1_1791181227.png'),
+        'tag': 'Cooperativa Agraria · San José de los Molinos, Ica',
+        'title': 'Desde Ica, cultivamos calidad y llevamos nuestros productos al mundo.',
+        'sub': 'Cooperativa Agraria de Usuarios Central Chavalina — 30 familias productoras comprometidas con la calidad, la sostenibilidad y el comercio justo.'
+    },
+    {
+        'img': 'https://images.unsplash.com/photo-1632606325750-5749c9ff78e2?w=1800&h=900&fit=crop&auto=format',
+        'tag': 'Producto principal · Palta Hass',
+        'title': 'Palta Hass de calidad que nace de nuestra tierra.',
+        'sub': 'Producida en Ica con asistencia técnica integral. Cajas de 4 kg, cosecha de febrero a mayo. Disponible para mercados nacionales e internacionales.'
+    },
+    {
+        'img': 'https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=1800&h=900&fit=crop&auto=format',
+        'tag': 'Est. 2025 · 30 socios productores',
+        'title': 'Calidad que nace de nuestra tierra y crece con nuestros productores.',
+        'sub': 'Nuestro modelo asociativo conecta directamente a productores de Ica con compradores, agroexportadoras y mercados que valoran el origen.'
+    }
+     ] %}
 
 
     {% for slide in slides %}
@@ -135,7 +54,7 @@ Central Chavalina — Palta Hass, Pecana y Pallar desde Ica
 
         <div
             class="absolute inset-0"
-            style="background:linear-gradient(
+            style="background: linear-gradient(
                 to right,
                 rgba(20,40,12,0.72) 40%,
                 rgba(20,40,12,0.10) 100%
@@ -156,24 +75,21 @@ Central Chavalina — Palta Hass, Pecana y Pallar desde Ica
                 </span>
 
 
-                <!-- TÍTULO ANIMADO -->
                 <h1
-                    class="hero-text-animado hero-text-titulo font-display text-4xl md:text-5xl lg:text-6xl text-white font-semibold leading-[1.05] mb-5 text-left"
+                    class="font-display text-4xl md:text-5xl lg:text-6xl text-white font-semibold leading-[1.05] mb-5 text-left"
                 >
                     {{ slide.title }}
                 </h1>
 
 
-                <!-- DESCRIPCIÓN ANIMADA -->
                 <p
-                    class="hero-text-animado hero-text-descripcion text-white/70 text-base md:text-lg max-w-lg leading-relaxed mb-10 text-justify"
+                    class="text-white/70 text-base md:text-lg max-w-lg leading-relaxed mb-10 text-justify"
                 >
                     {{ slide.sub }}
                 </p>
 
 
-                <!-- BOTONES ANIMADOS -->
-                <div class="hero-text-animado hero-text-botones flex flex-wrap gap-3">
+                <div class="flex flex-wrap gap-3">
 
                     <a
                         href="{{ url_for('public.producto', key='hass') }}"
@@ -216,7 +132,7 @@ Central Chavalina — Palta Hass, Pecana y Pallar desde Ica
     {% endfor %}
 
 
-    <!-- FLECHA ANTERIOR -->
+    <!-- Flecha anterior -->
     <button
         id="hero-prev"
         aria-label="Anterior"
@@ -238,7 +154,7 @@ Central Chavalina — Palta Hass, Pecana y Pallar desde Ica
     </button>
 
 
-    <!-- FLECHA SIGUIENTE -->
+    <!-- Flecha siguiente -->
     <button
         id="hero-next"
         aria-label="Siguiente"
@@ -260,7 +176,7 @@ Central Chavalina — Palta Hass, Pecana y Pallar desde Ica
     </button>
 
 
-    <!-- INDICADORES -->
+    <!-- Indicadores -->
     <div
         class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2"
     >
@@ -291,22 +207,31 @@ Central Chavalina — Palta Hass, Pecana y Pallar desde Ica
         class="max-w-7xl mx-auto px-5 lg:px-10 grid lg:grid-cols-2 gap-0 items-stretch rounded-2xl overflow-hidden shadow-sm border border-[#e8d5b0]"
     >
 
+        <!-- Bloque de Texto (Entra desde la izquierda) -->
         <div
             class="flex flex-col justify-center text-left p-10 lg:p-16"
             style="background-color:#fdf8f0;"
             data-aos="fade-right"
-            data-aos-duration="800"
+            data-aos-duration="550"
         >
 
-            <span class="text-xs font-semibold tracking-[0.2em] uppercase text-[#3a6b2a] mb-3">
+            <span
+                class="text-xs font-semibold tracking-[0.2em] uppercase text-[#3a6b2a] mb-3"
+            >
                 Quiénes somos
             </span>
 
-            <h2 class="font-display text-4xl md:text-5xl font-semibold text-[#234018] leading-tight mb-5 text-left">
+
+            <h2
+                class="font-display text-4xl md:text-5xl font-semibold text-[#234018] leading-tight mb-5 text-left"
+            >
                 Una cooperativa que nació del campo iqueño.
             </h2>
 
-            <p class="text-sm text-[#1e1e1e]/65 leading-relaxed mb-4 text-justify">
+
+            <p
+                class="text-sm text-[#1e1e1e]/65 leading-relaxed mb-4 text-justify"
+            >
                 La Cooperativa Agraria de Usuarios Central Chavalina fue
                 constituida en 2025 e integrada por 30 socios productores de
                 San José de los Molinos, Ica. Nuestra razón de ser es impulsar
@@ -314,7 +239,10 @@ Central Chavalina — Palta Hass, Pecana y Pallar desde Ica
                 trabajan la tierra con nosotros.
             </p>
 
-            <p class="text-sm text-[#1e1e1e]/65 leading-relaxed mb-8 text-justify">
+
+            <p
+                class="text-sm text-[#1e1e1e]/65 leading-relaxed mb-8 text-justify"
+            >
                 A través de asistencia técnica integral y una comercialización
                 justa, llevamos la palta Hass, pecanas y pallar seco de Ica a
                 compradores nacionales e internacionales que valoran el origen
@@ -324,27 +252,31 @@ Central Chavalina — Palta Hass, Pecana y Pallar desde Ica
         </div>
 
 
+        <!-- Bloque de Imagen (Entra desde la derecha) -->
         <div
             class="relative min-h-[320px] lg:min-h-0 bg-[#e8d5b0]"
             data-aos="fade-left"
-            data-aos-duration="800"
+            data-aos-duration="550"
         >
 
             <img
-                src="{{ imagenes['inicio_nosotros'] }}"
-                alt="Productor peruano en campo"
-                class="w-full h-full object-cover"
+            src="{{ imagenes['inicio_nosotros'] }}"
+            alt="Productor peruano en campo"
+            class="w-full h-full object-cover"
             >
 
+            <!-- Insignia "30 Familias" (Aparece con Zoom y retardo) -->
             <div
                 class="absolute bottom-6 right-6 rounded-xl p-4 text-center shadow-lg"
                 style="background-color:#c9930a; color:#3e1f06;"
-                data-aos="zoom-in"
-                data-aos-delay="300"
-                data-aos-duration="600"
+                data-aos="fade-up"
+                data-aos-delay="150"
+                data-aos-duration="500"
             >
 
-                <div class="font-display text-3xl font-semibold">30</div>
+                <div class="font-display text-3xl font-semibold">
+                    30
+                </div>
 
                 <div class="text-xs font-semibold mt-0.5">
                     Familias productoras
@@ -372,13 +304,11 @@ Central Chavalina — Palta Hass, Pecana y Pallar desde Ica
     style="background-color:#f5ead4;"
 >
 
-    <div
-        class="max-w-4xl mx-auto px-5 text-center"
-        data-aos="fade-up"
-        data-aos-duration="800"
-    >
+    <div class="max-w-4xl mx-auto px-5 text-center" data-aos="fade-up" data-aos-duration="550">
 
-        <p class="font-display text-2xl md:text-3xl font-semibold italic text-[#234018] leading-snug">
+        <p
+            class="font-display text-2xl md:text-3xl font-semibold italic text-[#234018] leading-snug"
+        >
             "Chavalina: calidad que nace de nuestra tierra
             y crece con nuestros productores."
         </p>
@@ -392,21 +322,30 @@ Central Chavalina — Palta Hass, Pecana y Pallar desde Ica
      CATÁLOGO
 =========================================== -->
 
-<section class="py-24 lg:py-32" style="background-color:#f5ead4;">
+<section
+    class="py-24 lg:py-32"
+    style="background-color:#f5ead4;"
+>
 
     <div class="max-w-7xl mx-auto px-5 lg:px-10">
 
         <div class="text-center mb-14" data-aos="fade-up">
 
-            <span class="text-xs font-semibold tracking-[0.2em] uppercase text-[#3a6b2a]">
+            <span
+                class="text-xs font-semibold tracking-[0.2em] uppercase text-[#3a6b2a]"
+            >
                 Catálogo
             </span>
 
-            <h2 class="font-display text-4xl md:text-5xl font-semibold text-[#234018] mt-2">
+            <h2
+                class="font-display text-4xl md:text-5xl font-semibold text-[#234018] mt-2"
+            >
                 Nuestros productos.
             </h2>
 
-            <p class="text-sm text-[#1e1e1e]/55 max-w-md mx-auto mt-3">
+            <p
+                class="text-sm text-[#1e1e1e]/55 max-w-md mx-auto mt-3"
+            >
                 Haz clic en cualquier producto para ver su ficha técnica
                 completa y calendario de cosecha.
             </p>
@@ -430,7 +369,9 @@ Central Chavalina — Palta Hass, Pecana y Pallar desde Ica
         } %}
 
 
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-3xl mx-auto">
+        <div
+            class="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-3xl mx-auto"
+        >
 
             {% for key in ['hass', 'pecana', 'pallar'] %}
 
@@ -445,14 +386,15 @@ Central Chavalina — Palta Hass, Pecana y Pallar desde Ica
 
                     <a
                         href="{{ url_for('public.producto', key=key) }}"
-                        class="block relative rounded-2xl overflow-hidden group shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+                        class="block relative rounded-2xl overflow-hidden group shadow-md
+                               transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
                         style="aspect-ratio:1;"
                     >
 
                         <img
                             src="{{ p.img }}"
                             alt="{{ info.name }}"
-                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                            class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
                         >
 
                         <div
@@ -460,27 +402,39 @@ Central Chavalina — Palta Hass, Pecana y Pallar desde Ica
                             style="background:linear-gradient(to top, {{ p.color }}e6, transparent);"
                         ></div>
 
+
                         {% if key == 'hass' %}
+
                         <span
                             class="absolute top-4 left-4 text-xs font-bold px-3 py-1 rounded-full"
                             style="background-color:#c9930a; color:#3e1f06;"
                         >
                             Producto principal
                         </span>
+
                         {% endif %}
+
 
                         <div class="absolute bottom-0 left-0 right-0 p-5">
 
-                            <div class="text-white/60 text-xs font-medium mb-0.5">
+                            <div
+                                class="text-white/60 text-xs font-medium mb-0.5"
+                            >
                                 {{ info.season }}
                             </div>
 
-                            <div class="font-display text-xl md:text-2xl text-white font-semibold">
+                            <div
+                                class="font-display text-xl md:text-2xl text-white font-semibold"
+                            >
                                 {{ info.name }}
                             </div>
 
                             <span
-                                class="inline-block mt-3 px-4 py-1.5 rounded-full text-xs font-semibold opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 [@media(hover:none)]:opacity-100 [@media(hover:none)]:translate-y-0 transition-all duration-300"
+                                class="inline-block mt-3 px-4 py-1.5 rounded-full text-xs font-semibold
+                                       opacity-0 translate-y-2
+                                       group-hover:opacity-100 group-hover:translate-y-0
+                                       [@media(hover:none)]:opacity-100 [@media(hover:none)]:translate-y-0
+                                       transition-all duration-300"
                                 style="background-color:#c9930a; color:#3e1f06;"
                             >
                                 Ver ficha técnica →
@@ -492,19 +446,23 @@ Central Chavalina — Palta Hass, Pecana y Pallar desde Ica
 
                 </div>
 
+
             {% endfor %}
 
         </div>
 
 
         <p class="text-center text-xs text-[#9a5e2a] mt-4">
+
             La palta también se produce en variedad
+
             <a
                 href="{{ url_for('public.producto', key='fuerte') }}"
                 class="underline font-semibold hover:text-[#234018]"
             >
                 Palta Fuerte
             </a>
+
         </p>
 
     </div>
@@ -513,14 +471,16 @@ Central Chavalina — Palta Hass, Pecana y Pallar desde Ica
 
 
 <!-- ==========================================
-     ESTADÍSTICAS
+     ESTADÍSTICAS (con contadores animados)
 =========================================== -->
 
 <section style="background-color:#234018;">
 
     <div class="max-w-7xl mx-auto px-5 lg:px-10">
 
-        <div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10">
+        <div
+            class="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10"
+        >
 
             {% set stats = [
                 ('30', 'Socios Productores', 30, ''),
@@ -529,12 +489,13 @@ Central Chavalina — Palta Hass, Pecana y Pallar desde Ica
                 ('100%', 'Comercio Justo', 100, '%')
             ] %}
 
+
             {% for value, label, target, suffix in stats %}
 
             <div
                 class="text-center py-10 px-4"
                 data-aos="fade-up"
-                data-aos-delay="{{ loop.index0 * 100 }}"
+                data-aos-delay="{{ loop.index0 * 60 }}"
             >
 
                 <div
@@ -572,47 +533,51 @@ Central Chavalina — Palta Hass, Pecana y Pallar desde Ica
 
         <div class="text-center mb-10" data-aos="fade-up">
 
-            <span class="text-xs font-semibold tracking-[0.2em] uppercase text-[#3a6b2a] mb-2 block">
+            <span
+                class="text-xs font-semibold tracking-[0.2em] uppercase text-[#3a6b2a] mb-2 block"
+            >
                 Lo que nos define
             </span>
 
-            <h2 class="font-display text-3xl md:text-4xl font-semibold text-[#234018]">
+            <h2
+                class="font-display text-3xl md:text-4xl font-semibold text-[#234018]"
+            >
                 Nuestros valores.
             </h2>
 
         </div>
 
 
-        {% set valores = [
-            ('Asociatividad', 'asociatividad'),
-            ('Calidad', 'calidad'),
-            ('Sostenibilidad', 'sostenibilidad'),
-            ('Compromiso', 'compromiso'),
-            ('Transparencia', 'transparencia'),
-            ('Comercio justo', 'comercio-justo'),
-            ('Trabajo en equipo', 'trabajo-equipo'),
-            ('Desarrollo familiar', 'desarrollo-familiar')
-        ] %}
+{% set valores = [
+    ('Asociatividad', 'asociatividad'),
+    ('Calidad', 'calidad'),
+    ('Sostenibilidad', 'sostenibilidad'),
+    ('Compromiso', 'compromiso'),
+    ('Transparencia', 'transparencia'),
+    ('Comercio justo', 'comercio-justo'),
+    ('Trabajo en equipo', 'trabajo-equipo'),
+    ('Desarrollo familiar', 'desarrollo-familiar')
+] %}
 
 
-        <div class="flex flex-wrap justify-center gap-3">
+<div class="flex flex-wrap justify-center gap-3">
 
-            {% for valor, destino in valores %}
+    {% for valor, destino in valores %}
 
-            <a
-                href="{{ url_for('public.responsabilidad') }}#{{ destino }}"
-                class="valor-chip px-5 py-2.5 rounded-full text-sm font-semibold border border-[#e8d5b0] text-[#234018] transition-all cursor-pointer"
-                style="background-color:#fdf8f0;"
-                data-aos="fade-up"
-                data-aos-delay="{{ loop.index0 * 60 }}"
-                data-aos-duration="600"
-            >
-                {{ valor }}
-            </a>
+    <a
+        href="{{ url_for('public.responsabilidad') }}#{{ destino }}"
+        class="valor-chip px-5 py-2.5 rounded-full text-sm font-semibold border border-[#e8d5b0] text-[#234018] transition-all cursor-pointer"
+        style="background-color:#fdf8f0;"
+        data-aos="fade-up"
+        data-aos-delay="{{ loop.index0 * 40 }}"
+        data-aos-duration="500"
+    >
+        {{ valor }}
+    </a>
 
-            {% endfor %}
+    {% endfor %}
 
-        </div>
+</div>
 
     </div>
 
@@ -625,11 +590,11 @@ Central Chavalina — Palta Hass, Pecana y Pallar desde Ica
 
 <section class="relative py-28 overflow-hidden">
 
-    <img
+        <img
         src="{{ imagenes['inicio_responsabilidad'] }}"
         alt="Campo agrícola"
         class="absolute inset-0 w-full h-full object-cover"
-    >
+        >
 
     <div
         class="absolute inset-0"
@@ -641,25 +606,34 @@ Central Chavalina — Palta Hass, Pecana y Pallar desde Ica
     ></div>
 
 
-    <div class="relative z-10 max-w-7xl mx-auto px-5 lg:px-10">
+    <div
+        class="relative z-10 max-w-7xl mx-auto px-5 lg:px-10"
+    >
 
-        <div class="max-w-xl" data-aos="fade-up" data-aos-duration="800">
+        <div class="max-w-xl" data-aos="fade-up" data-aos-duration="550">
 
-            <span class="text-xs font-semibold tracking-[0.2em] uppercase text-[#74c69d] mb-3 block">
+            <span
+                class="text-xs font-semibold tracking-[0.2em] uppercase text-[#74c69d] mb-3 block"
+            >
                 Responsabilidad Social
             </span>
 
-            <h2 class="font-display text-4xl md:text-5xl text-white font-semibold leading-tight mb-4">
+            <h2
+                class="font-display text-4xl md:text-5xl text-white font-semibold leading-tight mb-4"
+            >
                 30 familias.<br>
                 Una sola voz.
             </h2>
 
-            <p class="text-white/70 text-sm leading-relaxed mb-6 text-justify">
+            <p
+                class="text-white/70 text-sm leading-relaxed mb-6 text-justify"
+            >
                 Detrás de cada producto existe el trabajo organizado de 30
                 familias productoras de Ica, comprometidas con la calidad,
                 la sostenibilidad y una comercialización justa. Ese es el
                 corazón de Cooperativa Central Chavalina.
             </p>
+
 
             <a
                 href="{{ url_for('public.responsabilidad') }}"
@@ -680,12 +654,15 @@ Central Chavalina — Palta Hass, Pecana y Pallar desde Ica
      CTA FINAL
 =========================================== -->
 
-<section class="py-20 overflow-hidden" style="background-color:#c9930a;">
+<section
+    class="py-20 overflow-hidden"
+    style="background-color:#c9930a;"
+>
 
     <div
         class="max-w-7xl mx-auto px-5 lg:px-10 text-center"
-        data-aos="zoom-in"
-        data-aos-duration="800"
+        data-aos="fade-up"
+        data-aos-duration="550"
     >
 
         <h2
@@ -696,6 +673,7 @@ Central Chavalina — Palta Hass, Pecana y Pallar desde Ica
             directamente del productor?
         </h2>
 
+
         <p
             class="text-sm max-w-md mx-auto mb-7"
             style="color:rgba(62,31,6,0.7);"
@@ -703,6 +681,7 @@ Central Chavalina — Palta Hass, Pecana y Pallar desde Ica
             Empresas agroexportadoras, importadores, mercados mayoristas
             y supermercados: trabajemos juntos. Sin intermediarios.
         </p>
+
 
         <a
             href="{{ url_for('public.contacto') }}"
@@ -722,10 +701,13 @@ Central Chavalina — Palta Hass, Pecana y Pallar desde Ica
 {% block scripts %}
 
 <script>
+
 (function () {
+
     const wrap = document.getElementById('hero-carousel');
 
     if (!wrap) return;
+
 
     const slides = wrap.querySelectorAll('.hero-slide');
     const dots = wrap.querySelectorAll('.hero-dot');
@@ -733,69 +715,44 @@ Central Chavalina — Palta Hass, Pecana y Pallar desde Ica
     const prevBtn = document.getElementById('hero-prev');
     const nextBtn = document.getElementById('hero-next');
 
-    const reducirMovimiento = window.matchMedia(
-        '(prefers-reduced-motion: reduce)'
-    ).matches;
-
     let current = 0;
     let timer = null;
 
-    function animarTexto(slide) {
-        if (!slide) return;
-
-        const elementos = slide.querySelectorAll(
-            '.hero-text-titulo, .hero-text-descripcion, .hero-text-botones'
-        );
-
-        elementos.forEach((elemento) => {
-            // Limpiar el estilo anterior para reiniciar la animación.
-            elemento.style.animation = 'none';
-
-            if (reducirMovimiento) {
-                elemento.style.opacity = '1';
-                elemento.style.transform = 'none';
-                elemento.style.filter = 'none';
-                return;
-            }
-
-            elemento.style.opacity = '0';
-
-            // Forzar el reinicio de las animaciones CSS.
-            void elemento.offsetWidth;
-
-            // Recuperar las animaciones y sus retrasos del CSS.
-            elemento.style.animation = '';
-        });
-    }
 
     function goTo(index) {
-        if (!slides.length) return;
 
         current = (index + slides.length) % slides.length;
 
+
         slides.forEach((slide, i) => {
+
             const active = i === current;
 
             slide.classList.toggle('opacity-100', active);
             slide.classList.toggle('z-[1]', active);
             slide.classList.toggle('opacity-0', !active);
             slide.classList.toggle('pointer-events-none', !active);
+
         });
 
+
         dots.forEach((dot, i) => {
+
             const active = i === current;
 
             dot.classList.toggle('w-6', active);
             dot.classList.toggle('bg-[#c9930a]', active);
+
             dot.classList.toggle('w-2', !active);
             dot.classList.toggle('bg-white/40', !active);
+
         });
 
-        // Ejecutar el efecto en cada cambio de diapositiva.
-        animarTexto(slides[current]);
     }
 
+
     function restartAutoplay() {
+
         if (timer) {
             clearInterval(timer);
         }
@@ -803,37 +760,41 @@ Central Chavalina — Palta Hass, Pecana y Pallar desde Ica
         timer = setInterval(() => {
             goTo(current + 1);
         }, 5000);
+
     }
 
-    if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
-            goTo(current - 1);
-            restartAutoplay();
-        });
-    }
 
-    if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            goTo(current + 1);
-            restartAutoplay();
-        });
-    }
-
-    dots.forEach((dot) => {
-        dot.addEventListener('click', () => {
-            const destino = Number.parseInt(dot.dataset.goto, 10);
-
-            if (Number.isNaN(destino)) return;
-
-            goTo(destino);
-            restartAutoplay();
-        });
+    prevBtn?.addEventListener('click', () => {
+        goTo(current - 1);
+        restartAutoplay();
     });
 
-    // Animar la primera diapositiva al cargar.
-    goTo(current);
+
+    nextBtn?.addEventListener('click', () => {
+        goTo(current + 1);
+        restartAutoplay();
+    });
+
+
+    dots.forEach((dot) => {
+
+        dot.addEventListener('click', () => {
+
+            goTo(
+                parseInt(dot.dataset.goto, 10)
+            );
+
+            restartAutoplay();
+
+        });
+
+    });
+
+
     restartAutoplay();
+
 })();
+
 </script>
 
 {% endblock %}

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title description">
+  <title id="title">Imagen de noticia no disponible</title>
+  <desc id="description">Sube nuevamente la imagen desde el panel de noticias.</desc>
+  <rect width="1200" height="675" fill="#e8d5b0"/>
+  <path d="M0 480c170-110 315-70 480-5s310 85 720-110v310H0z" fill="#748a43"/>
+  <path d="M0 555c190-90 370-45 560 25s390 35 640-70v165H0z" fill="#234018"/>
+  <circle cx="925" cy="180" r="72" fill="#d79a35"/>
+  <text x="600" y="390" text-anchor="middle" fill="#234018" font-family="sans-serif" font-size="38" font-weight="600">Imagen no disponible</text>
+</svg>

@@ -51,216 +51,246 @@
 
 
 <!-- ==========================================
-     LISTA DE CERTIFICACIONES CON LOGOS OFICIALES
+     LISTA DE CERTIFICACIONES
 =========================================== -->
-
-<style>
-  .cert-card-hover {
-    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
-  }
-  .cert-card-hover:hover {
-    transform: translateY(-8px) !important;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
-  }
-</style>
 
 <section class="py-20 bg-white">
 
-  <div class="max-w-7xl mx-auto px-5 lg:px-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+  <div class="max-w-7xl mx-auto px-5 lg:px-10 space-y-5">
 
-    <!-- Tarjeta 1: SENASA -->
+
+    <!-- SENASA -->
+
     <div
-      class="group cert-card-hover rounded-2xl border border-[#e8d5b0] bg-[#fdf8f0] shadow-md flex flex-col justify-between"
-      data-aos="fade-up"
-      data-aos-delay="0"
+      class="rounded-2xl border border-[#e8d5b0] p-7 hover:shadow-lg transition-all"
+      style="background-color:#fdf8f0"
     >
-      <div>
-        <div class="relative p-6 pb-4 bg-[#f5ead4]/50 border-b border-[#e8d5b0]/40">
-          <div class="flex items-start justify-between">
-            <div class="flex items-center gap-3">
-              <div class="w-12 h-12 rounded-lg overflow-hidden bg-white p-1 shadow-sm shrink-0">
-                <img src="{{ url_for('static', filename='img/senasa.jpg') }}" alt="SENASA" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110">
-              </div>
-              <div>
-                <span class="inline-block text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[#c8ddb8] text-[#234018] mb-1">
-                  Activo
-                </span>
-                <div class="font-display text-xl font-semibold text-[#234018]">
-                  SENASA
-                </div>
-              </div>
+      <div class="flex flex-col md:flex-row md:items-start gap-5">
+
+        <div class="flex items-center gap-4 shrink-0 md:w-56">
+
+          <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#edf4e8] text-[#3a6b2a]">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m3 9 9-6 9 6M5 10h14M6 10v8m4-8v8m4-8v8m4-8v8M4 21h16"/>
+            </svg>
+          </span>
+
+          <div>
+            <div class="font-display text-xl font-semibold text-[#234018]">
+              SENASA
+            </div>
+
+            <div class="text-xs text-[#9a5e2a] italic">
+              Servicio Nacional de Sanidad Agraria
             </div>
           </div>
-          <div class="text-xs text-[#9a5e2a] italic mt-2">
-            Servicio Nacional de Sanidad Agraria
-          </div>
+
         </div>
 
-        <div class="p-6 pt-4">
-          <p class="text-sm leading-relaxed text-[#3e1f06]/80 text-justify">
+        <div class="flex-1">
+
+          <p class="text-[15px] leading-relaxed text-[#3e1f06]/80 mb-4 text-justify">
             SENASA respalda la sanidad de los campos de nuestros socios y otorga
             las certificaciones fitosanitarias que permiten comercializar la
             producción. Este apoyo es la base para acceder a mercados formales y,
             progresivamente, a la exportación.
           </p>
+
+          <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-[#c8ddb8] text-[#234018]">
+            Activo
+          </span>
+
         </div>
+
       </div>
     </div>
 
 
-    <!-- Tarjeta 2: GlobalG.A.P. -->
+    <!-- GLOBALG.A.P. -->
+
     <div
-      class="group cert-card-hover rounded-2xl border border-[#e8d5b0] bg-[#fdf8f0] shadow-md flex flex-col justify-between"
-      data-aos="fade-up"
-      data-aos-delay="150"
+      class="rounded-2xl border border-[#e8d5b0] p-7 hover:shadow-lg transition-all"
+      style="background-color:#fdf8f0"
     >
-      <div>
-        <div class="relative p-6 pb-4 bg-[#f5ead4]/50 border-b border-[#e8d5b0]/40">
-          <div class="flex items-start justify-between">
-            <div class="flex items-center gap-3">
-              <div class="w-12 h-12 rounded-lg overflow-hidden bg-white p-1 shadow-sm shrink-0">
-                <img src="{{ url_for('static', filename='img/globalgap.png') }}" alt="GlobalG.A.P." class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110">
-              </div>
-              <div>
-                <span class="inline-block text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[#f2dfc0] text-[#6b3f1f] mb-1">
-                  En proceso
-                </span>
-                <div class="font-display text-xl font-semibold text-[#234018]">
-                  GlobalG.A.P.
-                </div>
-              </div>
+      <div class="flex flex-col md:flex-row md:items-start gap-5">
+
+        <div class="flex items-center gap-4 shrink-0 md:w-56">
+
+          <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#edf4e8] text-[#3a6b2a]">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M3 12h18M12 3a14 14 0 0 1 0 18m0-18a14 14 0 0 0 0 18"/>
+            </svg>
+          </span>
+
+          <div>
+            <div class="font-display text-xl font-semibold text-[#234018]">
+              GlobalG.A.P.
+            </div>
+
+            <div class="text-xs text-[#9a5e2a] italic">
+              Buenas Prácticas Agrícolas
             </div>
           </div>
-          <div class="text-xs text-[#9a5e2a] italic mt-2">
-            Buenas Prácticas Agrícolas
-          </div>
+
         </div>
 
-        <div class="p-6 pt-4">
-          <p class="text-sm leading-relaxed text-[#3e1f06]/80 text-justify">
+        <div class="flex-1">
+
+          <p class="text-[15px] leading-relaxed text-[#3e1f06]/80 mb-4 text-justify">
             Estamos avanzando hacia la certificación de Buenas Prácticas
             Agrícolas, estándar exigido por las agroexportadoras e importadores
             internacionales. Garantiza inocuidad, trazabilidad, uso responsable
             de insumos y bienestar de los trabajadores del campo.
           </p>
+
+          <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-[#f2dfc0] text-[#6b3f1f]">
+            En proceso
+          </span>
+
         </div>
+
       </div>
     </div>
 
 
-    <!-- Tarjeta 3: HACCP -->
+    <!-- HACCP -->
+
     <div
-      class="group cert-card-hover rounded-2xl border border-[#e8d5b0] bg-[#fdf8f0] shadow-md flex flex-col justify-between"
-      data-aos="fade-up"
-      data-aos-delay="300"
+      class="rounded-2xl border border-[#e8d5b0] p-7 hover:shadow-lg transition-all"
+      style="background-color:#fdf8f0"
     >
-      <div>
-        <div class="relative p-6 pb-4 bg-[#f5ead4]/50 border-b border-[#e8d5b0]/40">
-          <div class="flex items-start justify-between">
-            <div class="flex items-center gap-3">
-              <div class="w-12 h-12 rounded-lg overflow-hidden bg-white p-1 shadow-sm shrink-0">
-                <img src="{{ url_for('static', filename='img/haccp.jpg') }}" alt="HACCP" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110">
-              </div>
-              <div>
-                <span class="inline-block text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[#f2dfc0] text-[#6b3f1f] mb-1">
-                  En implementación
-                </span>
-                <div class="font-display text-xl font-semibold text-[#234018]">
-                  HACCP
-                </div>
-              </div>
+      <div class="flex flex-col md:flex-row md:items-start gap-5">
+
+        <div class="flex items-center gap-4 shrink-0 md:w-56">
+
+          <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#edf4e8] text-[#3a6b2a]">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m9 3 6 6m-8-4 6-2m-4 8-4 4a5 5 0 0 0 7 7l4-4"/>
+              <path d="m13 9 5 5m-7-3 4 4"/>
+            </svg>
+          </span>
+
+          <div>
+            <div class="font-display text-xl font-semibold text-[#234018]">
+              HACCP
+            </div>
+
+            <div class="text-xs text-[#9a5e2a] italic">
+              Análisis de Peligros y Puntos Críticos de Control
             </div>
           </div>
-          <div class="text-xs text-[#9a5e2a] italic mt-2">
-            Análisis de Peligros y Puntos Críticos
-          </div>
+
         </div>
 
-        <div class="p-6 pt-4">
-          <p class="text-sm leading-relaxed text-[#3e1f06]/80 text-justify">
+        <div class="flex-1">
+
+          <p class="text-[15px] leading-relaxed text-[#3e1f06]/80 mb-4 text-justify">
             Iniciamos la implementación de sistemas de análisis de peligros y
             puntos críticos de control para asegurar la inocuidad de los productos
             a lo largo de la cadena de cosecha, manejo postcosecha y empaque.
           </p>
+
+          <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-[#f2dfc0] text-[#6b3f1f]">
+            En implementación
+          </span>
+
         </div>
+
       </div>
     </div>
 
 
-    <!-- Tarjeta 4: Registro Agroideas -->
+    <!-- REGISTRO AGROIDEAS -->
+
     <div
-      class="group cert-card-hover rounded-2xl border border-[#e8d5b0] bg-[#fdf8f0] shadow-md flex flex-col justify-between"
-      data-aos="fade-up"
-      data-aos-delay="450"
+      class="rounded-2xl border border-[#e8d5b0] p-7 hover:shadow-lg transition-all"
+      style="background-color:#fdf8f0"
     >
-      <div>
-        <div class="relative p-6 pb-4 bg-[#f5ead4]/50 border-b border-[#e8d5b0]/40">
-          <div class="flex items-start justify-between">
-            <div class="flex items-center gap-3">
-              <div class="w-12 h-12 rounded-lg overflow-hidden bg-white p-1 shadow-sm shrink-0">
-                <img src="{{ url_for('static', filename='img/agroideas.png') }}" alt="Agroideas" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110">
-              </div>
-              <div>
-                <span class="inline-block text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[#c8ddb8] text-[#234018] mb-1">
-                  Activo
-                </span>
-                <div class="font-display text-xl font-semibold text-[#234018]">
-                  Registro Agroideas
-                </div>
-              </div>
+      <div class="flex flex-col md:flex-row md:items-start gap-5">
+
+        <div class="flex items-center gap-4 shrink-0 md:w-56">
+
+          <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#edf4e8] text-[#3a6b2a]">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 21V9m0 3c-4 0-7-2-7-6 4 0 7 2 7 6Zm0-3c0-4 3-6 7-6 0 4-3 6-7 6Z"/>
+              <path d="M7 21h10"/>
+            </svg>
+          </span>
+
+          <div>
+            <div class="font-display text-xl font-semibold text-[#234018]">
+              Registro Agroideas
+            </div>
+
+            <div class="text-xs text-[#9a5e2a] italic">
+              Programa AGROIDEAS — MIDAGRI
             </div>
           </div>
-          <div class="text-xs text-[#9a5e2a] italic mt-2">
-            Programa AGROIDEAS — MIDAGRI
-          </div>
+
         </div>
 
-        <div class="p-6 pt-4">
-          <p class="text-sm leading-relaxed text-[#3e1f06]/80 text-justify">
+        <div class="flex-1">
+
+          <p class="text-[15px] leading-relaxed text-[#3e1f06]/80 mb-4 text-justify">
             Como organización beneficiaria de AGROIDEAS, accedemos a
             cofinanciamiento para maquinaria y fortalecimiento de la gestión
             asociativa, mejorando la competitividad de los 30 socios productores.
           </p>
+
+          <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-[#c8ddb8] text-[#234018]">
+            Activo
+          </span>
+
         </div>
+
       </div>
     </div>
 
 
-    <!-- Tarjeta 5: RUC Activo -->
+    <!-- RUC ACTIVO -->
+
     <div
-      class="group cert-card-hover rounded-2xl border border-[#e8d5b0] bg-[#fdf8f0] shadow-md flex flex-col justify-between"
-      data-aos="fade-up"
-      data-aos-delay="600"
+      class="rounded-2xl border border-[#e8d5b0] p-7 hover:shadow-lg transition-all"
+      style="background-color:#fdf8f0"
     >
-      <div>
-        <div class="relative p-6 pb-4 bg-[#f5ead4]/50 border-b border-[#e8d5b0]/40">
-          <div class="flex items-start justify-between">
-            <div class="flex items-center gap-3">
-              <div class="w-12 h-12 rounded-lg overflow-hidden bg-white p-1 shadow-sm shrink-0">
-                <img src="{{ url_for('static', filename='img/sunat.jpg') }}" alt="SUNAT" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110">
-              </div>
-              <div>
-                <span class="inline-block text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[#c8ddb8] text-[#234018] mb-1">
-                  Activo
-                </span>
-                <div class="font-display text-xl font-semibold text-[#234018]">
-                  RUC Activo
-                </div>
-              </div>
+      <div class="flex flex-col md:flex-row md:items-start gap-5">
+
+        <div class="flex items-center gap-4 shrink-0 md:w-56">
+
+          <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#edf4e8] text-[#3a6b2a]">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M8 4h8l3 3v13H5V4h3Z"/>
+              <path d="M9 4v4h6V4M8 12h8m-8 4h8"/>
+            </svg>
+          </span>
+
+          <div>
+            <div class="font-display text-xl font-semibold text-[#234018]">
+              RUC Activo
+            </div>
+
+            <div class="text-xs text-[#9a5e2a] italic">
+              Registro Único de Contribuyentes — SUNAT
             </div>
           </div>
-          <div class="text-xs text-[#9a5e2a] italic mt-2">
-            Registro Único de Contribuyentes
-          </div>
+
         </div>
 
-        <div class="p-6 pt-4">
-          <p class="text-sm leading-relaxed text-[#3e1f06]/80 text-justify">
+        <div class="flex-1">
+
+          <p class="text-[15px] leading-relaxed text-[#3e1f06]/80 mb-4 text-justify">
             La cooperativa está formalmente constituida y cuenta con RUC activo
             ante SUNAT, lo que nos permite emitir comprobantes y contratar
             directamente con empresas, mercados mayoristas y retail.
           </p>
+
+          <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-[#c8ddb8] text-[#234018]">
+            Activo
+          </span>
+
         </div>
+
       </div>
     </div>
 
@@ -307,7 +337,9 @@
           class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 font-display text-xl font-semibold text-white"
           style="background-color:#234018"
         >
-          ✓
+          <svg aria-hidden="true" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m5 12 4 4L19 6" />
+          </svg>
         </div>
 
         <h3 class="font-display text-lg font-semibold text-[#234018] mb-2">
@@ -330,7 +362,9 @@
           class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 font-display text-xl font-semibold text-white"
           style="background-color:#234018"
         >
-          ✓
+          <svg aria-hidden="true" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m5 12 4 4L19 6" />
+          </svg>
         </div>
 
         <h3 class="font-display text-lg font-semibold text-[#234018] mb-2">

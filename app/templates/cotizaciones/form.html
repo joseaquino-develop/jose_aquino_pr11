@@ -37,7 +37,7 @@
 
       <input
         type="text"
-        name="contacto"
+        name="contacto_nombre"
         required
         value="{{ cotizacion.contacto if cotizacion else '' }}"
         class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
@@ -56,7 +56,7 @@
 
       <input
         type="text"
-        name="cargo"
+        name="contacto_cargo"
         value="{{ cotizacion.cargo if cotizacion else '' }}"
         class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
       >
@@ -88,7 +88,7 @@
 
       <input
         type="email"
-        name="email"
+        name="correo"
         required
         value="{{ cotizacion.email if cotizacion else '' }}"
         class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
@@ -119,7 +119,7 @@
 
     <input
       type="text"
-      name="web"
+      name="pagina_web"
       value="{{ cotizacion.web if cotizacion else '' }}"
       class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
     >
